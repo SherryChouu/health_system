@@ -72,7 +72,7 @@ nav ul {
 /*醫院背景圖*/
 .banner{
     display: block;
-    background-image:url("banner_hospital.jpeg"); /*匯入醫院背景圖*/
+    background-image:url("images/banner_hospital.jpeg"); /*匯入醫院背景圖*/
     background-repeat: no-repeat; /*背景圖不要重複顯示*/
     background-attachment:scroll; /*背景圖不滑動*/
     background-position: center;
