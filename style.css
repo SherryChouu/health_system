@@ -135,3 +135,52 @@ nav ul {
     font-size: 1.6rem;    /*文字大小*/
     line-height:120px;   /*文字位置*/
 }
+
+
+
+ /*健檢類別查詢*/
+
+ #hc{
+    padding:80px 0;
+    text-align:center;
+}
+
+#hc img{
+    margin: auto;
+    width: 180px;
+    height: 170px;
+}
+#hc h3{
+    font-weight:bold;
+    text-align: center;
+}
+#hc a{
+    color:#000000;
+    text-decoration: none;
+}
+#hc .col-md-4{      /*每個col-md-4為一個容量*/
+        padding :15px;
+        background: #0367b9;/*按鈕本身顏色*/
+        border-radius: 20px 20px;   /*(左上 右下)  (右上左下)，按鈕四個角變圓弧*/
+}
+#hc .col-md-4:hover{
+        padding : 15px;
+        background :linear-gradient(#f9fafb,#b5e0f6);
+        box-shadow:1px 1px 4px #ccc;
+}
+#hc .container { /*包裹著三個案件的container*/
+        width: 800px;  /* 設定容器的寬度為800px */
+        height: 900px; /* 設定容器的高度為400px */
+        padding: 20px; /* 設定內邊距 */
+        margin: 0 auto; /* 水平居中 */
+        background-color: #ffffff; /* 設定背景顏色 */
+        border: 1px solid #ccc; /* 設定邊框 */
+        
+        
+}
+#hc .row {
+    display: flex;
+    margin: 0 auto; /* 水平居中 */
+    padding-bottom: 640px; /*padding-bottom , 會參照父物件的 width 來計算*/
+    justify-content: space-between; /* 讓列之間平均分佈空間 */
+}
