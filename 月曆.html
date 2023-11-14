@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <html lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title> 預約月曆頁面 </title>
+    </head>
+
+    <style> 
+        @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
+    </style> 
+
+    <main>       
+        <div class="navbar">
+                <a href=#>
+                    <div class="logo">
+                        <img src="images/logo_hospital.png" alt="醫院Logo">
+                    </div>
+                </a>
+
+            <h1 class= "title"><a href="#p1">仁愛醫院健檢中心</a></h1>
+    <nav>
+            <ul class="flex-nav">
+                <li><a href="健檢類別查詢.html">健檢類別查詢</a></li>
+                <li><a href="#">線上預約</a></li>
+                <li><a href="#">繳費資訊</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </div>
+    </nav>
+</main>
+
+    <body>
+    
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prevMonthBtn">&lt;</button>
+                <h2 id="currentMonth">月份</h2>
+                <button id="nextMonthBtn">&gt;</button>
+            </div>
+            <div id="calendar"></div>
+        </div>
+    
+        <script src="calendar.js"></script>
+    </body>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+        const prevMonthBtn = document.getElementById("prevMonthBtn"); /*控制前一個月的按鈕*/
+        const nextMonthBtn = document.getElementById("nextMonthBtn"); /*控制後一個月的按鈕*/
+        const currentMonthElement = document.getElementById("currentMonth"); /*當前月曆元素*/
+        const calendarElement = document.getElementById("calendar"); 
+    
+        let currentDate = new Date();
+    
+        function renderCalendar() {
+            const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+            const firstDayOfWeek = firstDayOfMonth.getDay();
+    
+            currentMonthElement.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
+    
+            let calendarHTML = '<div class="day">Sun</div><div class="day">Mon</div><div class="day">Tue</div><div class="day">Wed</div><div class="day">Thu</div><div class="day">Fri</div><div class="day">Sat</div>';
+    
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                calendarHTML += '<div class="day"></div>';
+            }
+    
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+                const isToday = isSameDay(dayDate, new Date());
+    
+                calendarHTML += `<div class="day ${isToday ? 'today' : ''}">${i}</div>`;
+            }
+    
+            calendarElement.innerHTML = calendarHTML;
+        }
+    
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+    
+        prevMonthBtn.addEventListener("click", function () {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+    
+        nextMonthBtn.addEventListener("click", function () {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+    
+        renderCalendar();
+    });
+    </script>
+    
+    </html>
+
+    
+    
+

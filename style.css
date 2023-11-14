@@ -141,42 +141,40 @@ nav ul {
  /*健檢類別查詢*/
 
  #hc{
-    padding:80px 0;
+    padding:200px 0; /*導覽列到物件的間距*/
     text-align:center;
+    color:#ffffff;
 }
 
 #hc img{
     margin: auto;
-    width: 180px;
-    height: 170px;
+    width: 200px;
+    height: 200px;
 }
 #hc h3{
-    font-weight:bold;
     text-align: center;
 }
 #hc a{
-    color:#000000;
+    color:#ffffff;
     text-decoration: none;
 }
 #hc .col-md-4{      /*每個col-md-4為一個容量*/
-        padding :15px;
+        padding :50px;
         background: #0367b9;/*按鈕本身顏色*/
         border-radius: 20px 20px;   /*(左上 右下)  (右上左下)，按鈕四個角變圓弧*/
 }
 #hc .col-md-4:hover{
-        padding : 15px;
-        background :linear-gradient(#f9fafb,#b5e0f6);
+        padding : 50px;
+        background :linear-gradient(#f9fafb,#abc1cb);
         box-shadow:1px 1px 4px #ccc;
 }
 #hc .container { /*包裹著三個案件的container*/
-        width: 800px;  /* 設定容器的寬度為800px */
+        width: 999px;  /* 設定容器的寬度為800px */
         height: 900px; /* 設定容器的高度為400px */
-        padding: 20px; /* 設定內邊距 */
+        padding: 30px; /* 設定內邊距 */
         margin: 0 auto; /* 水平居中 */
         background-color: #ffffff; /* 設定背景顏色 */
-        border: 1px solid #ccc; /* 設定邊框 */
-        
-        
+        border: 1px solid #ffffff; /* 設定邊框 */
 }
 #hc .row {
     display: flex;
@@ -184,3 +182,73 @@ nav ul {
     padding-bottom: 640px; /*padding-bottom , 會參照父物件的 width 來計算*/
     justify-content: space-between; /* 讓列之間平均分佈空間 */
 }
+
+
+
+
+/*calendar*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding:200px ;
+}
+
+.calendar-container {
+    width: 100%;
+    height: 500px;
+    max-width: 1200px; /* 調整最大寬度 */
+    padding: 50px; /* 調整內部 padding */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}   
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #0367b9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: calc(100% - 40px); /* 調整內容高度，考慮邊框和內邊距 */
+}
+
+.day {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.today {
+    background-color: #e7e8e9;
+    color: #000000;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 1000px;
+    height: 600px; /* 調整高度 */
+    margin: 100px auto;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
