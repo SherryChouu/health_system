@@ -37,7 +37,7 @@ nav a {
 
 /* 滑鼠移到 `<a>` 時變成深底淺色 */
 ul a:hover {
-    background-color: rgb(122, 166, 203);
+    background-color: #7aa6cb;
     color: black;
 }
 
@@ -60,6 +60,7 @@ nav ul {
 
 
 /*標題（仁愛醫健檢中心）*/
+/*待解決：文字會跑 但用 position:fixed 微怪*/
 .title a {
     font-family: "cwTeXYen", serif;
     color:#fff;
@@ -183,10 +184,43 @@ nav ul {
     justify-content: space-between; /* 讓列之間平均分佈空間 */
 }
 
+/*顯示套餐詳細項目的頁面*/
+
+.sidenav {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#7aa6cb;
+    padding-top: 80px;
+}
+
+.sidenav a {
+    padding: 20px 40px 15px 60px; /*上右下左*/
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #dfdfdf;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
 
 
 
-/*calendar*/
+
+
+
+
+/*calendar 目前用不到 只是之前有先寫一個參考*/
 
 body {
     font-family: Arial, sans-serif;
