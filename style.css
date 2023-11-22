@@ -252,3 +252,19 @@ body {
     border-radius: 20px;
 }
 
+#ck{
+    padding:200px 0; /*導覽列到物件的間距*/
+    text-align:center;
+}
+#ck button{
+    padding: 20px;   /* 使用 padding 調整按鈕內的間距 */
+    margin-bottom: 20px; /* 使用 margin 調整按鈕之間的間距 */
+    width:700px;
+    height:100px;
+
+}
+#ck button:hover{
+    padding : 20px;
+    background :linear-gradient(#f9fafb,#abc1cb);
+    box-shadow:1px 1px 4px #ccc;
+}
