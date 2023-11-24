@@ -15,7 +15,7 @@
         <div class="navbar">
                 <a href=#>
                     <div class="logo">
-                        <img src="/Users/sherrychou/Desktop/專題素材/logo_hospital.png" alt="醫院Logo">
+                        <img src="images/logo_hospital.png" alt="醫院Logo">
                     </div>
                 </a>
 
