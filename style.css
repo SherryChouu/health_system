@@ -286,7 +286,8 @@ body {
     border-radius: 20px;
 }
 
-#ck{
+/*選擇愈健檢項目*/
+#ck{ 
     padding:200px 0; /*導覽列到物件的間距*/
     text-align:center;
 }
@@ -302,3 +303,4 @@ body {
     background :linear-gradient(#f9fafb,#abc1cb);
     box-shadow:1px 1px 4px #ccc;
 }
+
