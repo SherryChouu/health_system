@@ -23,6 +23,10 @@
             padding: 30px;
             text-align: center;
         }
+        td:hover {
+        background-color: #f0f0f0; /* 滑鼠移至時的背景色 */
+        
+    }
         .rl-button {
             padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
             margin: 50px; /* 使用 margin 調整按鈕之間的間距 */
@@ -59,13 +63,16 @@
     </br>
     </br>
 <div style="height: 600px;">
-    <?php
+<?php
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
 
 // 獲取當前月份年份
 $month = isset($_GET['month']) ? $_GET['month'] : date('m');
 $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+// 計算6個月後的日期
+$limitDate = date('Y-m-d', strtotime("+6 months"));
 
 // 獲取當前月份的第一天是星期幾
 $first_day = mktime(0, 0, 0, $month, 1, $year);
@@ -92,7 +99,8 @@ while ($day <= $num_days) {
     if ($day_of_week == 'Sun') {
         echo "</tr><tr>";
     }
-    echo "<td>$day</td>";
+    
+    echo "<td style='text-align: left; vertical-align: top;'class='selectable-day' data-date='$year-$month-$day'>$day</td>";
     $day++;
     $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
 }
@@ -111,6 +119,24 @@ $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
 $nextMonth = date('m', strtotime("+1 month", strtotime("$year-$month-01")));
 $nextYear = date('Y', strtotime("+1 month", strtotime("$year-$month-01")));
 ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 獲取所有具有 'selectable-day' 類別的元素
+    var selectableDays = document.querySelectorAll('.selectable-day');
+
+    // 對每個可選擇的日期元素添加點擊事件
+    selectableDays.forEach(function(dayElement) {
+        dayElement.addEventListener('click', function() {
+            // 獲取日期數據，這裡假設日期數據儲存在元素的 data-date 屬性中
+            var selectedDate = dayElement.getAttribute('data-date');
+
+            // 在這裡你可以進一步處理所選日期，例如顯示在畫面上或發送到伺服器等
+            alert('You clicked on ' + selectedDate);
+        });
+    });
+});
+</script>
 </div>
 
 <div style="display: flex; justify-content:space-between ; margin-top: -170px;top: 0; width: 100%;">

@@ -34,7 +34,7 @@
         <div id="ck">
         <a href="月曆.php">
         <button type="button1" >尊爵A</button></a>
-        <a href="6個月月曆.php">
+        <a href="月曆2.php">
         <button type="button2" >尊爵B</button></a>
         <button type="button3" >尊爵C</button>
         <button type="button4" >菁英A</button>
