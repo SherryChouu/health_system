@@ -145,6 +145,8 @@ nav ul {
     padding:200px 0; /*導覽列到物件的間距*/
     text-align:center;
     color:#ffffff;
+    font-size: 20px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #hc img{
@@ -286,7 +288,7 @@ body {
     border-radius: 20px;
 }
 
-/*選擇愈健檢項目*/
+/*選擇欲健檢項目*/
 #ck{ 
     padding:200px 0; /*導覽列到物件的間距*/
     text-align:center;
