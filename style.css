@@ -221,7 +221,14 @@ nav ul {
     padding-top: 80px;
 }  
  
-table {
+table.type1 {
+    border-collapse: collapse; /* 合併框為單線條 */
+    margin-left: 240px;
+    margin-top: 10px;
+    width: 80%;
+}
+
+table.type2 {
     border-collapse: collapse; /* 合併框為單線條 */
     margin-left: 240px;
     margin-top: 10px;
@@ -234,6 +241,15 @@ th, td {
     text-align: left;
     border-width:min-content;
 }
+
+tr.category1 {
+    background-color:#abc1cb ; 
+}
+
+tr.category2 {
+    background-color: #f2f2f2; 
+}
+
 
 th.centered , td.centered {
     text-align: center; /*特定列的文本置中*/
