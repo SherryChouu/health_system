@@ -200,6 +200,61 @@ nav ul {
 }
 
 
+/*----------------------線上預約.php--------------------------*/
+
+
+/*flexbox容器樣式（排列框）*/
+.container1{
+    display: flex;  /*外容器宣告為flex*/
+    text-align: center;
+    flex-direction: row;  /*元件排列方向*/
+    justify-content: center;  
+    gap: 30px;   
+}
+
+/*框的樣式*/
+.box2{
+    display: inline-block; /*水平排列*/
+    width: 350px;    /*方框寬度*/
+    height: 400px;   /*方框高度*/
+    background-color: rgb(3, 104, 185) ;
+    margin: 10px;    /*方框間間距*/
+    border-radius: 20px;   /*圓角*/
+    margin-top: 100px; 
+    padding: 10px; /*內邊距*/
+}
+
+/*鏈接樣式*/
+.box2 a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none; /*移除鏈結底線*/  
+}
+
+.box2:hover{
+    background-color:rgb(122, 166, 203);
+}
+
+/*圖片樣式*/
+.box2 img {
+    margin: auto;
+    max-width: 70%;
+    height:auto;
+    padding-top: 10%;
+}
+
+/*文字樣式*/
+.box2 h3{
+    text-align: center; /* 文本居中 */
+    margin: 0; /* 移除段落的默认边距 */
+    color:rgb(255, 255, 255);  /*文字顏色*/
+    text-align: center;   /*文字水平居中*/
+    font-size: 1.6rem;    /*文字大小*/
+    line-height:120px;   /*文字位置*/
+}
+
+
 /*<--------------------卓越套餐、尊爵套餐 左邊導覽列------------------------>*/
 
 .sidenav {
@@ -283,7 +338,6 @@ th.centered , td.centered {
     background :linear-gradient(#f9fafb,#abc1cb);
     box-shadow:1px 1px 4px #ccc;
 }
-
 
 
 

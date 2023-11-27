@@ -33,32 +33,23 @@
 </main>
 
 
-<!--健檢類別查詢程式-->
-<h2 >健檢類別</h2>
-<hr width="100%"> <!--橫線-->
-
-
-<div id="hc"> <!--第一層-->
-    <div class="container"> <!--第二層-->
-        <div class="row"><!--第三層-->
-
-            <div class="col-md-4" button name="buttonA"></button>
+    <div class = "container1">
+            <div class=" box2">
                 <a href="選擇欲健檢項目.php">
-                <img src="images/hoshi.jpeg" class="img-responsive" alt="">
-                <h3>我要預約</h3>
-                </a>
+                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="套餐查詢">
+                    <h3>我要預約</h3>
+                </a> 
             </div>
-            
-            <div class="col-md-4" button name="buttonB"></button>  
-                <img src="images/hoshi.jpeg" class="img-responsive" alt="">
-                <h3>預約記錄查詢</h3>
-            </div>
-            
 
-        </div>
+            <div class=" box2">
+                <a href="">
+                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="預約月曆">
+                    <h3>預約記錄查詢</h3>
+                </a> 
+            </div>  
     </div>
-</div>
 
+    
 
 
 <script>
