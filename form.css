@@ -1,0 +1,150 @@
+/*導覽列整體樣式*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(3, 104, 185);
+    margin: 0;
+    color: white;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+}
+
+/* 醫院Logo樣式 */
+.logo img {
+    display: block;
+    max-width: 100px;  /* 最大寬度 */
+    height: auto;    /* 保持高度比例 */
+    border: none;    /* 移除圖片邊框 */
+    margin: 0%;
+    padding: 0;
+    margin-left: 40px;  /*增加左邊距讓logo往右移*/
+}
+
+/*導覽列鏈接的樣式*/
+nav a {
+    color: inherit;   /* 移除超連結顏色 */
+    display: block;   /* 讓 <a> 填滿 <li> */
+    padding: 20px;    /*滑鼠過去的方框大小*/
+    color: white;
+    font-size: 20px;  /*導覽列列表字體*/
+    text-decoration:none;  /* 移除超連結底線 */
+}
+
+/* 滑鼠移到 `<a>` 時變成深底淺色 */
+ul a:hover {
+    background-color: #7aa6cb;
+    color: black;
+}
+
+/*導覽列表樣式*/
+nav ul {
+    list-style: none;
+    background-color: rgb(3, 104, 185);
+    margin: 0;
+    padding:0;
+    border: 0;
+    height: 80px;
+    align-items: center;
+}
+
+/*導覽列靠右邊*/
+.flex-nav {
+    display: flex;
+    justify-content:flex-end; 
+}
+
+/*標題（仁愛醫健檢中心）*/
+/*待解決：文字會跑 但用 position:fixed 微怪*/
+.title a {
+    font-family: "cwTeXYen", serif;
+    color:#fff;
+    font-size:30px;
+    margin-left:-380px;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column; /* 使子元素垂直排列 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 容器高度設為視口的100% */
+    margin-top: 100px; /* 在表單區域頂部添加邊距 */
+}
+
+.form-title {
+    margin-bottom: 20px; /* 為標題和表單之間增加一些間距 */
+    
+        text-align: center; /* 標題文字居中 */
+    
+    
+}
+
+form {
+    width: 50%;              /* Adjust the width as necessary */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+select {
+    width: 80%; /* 或您所需的寬度 */
+    padding: 10px; /* 內邊距 */
+    border-radius: 15px; /* 圓角 */
+    border: 1px solid #ccc; /* 邊框 */
+    outline: none; /* 去除點擊時的藍色外框 */
+    -moz-appearance: none; /* 移除Firefox的預設樣式 */
+    -webkit-appearance: none; /* 移除Chrome和Safari的預設樣式 */
+    appearance: none; /* 移除預設的外觀 */
+    background-color: white; /* 背景顏色 */
+    color: black; /* 文字顏色 */
+}
+
+/* 針對IE瀏覽器，移除下拉箭頭 */
+select::-ms-expand {
+    display: none;
+}
+
+/* 自定義下拉箭頭 */
+select {
+    background-image: url('dropdown-arrow.png'); /* 使用自定義的箭頭圖示 */
+    background-position: right 10px center; /* 箭頭位置 */
+    background-repeat: no-repeat; /* 不重複箭頭圖示 */
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: center; /* 這會將按鈕組水平居中 */
+}
+
+button {
+    margin: 0 10px; /* 按鈕之間的間距 */
+    padding: 10px 20px; /* 為按鈕增加內邊距 */
+    border-radius: 15px; /* 同樣為按鈕增加圓角 */
+    border: none; /* 去除按鈕的邊框 */
+    background-color: #007bff; /* 為按鈕增加背景顏色，這裡使用的是一種藍色 */
+    color: white; /* 設置按鈕文字為白色 */
+    cursor: pointer; /* 當鼠標懸停在按鈕上時，顯示指針手型 */
+    outline: none; /* 去除點擊時的藍色外框 */
+}
+
+.required {
+    color: red; /* 將星號設置為紅色來突出顯示 */
+    margin-right: 5px; /* 為了美觀，在星號和文字之間添加一些間距 */
+}
