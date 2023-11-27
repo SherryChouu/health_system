@@ -23,7 +23,7 @@
             <h1 class= "title"><a href="index.html">仁愛醫院健檢中心</a></h1>
     <nav>
             <ul class="flex-nav">
-                <li><a href="健檢類別查詢.html">健檢類別查詢</a></li>
+                <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
                 <li><a href="線上預約.php">線上預約</a></li>
                 <li><a href="#">繳費資訊</a></li>
                 <li><a href="#">聯絡我們</a></li>
