@@ -22,7 +22,7 @@
             <h1 class= "title"><a href="index.html">仁愛醫院健檢中心</a></h1>
             <nav>
                 <ul class="flex-nav">
-                    <li><a href="健檢類別查詢.html">健檢類別查詢</a></li>
+                    <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
                     <li><a href="線上預約.php">線上預約</a></li>
                     <li><a href="#">繳費資訊</a></li>
                     <li><a href="#">聯絡我們</a></li>
@@ -33,16 +33,13 @@
 
         <div id="ck">
         <a href="月曆.php">
-        <button type="button1" >尊爵A</button></a>
+        <button type="button1" >尊爵Ａ</button></a>
         <a href="月曆2.php">
-        <button type="button2" >尊爵B</button></a>
-        <button type="button3" >尊爵C</button>
-        <button type="button4" >菁英A</button>
-        <button type="button5" >菁英B</button>
-        <button type="button6" >菁英C</button>
-        <button type="button7" >卓越A</button>
-        <button type="button8" >卓越B</button>
-        <button type="button9" >卓越C</button>   
+        <button type="button3" >尊爵Ｂ</button>
+        <button type="button3" >尊爵Ｃ</button>
+        <button type="button3" >尊爵Ｄ</button>
+        <button type="button7" >卓越Ｍ</button>
+        <button type="button8" >卓越Ｃ</button>
         </div>
 
     </body>

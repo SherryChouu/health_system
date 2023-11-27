@@ -8,7 +8,7 @@
         background-color: #f9f9f9;
         padding: 0.1%; /*框的寬*/
         border-radius: 10px; /*圓角*/
-        margin-top:130px ; /*頂部和框的距離*/
+        margin-top:110px ; /*頂部和框的距離*/
         margin-left:220px ;
         margin-right: 220px;  
         align-items: center; 

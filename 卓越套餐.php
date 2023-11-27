@@ -5,12 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <title>健檢類別查詢</title>
+        <!-- 引入 breadcrumbs.php -->
+        <?php include 'breadcrumbs.php'; ?>
+
+        <style>
+            @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
+        </style>
     </head>
 
-    <style>
-        @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
-    </style>
-
+    
 <body>
     <main>       
             <div class="navbar">
@@ -32,8 +35,17 @@
         </nav>
     </main>
 
+        <!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->
+        <?php
+        $pages = array(
+            array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
+            array('title' => '健檢類別查詢', 'link' => '健檢類別查詢.php'), // 健檢類別查詢的連結指向:健檢類別查詢.php 
+            array('title' => '卓越套餐', 'link' => '卓越套餐.php'), // 卓越套餐的連結指向:卓越套餐.php
+        );
+        generateBreadcrumbs($pages);
+        ?>
+
     <div class="sidenav">
-        <a href="菁英套餐.html">菁英套餐</a>
         <a href="卓越套餐.php">卓越套餐</a>
         <a href="尊爵套餐.php">尊爵套餐</a>
     </div>

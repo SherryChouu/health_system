@@ -46,7 +46,6 @@
     ?>
 
 
-
 <!--健檢類別查詢程式-->
 <h2 >健檢類別</h2>
 <hr width="100%"> <!--橫線-->
@@ -56,17 +55,8 @@
     <div class="container"> <!--第二層-->
         <div class="row"><!--第三層-->
 
-            <!--菁英套餐區塊-->
-            <a href="菁英套餐.html">
-            <div class="col-md-4"> 
-                <!--"responsive" 表示這個圖像將會根據其容器的大小作出響應式的調整，以確保在不同螢幕大小或設備上顯示正確-->
-                <img src="images/hoshi.jpeg" class="img-responsive" alt="">
-                <h3>菁英套餐</h3>
-            </div>
-            </a>
-
             <!--卓越套餐區塊-->
-            <a href="卓越套餐.html">
+            <a href="卓越套餐.php">
             <div class="col-md-4">  
                 <img src="images/hoshi.jpeg" class="img-responsive" alt="">
                 <h3>卓越套餐</h3>

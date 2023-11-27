@@ -45,9 +45,7 @@
     generateBreadcrumbs($pages);
     ?>
 
-
     <div class="sidenav">
-        <a href="菁英套餐.html">菁英套餐</a>
         <a href="卓越套餐.php">卓越套餐</a>
         <a href="尊爵套餐.php">尊爵套餐</a>
     </div>

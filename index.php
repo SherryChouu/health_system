@@ -8,12 +8,10 @@
         <!-- 引入 breadcrumbs.php -->
         <?php include 'breadcrumbs.php'; ?>
     </head> 
-    
 
     <style> 
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
     </style> 
-
 
 <body>
 <main>       
