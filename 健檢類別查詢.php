@@ -46,30 +46,27 @@
     ?>
 
 
-<!--健檢類別查詢程式-->
-<h2 >健檢類別</h2>
-<hr width="100%"> <!--橫線-->
+<!--健檢類別查詢-->
+<div class= "title">
+    <h2>健檢類別</h2>
+    <hr width="70%"> <!--橫線-->
+</div>
 
-<!--健檢類別三個按鈕-->
-<div id="hc"> <!--第一層-->
-    <div class="container"> <!--第二層-->
-        <div class="row"><!--第三層-->
-
-            <!--卓越套餐區塊-->
-            <a href="卓越套餐.php">
-            <div class="col-md-4">  
-                <img src="images/hoshi.jpeg" class="img-responsive" alt="">
-                <h3>卓越套餐</h3>
+        <div class = "container">
+            <div class=" box1">
+                <a href="卓越套餐.php">
+                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="套餐查詢">
+                    <h3>卓越套餐</h3>
+                </a> 
             </div>
-            </a>
 
-            <!--尊爵套餐區塊-->
-            <a href="尊爵套餐.php">
-            <div class="col-md-4">  
-                <img src="images/hoshi.jpeg" class="img-responsive" alt="">
-                <h3>尊爵套餐</h3>
-            </div>
-            </a>
+            <div class=" box1">
+                <a href="尊爵套餐.php">
+                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="預約月曆">
+                    <h3>尊爵套餐</h3>
+                </a> 
+            </div>  
+        </div>
 
         </div>
     </div>

@@ -142,49 +142,61 @@ nav ul {
 
  /*----------------------健檢類別查詢.php--------------------------*/
 
-#hc{
-    padding:200px 0; /*導覽列到物件的間距*/
-    text-align:center;
-    color:#ffffff;
-    font-size: 20px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+/*健檢類別*/
+.title h2{
+    margin-left: 220px;
 }
 
-#hc img{
-    margin: auto;
-    width: 200px;
-    height: 200px;
-}
-#hc h3{
+
+/*flexbox容器樣式（排列框）*/
+.container{
+    display: flex;  /*外容器宣告為flex*/
     text-align: center;
+    flex-direction: row;  /*元件排列方向*/
+    justify-content: center;  
+    gap: 30px;   
 }
-#hc a{
-    color:#ffffff;
-    text-decoration: none;
+
+/*框的樣式*/
+.box1{
+    display: inline-block; /*水平排列*/
+    width: 350px;    /*方框寬度*/
+    height: 400px;   /*方框高度*/
+    background-color: rgb(3, 104, 185) ;
+    margin: 10px;    /*方框間間距*/
+    border-radius: 20px;   /*圓角*/
+    margin-top: 30px; 
+    padding: 10px; /*內邊距*/
 }
-#hc .col-md-4{      /*每個col-md-4為一個容量*/
-        padding :50px;
-        background: #0367b9;/*按鈕本身顏色*/
-        border-radius: 20px 20px;   /*(左上 右下)  (右上左下)，按鈕四個角變圓弧*/
-}
-#hc .col-md-4:hover{
-        padding : 50px;
-        background :linear-gradient(#f9fafb,#abc1cb);
-        box-shadow:1px 1px 4px #ccc;
-}
-#hc .container { /*包裹著三個案件的container*/
-        width: 999px;  /* 設定容器的寬度為800px */
-        height: 900px; /* 設定容器的高度為400px */
-        padding: 30px; /* 設定內邊距 */
-        margin: 0 auto; /* 水平居中 */
-        background-color: #ffffff; /* 設定背景顏色 */
-        border: 1px solid #ffffff; /* 設定邊框 */
-}
-#hc .row {
+
+/*鏈接樣式*/
+.box1 a{
     display: flex;
-    margin: 0 auto; /* 水平居中 */
-    padding-bottom: 640px; /*padding-bottom , 會參照父物件的 width 來計算*/
-    justify-content: space-between; /* 讓列之間平均分佈空間 */
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none; /*移除鏈結底線*/  
+}
+
+.box1:hover{
+    background-color:rgb(122, 166, 203);
+}
+
+/*圖片樣式*/
+.box1 img {
+    margin: auto;
+    max-width: 70%;
+    height:auto;
+    padding-top: 10%;
+}
+
+/*文字樣式*/
+.box1 h3{
+    text-align: center; /* 文本居中 */
+    margin: 0; /* 移除段落的默认边距 */
+    color:rgb(255, 255, 255);  /*文字顏色*/
+    text-align: center;   /*文字水平居中*/
+    font-size: 1.6rem;    /*文字大小*/
+    line-height:120px;   /*文字位置*/
 }
 
 
@@ -198,7 +210,7 @@ nav ul {
     top: 0;
     left: 0;
     background-color:#7aa6cb;
-    padding-top: 80px;
+    padding-top: 90px;
 }
 
 .sidenav a {

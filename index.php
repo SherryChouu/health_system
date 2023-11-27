@@ -16,13 +16,13 @@
 <body>
 <main>       
         <div class="navbar">
-                <a href="index.html">
+                <a href="index.php">
                     <div class="logo">
                         <img src="images/logo_hospital.png" alt="醫院Logo">
                     </div>
                 </a>
 
-            <h1 class= "title"><a href="index.html">仁愛醫院健檢中心</a></h1>
+            <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
     <nav>
             <ul class="flex-nav">
                 <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
@@ -52,9 +52,7 @@
                     <img src="images/hoshi.jpeg" class= "img-responsive" alt="預約月曆">
                     <p>線上預約</p>
                 </a> 
-            </div>
-
-            
+            </div>  
         </div>
         
        
