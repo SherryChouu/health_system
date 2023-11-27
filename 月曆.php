@@ -38,22 +38,36 @@
             background :linear-gradient(#f9fafb,#abc1cb);
             box-shadow:1px 1px 4px #ccc;
         }
+        .button-container {
+            display: flex;
+            flex-direction: column; /* 垂直排列 */
+            justify-content: space-between;
+            align-items: flex-end; /* 右對齊 */
+            margin-top: -410px;
+            top: 0;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .button-container button {
+            margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
+        }
     </style>
 
 <body>
 <main>       
             <div class="navbar">
-                    <a href=#>
+                    <a href="index.html">
                         <div class="logo">
                             <img src="images/logo_hospital.png" alt="醫院Logo">
                         </div>
                     </a>
 
-                <h1 class= "title"><a href="#p1">仁愛醫院健檢中心</a></h1>
+                <h1 class= "title"><a href="index.html">仁愛醫院健檢中心</a></h1>
         <nav>
                 <ul class="flex-nav">
-                    <li><a href="#">健檢類別查詢</a></li>
-                    <li><a href="#">線上預約</a></li>
+                    <li><a href="健檢類別查詢.html">健檢類別查詢</a></li>
+                    <li><a href="線上預約.php">線上預約</a></li>
                     <li><a href="#">繳費資訊</a></li>
                     <li><a href="#">聯絡我們</a></li>
                 </ul>
@@ -139,15 +153,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </div>
 
-<div style="display: flex; justify-content:space-between ; margin-top: -170px;top: 0; width: 100%;">
+<div class="button-container">
     <!-- 上一個月按鈕 -->
     <a href="?month=<?php echo $prevMonth; ?>&year=<?php echo $prevYear; ?>"><button class="rl-button"><?php echo "上一個月"; ?></button></a>
     
+    <!-- 回到當月按鈕 -->
+    <a href="?month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
+    
     <!-- 下一個月按鈕 -->
     <a href="?month=<?php echo $nextMonth; ?>&year=<?php echo $nextYear; ?>"><button class="rl-button"><?php echo "下一個月"; ?></button></a>
-</div>
-
-
 </div>
 </body>
 </html>
