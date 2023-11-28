@@ -79,6 +79,25 @@
     </br>
 <div style="height: 600px;">
 <?php
+header("Content-Type:text/html; charset=utf-8");
+
+// 設定連線至資料庫的伺服器名稱和埠號
+$serverName = "DESKTOP-947P2F9";
+
+// 設定連線選項，包括資料庫名稱、使用者名稱和密碼
+$connectionOptions = array(
+    "Database" => "health_system", // 資料庫名稱
+    "Uid" => "sa", // 使用者名稱
+    "PWD" => "1106Evelyn", // 密碼
+    "CharacterSet" => "UTF-8"
+);
+
+// 使用 sqlsrv_connect 函數建立資料庫連線
+$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+
+?>
+<?php
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
 
@@ -153,6 +172,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 </div>
+<?php
+$package = isset($_GET['package']) ? $_GET['package'] : '';
+
+switch ($package) {
+    case '3':
+        // 顯示套餐A的月曆內容
+        echo '<div>這是尊爵A的月曆</div>';
+        break;
+    case '4':
+        // 顯示套餐B的月曆內容
+        echo '<div>這是尊爵B的月曆</div>';
+        break;
+    case '5':
+        // 顯示套餐B的月曆內容
+        echo '<div>這是尊爵C的月曆</div>';
+        break;
+    case '6':
+        // 顯示套餐A的月曆內容
+        echo '<div>這是尊爵D的月曆</div>';
+        break;
+    case '1':
+        // 顯示套餐B的月曆內容
+        echo '<div>這是卓越C的月曆</div>';
+        break;
+    case '2':
+        // 顯示套餐B的月曆內容
+        echo '<div>這是卓越M的月曆</div>';
+        break;
+
+
+
+    // 其他套餐的處理
+    default:
+        echo '<div>未知套餐</div>';
+        break;
+}
+?>
 
 <div class="button-container">
     <!-- 上一個月按鈕 -->
