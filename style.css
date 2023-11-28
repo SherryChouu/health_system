@@ -331,22 +331,16 @@ th.centered , td.centered {
     color:rgb(255, 255, 255);  /*文字顏色*/
     font-size: 12px;    /*文字大小*/
 }
-.button1{
+.button1, .button2{
+    position: relative;
+    justify-content: center;
     width:500px;
     height:100px;
     border-radius: 20px;   /*圓角*/
-    margin-top: 15px;
+    margin-top: 20px;
     color:rgb(0, 0, 0) ;/*文字顏色*/
     font-size: 20px;    /*文字大小*/
-}
-
-.button2{
-    width:500px;
-    height:100px;
-    border-radius: 20px;   /*圓角*/
-    margin-top: 15px;
-    color:rgb(0, 0, 0) ;/*文字顏色*/
-    font-size: 20px;    /*文字大小*/
+    margin: 10px; /*間距*/  
 }
 
 .button1:hover{
