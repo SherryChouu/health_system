@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="formstyle.css">
         <title>健檢類別查詢</title>
     </head>
 
@@ -34,15 +34,15 @@
 
         <section class="form-section">
             <form action="submit_data.php" method="post">
-                <h2 class="form-title">填寫個人資料</h2>
+                <h2 class="form-title">基本資料填寫</h2>
                 <!-- 中文姓名 -->
                 <div class="form-group">
-                    <label for="name">中文姓名 <span class="required">*</span>:</label>
+                    <label for="name">中文姓名<span class="required">*</span>:</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <!-- 英文姓名 -->
                 <div class="form-group">
-                    <label for="name">英文姓名:</label>
+                    <label for="name">英文姓名：</label>
                     <input type="text" id="name" name="name" >
                 </div>
                 <!-- 身分證字號 -->
@@ -61,7 +61,7 @@
                 </div>
                 <!-- 出生日期 -->
                 <div class="form-group">
-                    <label for="birthdate">出生日期 <span class="required">*</span>：</label>
+                    <label for="birthdate">出生日期 <span class="required">*</span>:</label>
                     <input type="date" id="birthdate" name="birthdate" required>
                 </div>
                 <!-- 通訊地址 -->
@@ -92,7 +92,7 @@
                 </div>
                 <!-- 婚姻 -->
                 <div class="form-group">
-                    <label for="wedding-select">婚姻 :</label>
+                    <label for="wedding-select">婚姻：</label>
                     <select id="wedding-select" name="wedding">
                         <option value="">請選擇...</option>
                         <option value="wedding1">未婚</option>

@@ -1,4 +1,4 @@
-/*------------------導覽列------------------*/
+/*----------------------------導覽列-----------------------------*/
 
 /*導覽列樣式*/
 .navbar {
@@ -87,7 +87,7 @@ nav ul {
     margin-top:90px; /*圖片上邊距*/
 }
 
-/*------------------首頁(健檢類別查詢、線上預約)------------------*/
+/*-----------------------------------首頁(健檢類別查詢、線上預約)---------------------------------*/
 
 /*flexbox容器樣式（排列框）*/
 .flex-container{
@@ -141,7 +141,7 @@ nav ul {
     line-height:120px;   /*文字位置*/
 }
 
- /*----------------------健檢類別查詢.php--------------------------*/
+ /*--------------------------------健檢類別查詢.php-----------------------------------------*/
 
 /*健檢類別*/
 .title h2{
@@ -202,7 +202,7 @@ nav ul {
 }
 
 
-/*----------------------線上預約.php--------------------------*/
+/*----------------------------------------線上預約.php---------------------------------------------*/
 
 
 /*flexbox容器樣式（排列框）*/
@@ -222,7 +222,7 @@ nav ul {
     background-color: rgb(3, 104, 185) ;
     margin: 10px;    /*方框間間距*/
     border-radius: 20px;   /*圓角*/
-    margin-top: 100px; 
+    margin-top: 50px;   /*物件跟頂部的距離*/
     padding: 10px; /*內邊距*/
 }
 
@@ -259,7 +259,7 @@ nav ul {
 }
 
 
-/*<--------------------卓越套餐、尊爵套餐 左邊導覽列------------------------>*/
+/*<----------------------------------卓越套餐、尊爵套餐 左邊導覽列------------------------------------->*/
 
 .sidenav {
     height: 100%;
@@ -284,7 +284,7 @@ nav ul {
     color: #dfdfdf;
 }
 
-/*--------健檢套餐的項目表格(先保留，之後須再改成資料庫語言的寫法)-----*/
+/*-------------------------------健檢套餐的項目表格(先保留，之後須再改成資料庫語言的寫法)----------------------*/
 .content {
     margin-left: 240px;
     margin-bottom: 5px; /* 文字和表格的間距 */
@@ -325,109 +325,22 @@ th.centered , td.centered {
 }
 
 
-/*----------------------選擇欲健檢項目.php--------------------*/
+/*------------------------------------chooseitem.php-------------------------------------*/
 #ck{ 
-    padding:200px 0; /*導覽列到物件的間距*/
     text-align:center;
+    color:rgb(255, 255, 255);  /*文字顏色*/
+    font-size: 12px;    /*文字大小*/
 }
 #ck button{
-    padding: 20px;   /* 使用 padding 調整按鈕內的間距 */
-    margin-bottom: 20px; /* 使用 margin 調整按鈕之間的間距 */
-    width:700px;
+    width:500px;
     height:100px;
-
+    border-radius: 20px;   /*圓角*/
+    margin-top: 15px;
+    color:rgb(0, 0, 0) ;/*文字顏色*/
+    font-size: 20px;    /*文字大小*/
 }
 #ck button:hover{
     padding : 20px;
-    background :linear-gradient(#f9fafb,#abc1cb);
-    box-shadow:1px 1px 4px #ccc;
+    background :linear-gradient(#f9fafb,#82bcd4);
+    box-shadow:1px 1px 4px #d5dde1;
 }
-
-
-
-
-/*-------------預約表格-----------*/
-
-.form-section {
-    display: flex;
-    flex-direction: column; /* 使子元素垂直排列 */
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    height: 100vh; /* 容器高度設為視口的100% */
-    margin-top: 100px; /* 在表單區域頂部添加邊距 */
-}
-
-.form-title {
-    margin-bottom: 20px; /* 為標題和表單之間增加一些間距 */
-    
-        text-align: center; /* 標題文字居中 */
-    
-    
-}
-
-form {
-    width: 50%;              /* Adjust the width as necessary */
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="tel"],
-input[type="email"],
-select {
-    width: 80%; /* 或您所需的寬度 */
-    padding: 10px; /* 內邊距 */
-    border-radius: 15px; /* 圓角 */
-    border: 1px solid #ccc; /* 邊框 */
-    outline: none; /* 去除點擊時的藍色外框 */
-    -moz-appearance: none; /* 移除Firefox的預設樣式 */
-    -webkit-appearance: none; /* 移除Chrome和Safari的預設樣式 */
-    appearance: none; /* 移除預設的外觀 */
-    background-color: white; /* 背景顏色 */
-    color: black; /* 文字顏色 */
-}
-
-/* 針對IE瀏覽器，移除下拉箭頭 */
-select::-ms-expand {
-    display: none;
-}
-
-/* 自定義下拉箭頭 */
-select {
-    background-image: url('dropdown-arrow.png'); /* 使用自定義的箭頭圖示 */
-    background-position: right 10px center; /* 箭頭位置 */
-    background-repeat: no-repeat; /* 不重複箭頭圖示 */
-}
-
-
-.button-group {
-    display: flex;
-    justify-content: center; /* 這會將按鈕組水平居中 */
-}
-
-button {
-    margin: 0 10px; /* 按鈕之間的間距 */
-    padding: 10px 20px; /* 為按鈕增加內邊距 */
-    border-radius: 15px; /* 同樣為按鈕增加圓角 */
-    border: none; /* 去除按鈕的邊框 */
-    background-color: #007bff; /* 為按鈕增加背景顏色，這裡使用的是一種藍色 */
-    color: white; /* 設置按鈕文字為白色 */
-    cursor: pointer; /* 當鼠標懸停在按鈕上時，顯示指針手型 */
-    outline: none; /* 去除點擊時的藍色外框 */
-}
-
-.required {
-    color: red; /* 將星號設置為紅色來突出顯示 */
-    margin-right: 5px; /* 為了美觀，在星號和文字之間添加一些間距 */
-}
-
-
-
-
