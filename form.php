@@ -71,7 +71,7 @@
                 </div>
                 <!-- 戶籍地址 -->
                 <div class="form-group">
-                    <label for="residence-address">戶籍地址:</label>
+                    <label for="residence-address">戶籍地址：</label>
                     <input type="text" id="residence-address" name="residence-address">
                  </div>
 

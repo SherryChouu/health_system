@@ -99,14 +99,14 @@ nav ul {
 }
 
 .form-title {
-    margin-bottom: 20px; /* 為標題和表單之間增加一些間距 */
+    margin-bottom: 40px; /* 為標題和表單之間增加一些間距 */
     text-align: center; /* 標題文字居中 */ 
 }
 
 form {
-    width: 50%;              /* Adjust the width as necessary */
+    width: 60%;     /* 表格大小*/
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 30px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
