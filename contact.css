@@ -1,0 +1,70 @@
+/*導覽列整體樣式*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(3, 104, 185);
+    margin: 0;
+    color: white;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+}
+
+/* 醫院Logo樣式 */
+.logo img {
+    display: block;
+    max-width: 100px;  /* 最大寬度 */
+    height: auto;    /* 保持高度比例 */
+    border: none;    /* 移除圖片邊框 */
+    margin: 0%;
+    padding: 0;
+    margin-left: 40px;  /*增加左邊距讓logo往右移*/
+}
+
+/*導覽列鏈接的樣式*/
+nav a {
+    color: inherit;   /* 移除超連結顏色 */
+    display: block;   /* 讓 <a> 填滿 <li> */
+    padding: 20px;    /*滑鼠過去的方框大小*/
+    color: white;
+    font-size: 20px;  /*導覽列列表字體*/
+    text-decoration:none;  /* 移除超連結底線 */
+}
+
+/* 滑鼠移到 `<a>` 時變成深底淺色 */
+ul a:hover {
+    background-color: #7aa6cb;
+    color: black;
+}
+
+/*導覽列表樣式*/
+nav ul {
+    list-style: none;
+    background-color: rgb(3, 104, 185);
+    margin: 0;
+    padding:0;
+    border: 0;
+    height: 80px;
+    align-items: center;
+}
+
+/*導覽列靠右邊*/
+.flex-nav {
+    display: flex;
+    justify-content:flex-end; 
+}
+
+/*標題（仁愛醫健檢中心）*/
+/*待解決：文字會跑 但用 position:fixed 微怪*/
+.title a {
+    font-family: "cwTeXYen", serif;
+    color:#fff;
+    font-size:30px;
+    margin-left:-380px;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
