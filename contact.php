@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="style.css">
     <title>聯絡我們</title>
     <style>
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css'); /*圓體*/

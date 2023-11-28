@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="formstyle.css">
-        <title>健檢類別查詢</title>
+        <title>填寫個人資料</title>
     </head>
 
     <style>
@@ -14,23 +14,24 @@
 <body>
     <main>       
         <div class="navbar">
-                <a href="index.html">
+                <a href="index.php">
                     <div class="logo">
                         <img src="images/logo_hospital.png" alt="醫院Logo">
                     </div>
                 </a>
 
-            <h1 class= "title"><a href="index.html">仁愛醫院健檢中心</a></h1>
+            <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
     <nav>
             <ul class="flex-nav">
                 <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
                 <li><a href="線上預約.php">線上預約</a></li>
-                <li><a href="#">繳費資訊</a></li>
-                <li><a href="#">聯絡我們</a></li>
+                <li><a href="contact.php">繳費資訊</a></li>
+                <li><a href="pay.php">聯絡我們</a></li>
             </ul>
         </div>
     </nav>
-</main>
+</main><li><a href="#">繳費資訊</a></li>
+                <li><a href="#">聯絡我們</a></li>
 
         <section class="form-section">
             <form action="submit_data.php" method="post">
