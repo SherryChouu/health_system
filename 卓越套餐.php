@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <title>健檢類別查詢</title>
+        <title>卓越套餐</title>
         <!-- 引入 breadcrumbs.php -->
         <?php include 'breadcrumbs.php'; ?>
 
@@ -17,7 +17,7 @@
 <body>
     <main>       
             <div class="navbar">
-                    <a href="index.html">
+                    <a href="index.php">
                         <div class="logo">
                             <img src="images/logo_hospital.png" alt="醫院Logo">
                         </div>
@@ -28,8 +28,8 @@
                 <ul class="flex-nav">
                     <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
                     <li><a href="線上預約.php">線上預約</a></li>
-                    <li><a href="#">繳費資訊</a></li>
-                    <li><a href="#">聯絡我們</a></li>
+                    <li><a href="contact.php">繳費資訊</a></li>
+                    <li><a href="pay.php">聯絡我們</a></li>
                 </ul>
             </div>
         </nav>
