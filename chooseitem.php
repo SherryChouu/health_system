@@ -48,19 +48,17 @@
     <h2>選擇欲健檢項目</h2>
     <hr width="70%"> <!--橫線-->
 </div>
+        <div id="ck">
+        <a href="月曆.php">
+        <button type="button1">尊爵Ａ</button></a>
+        <a href="form.php">
+        <button type="button1">尊爵Ｂ</button></a>
 
-<div id="ck">
-    <a href="月曆.php?package=3"><button type="button">尊爵Ａ</button></a>
-    <a href="月曆.php?package=4"><button type="button">尊爵Ｂ</button></a>
-    <a href="月曆.php?package=5"><button type="button">尊爵Ｃ</button></a>
-    <a href="月曆.php?package=6"><button type="button">尊爵D</button></a>
-    <a href="月曆.php?package=2"><button type="button">卓越Ｍ</button></a>
-    <a href="月曆.php?package=1"><button type="button">卓越Ｃ</button></a>
-
-    
-</div>
-
-
+        <button type="button1" >尊爵Ｃ</button>
+        <button type="button1" >尊爵Ｄ</button>
+        <button type="button2" >卓越Ｃ</button>
+        <button type="button2" >卓越Ｍ</button>
+        </div>
 
     </body>
 

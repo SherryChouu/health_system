@@ -239,7 +239,6 @@ nav ul {
 }
 
 /*圖片樣式*/
-/*圖片樣式*/
 .box2 img {
     margin: auto;
     max-width: 70%;
@@ -326,12 +325,13 @@ th.centered , td.centered {
 
 
 /*------------------------------------chooseitem.php-------------------------------------*/
-#ck{ 
+.ck{ 
     text-align:center;
+    align-items: center;
     color:rgb(255, 255, 255);  /*文字顏色*/
     font-size: 12px;    /*文字大小*/
 }
-#ck button{
+.button1{
     width:500px;
     height:100px;
     border-radius: 20px;   /*圓角*/
@@ -339,8 +339,24 @@ th.centered , td.centered {
     color:rgb(0, 0, 0) ;/*文字顏色*/
     font-size: 20px;    /*文字大小*/
 }
-#ck button:hover{
+
+.button2{
+    width:500px;
+    height:100px;
+    border-radius: 20px;   /*圓角*/
+    margin-top: 15px;
+    color:rgb(0, 0, 0) ;/*文字顏色*/
+    font-size: 20px;    /*文字大小*/
+}
+
+.button1:hover{
     padding : 20px;
-    background :linear-gradient(#f9fafb,#82bcd4);
+    background:linear-gradient(#ffffff,#cad6e3) ;
+    box-shadow:1px 1px 4px #d5dde1;
+}
+
+.button2:hover{
+    padding : 20px;
+    background :linear-gradient(#f9fafb,#cad6e3);
     box-shadow:1px 1px 4px #d5dde1;
 }
