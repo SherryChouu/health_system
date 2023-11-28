@@ -25,6 +25,7 @@
         }
         td:hover {
         background-color: #f0f0f0; /* 滑鼠移至時的背景色 */
+        transition-duration: 0.3s;
         
     }
         .rl-button {

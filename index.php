@@ -49,7 +49,7 @@
 
             <div class=" box">
                 <a href="線上預約.php">
-                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="預約月曆">
+                    <img src="images/reserve.jpg" class= "img-responsive" alt="預約月曆">
                     <p>線上預約</p>
                 </a> 
             </div>  

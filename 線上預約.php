@@ -36,7 +36,7 @@
     <div class = "container1">
             <div class=" box2">
                 <a href="選擇欲健檢項目.php">
-                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="套餐查詢">
+                    <img src="images/reserve.jpg" class= "img-responsive" alt="套餐查詢">
                     <h3>我要預約</h3>
                 </a> 
             </div>

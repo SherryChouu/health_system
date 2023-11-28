@@ -94,7 +94,7 @@ nav ul {
     display: flex;  /*外容器宣告為flex*/
     text-align: center;
     flex-direction: row;  /*元件排列方向*/
-    justify-content: center;  
+    justify-content: center; 
     gap: 30px;   
 }
 
@@ -127,7 +127,8 @@ nav ul {
     margin: auto;
     max-width: 70%;
     height:auto;
-    padding-top: 10%;
+    margin-top: 10%;
+    border-radius: 15px;
 }
 
 /*文字樣式*/
@@ -186,7 +187,8 @@ nav ul {
     margin: auto;
     max-width: 70%;
     height:auto;
-    padding-top: 10%;
+    margin-top: 10%;
+    border-radius: 15px;
 }
 
 /*文字樣式*/
@@ -237,11 +239,13 @@ nav ul {
 }
 
 /*圖片樣式*/
+/*圖片樣式*/
 .box2 img {
     margin: auto;
     max-width: 70%;
     height:auto;
-    padding-top: 10%;
+    margin-top: 10%;
+    border-radius: 15px;
 }
 
 /*文字樣式*/
