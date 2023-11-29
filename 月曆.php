@@ -94,10 +94,14 @@ $connectionOptions = array(
 
 // 使用 sqlsrv_connect 函數建立資料庫連線
 $conn = sqlsrv_connect($serverName, $connectionOptions);
-
+// 檢查連線是否成功
+if (!$conn) {
+    die(print_r(sqlsrv_errors(), true));
+}
 
 ?>
 <?php
+
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
 
@@ -133,8 +137,30 @@ while ($day <= $num_days) {
     if ($day_of_week == 'Sun') {
         echo "</tr><tr>";
     }
+
+   
+// 這裡插入了 SQL 查詢
+    $reservationDate = "$year-$month-$day";
+    $sql = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = 1 AND ReservationDate = ?";
+    $params = array($reservationDate);
+    $stmt = sqlsrv_prepare($conn, $sql, $params);
     
-    echo "<td style='text-align: left; vertical-align: top;'class='selectable-day' data-date='$year-$month-$day'>$day</td>";
+    if (!$stmt) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+
+    sqlsrv_execute($stmt);
+    sqlsrv_fetch($stmt);
+    $ARD_Count = sqlsrv_get_field($stmt, 0);
+
+    // 獲取套餐預約人數上限
+    $maxCapacity = 10;  // 替換為您套餐的實際預約人數上限
+
+    // 計算每天剩餘可預約人數
+    $remainingCapacity = $maxCapacity - $ARD_Count;
+    // 這裡顯示了日期和相應的預約數
+    echo "<td style='text-align: left; vertical-align: top;' class='selectable-day' data-date='$reservationDate'>$day<br>預約數：$ARD_Count<br>尚可預約人數：$remainingCapacity</td>";
+    
     $day++;
     $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
 }
@@ -146,6 +172,7 @@ echo "</tr>";
 
 // 結束月曆表格
 echo "</table>";
+
 
 // 上一個月和下一個月的按鈕
 $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
