@@ -95,7 +95,8 @@ nav ul {
     justify-content: center; /* 水平居中 */
     align-items: center; /* 垂直居中 */
     height: 100vh; /* 容器高度設為視口的100% */
-    margin-top: 120px; /* 在表單區域頂部添加邊距 */
+    margin-top: 90px; /* 在表單區域頂部添加邊距 */
+    margin-bottom: 20px;
 }
 
 .form-title {
@@ -120,8 +121,9 @@ input[type="date"],
 input[type="tel"],
 input[type="email"],
 select {
-    width: 80%; /* 或您所需的寬度 */
+    width: 80%; /* 寬度 */
     padding: 10px; /* 內邊距 */
+    position: relative;
     border-radius: 15px; /* 圓角 */
     border: 1px solid #ccc; /* 邊框 */
     outline: none; /* 去除點擊時的藍色外框 */
@@ -130,6 +132,9 @@ select {
     appearance: none; /* 移除預設的外觀 */
     background-color: white; /* 背景顏色 */
     color: black; /* 文字顏色 */
+    margin-left: 10px; /* 往右移動 10px */
+    display: inline-block; /* 讓每個元素在同一行顯示 */
+    box-sizing: border-box; /* 讓 padding 和 border 不會改變元素的寬度 */
 }
 
 /* 針對IE瀏覽器，移除下拉箭頭 */
@@ -137,12 +142,7 @@ select::-ms-expand {
     display: none;
 }
 
-/* 自定義下拉箭頭 */
-select {
-    background-image: url('dropdown-arrow.png'); /* 使用自定義的箭頭圖示 */
-    background-position: right 10px center; /* 箭頭位置 */
-    background-repeat: no-repeat; /* 不重複箭頭圖示 */
-}
+
 
 
 .button-group {

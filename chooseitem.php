@@ -52,7 +52,7 @@
             <a href="月曆.php?package=3"><button type="button" class="button1">尊爵Ａ</button></a>
             <a href="月曆.php?package=4"><button type="button" class="button1">尊爵Ｂ</button></a>
             <a href="月曆.php?package=5"><button type="button" class="button1">尊爵Ｃ</button></a>
-            <a href="月曆.php?package=6"><button type="button" class="button1">尊爵Ｄ</button></a>
+            <a href="月曆.php?package=6"><button type="button" class="button2">尊爵Ｄ</button></a>
             <a href="月曆.php?package=1"><button type="button" class="button2">卓越Ｃ</button></a>
             <a href="月曆.php?package=2"><button type="button" class="button2">卓越Ｍ</button></a>
         </div>

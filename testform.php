@@ -44,8 +44,7 @@
         ?>
 
 
-
-        <section class="form-section">
+<section class="form-section">
             <form action="submit_data.php" method="post">
                 <h2 class="form-title">基本資料填寫</h2>
 
@@ -72,9 +71,11 @@
                     if ($fieldName === "chinese-name" || $fieldName === "id-number" || $fieldName === "sexual" || $fieldName === "birthdate" || $fieldName === "address" || $fieldName === "phone" || $fieldName === "email") {
                         echo " <span class='required'>*</span>";
                     }
-                    echo ":</label>";
+                    echo "：</label>";
 
-                    if ($fieldName === "address" || $fieldName === "wedding") {
+                    /*-- 自動給選項的欄位 -*/
+
+                    if ($fieldName === "address" || $fieldName === "wedding" || $fieldName === "sexual") {
                         echo "<select id='$fieldName' name='$fieldName' required>";
                         echo "<option value=''>請選擇...</option>";
 
@@ -95,20 +96,23 @@
                             foreach ($maritalStatusOptions as $status) {
                                 echo "<option value='$status'>$status</option>";
                             }
+                        } elseif ($fieldName === "sexual") {
+                            $sexualOptions = array("男", "女");
+
+                            foreach ($sexualOptions as $option) {
+                                echo "<option value='$option'>$option</option>";
+                            }
                         }
 
                         echo "</select>";
                     } elseif ($fieldName === "same-as-mailing") {
-                        echo "<input type='checkbox' id='$fieldName' name='$fieldName'>";
-                        echo "<label for='$fieldName'>$fieldLabel</label>";
+                        echo "<input type='checkbox' id='$fieldName' name='$fieldName'>";   /*顯示與通訊地址相同的按鈕*/
                     } else {
                         echo "<input type='text' id='$fieldName' name='$fieldName'>";
                     }
-
                     echo "</div>";
                 }
                 ?>
-
                 <!-- 按鈕 -->
                 <div class="button-group">
                     <button type="submit">提交</button>
