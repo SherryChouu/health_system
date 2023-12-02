@@ -61,8 +61,7 @@
                     "same-as-mailing" => "與通訊地址相同",
                     "phone" => "聯絡電話",
                     "email" => "電子郵件",
-                    "wedding" => "婚姻狀態"
-                    // 添加其他表單項目
+                    "wedding" => "婚姻狀態",
                 );
 
                 foreach ($formFields as $fieldName => $fieldLabel) {
@@ -73,10 +72,10 @@
                     }
                     echo "：</label>";
 
-                    /*-- 自動給選項的欄位 -*/
+                    /*--自動給選項的欄位 --*/
 
-                    if ($fieldName === "address" || $fieldName === "wedding" || $fieldName === "sexual") {
-                        echo "<select id='$fieldName' name='$fieldName' required>";
+                    if ($fieldName === "address" || $fieldName === "wedding" || $fieldName === "sexual") {                       
+                        echo "<select id=$fieldName name='$fieldName' required>";
                         echo "<option value=''>請選擇...</option>";
 
                         if ($fieldName === "address") {
@@ -90,6 +89,8 @@
                             foreach ($taiwanCities as $city) {
                                 echo "<option value='$city'>$city</option>";
                             }
+                           
+
                         } elseif ($fieldName === "wedding") {
                             $maritalStatusOptions = array("未婚", "已婚", "離婚", "鰥寡", "同居", "分居");
 
@@ -105,19 +106,34 @@
                         }
 
                         echo "</select>";
+
+                        
+                    } elseif ($fieldName === "birthdate") {
+                        echo "<input type='date' id='$fieldName' name='$fieldName' required>";  //使用日期選擇器
                     } elseif ($fieldName === "same-as-mailing") {
-                        echo "<input type='checkbox' id='$fieldName' name='$fieldName'>";   /*顯示與通訊地址相同的按鈕*/
+                        echo "<input type='checkbox' id='$fieldName' name='$fieldName' onchange='copyAddress()'>";   //顯示與通訊地址相同的按鈕
                     } else {
                         echo "<input type='text' id='$fieldName' name='$fieldName'>";
                     }
                     echo "</div>";
                 }
+
+                // 戶籍地址自動填入通訊地址的 JavaScript 函式
+                echo "<script>
+                function copyAddress() {
+                    var mailingAddress = document.getElementById('address').value;
+                    document.getElementById('residence-address').value = mailingAddress;
+                }
+                </script>";
                 ?>
+
                 <!-- 按鈕 -->
                 <div class="button-group">
-                <button type="submit" name="submit_form">提交</button>
+                    <button type="submit">提交</button>
                     <button type="reset">重置</button>
                 </div>
+            
+
 </form>
 <?php
 // 當表單提交時執行
