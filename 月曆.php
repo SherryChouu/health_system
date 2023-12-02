@@ -158,8 +158,12 @@ while ($day <= $num_days) {
 
     // 計算每天剩餘可預約人數
     $remainingCapacity = $maxCapacity - $ARD_Count;
-    // 這裡顯示了日期和相應的預約數
-    echo "<td style='text-align: left; vertical-align: top;' class='selectable-day' data-date='$reservationDate'>$day<br>預約數：$ARD_Count<br>尚可預約人數：$remainingCapacity</td>";
+   // 添加連結，將日期作為參數傳遞到 form.php
+   echo "<td style='text-align: left; vertical-align: top;' class='selectable-day'>
+   <a href='form.php?date=$reservationDate'>$day</a><br>
+   
+   尚可預約人數：$remainingCapacity
+ </td>";
     
     $day++;
     $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
@@ -192,8 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 獲取日期數據，這裡假設日期數據儲存在元素的 data-date 屬性中
             var selectedDate = dayElement.getAttribute('data-date');
 
-            // 在這裡你可以進一步處理所選日期，例如顯示在畫面上或發送到伺服器等
-            alert('You clicked on ' + selectedDate);
+            
         });
     });
 });
