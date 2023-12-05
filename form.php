@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="formstyle.css">
-    <title>test</title>
+    <title>form</title>
     
     <!-- 引入 breadcrumbs.php -->
     <?php include 'breadcrumbs.php'; ?>
@@ -44,8 +44,9 @@
         ?>
 
 
-<section class="form-section">
-<form action="submit_form.php" method="post">
+        <section class="form-section">
+        <!--指定了表單提交的目標 URL 為 submit_form.php-->
+        <form id="submit_form" action="final_check.php" method="post">  
                 <h2 class="form-title">基本資料填寫</h2>
 
                 <?php
@@ -75,7 +76,7 @@
                     /*--自動給選項的欄位 --*/
 
                     if ($fieldName === "address" || $fieldName === "wedding" || $fieldName === "sexual") {                       
-                        echo "<select id=$fieldName name='$fieldName' required>";
+                        echo "<select id=$fieldName  name='$fieldName' required>"; //這段很重要 id、name是屬性
                         echo "<option value=''>請選擇...</option>";
 
                         if ($fieldName === "address") {
@@ -116,85 +117,49 @@
                         echo "<input type='text' id='$fieldName' name='$fieldName'>";
                     }
                     echo "</div>";
-                }
+                }             
 
+                $reservationDate = isset($_GET['date']) ? $_GET['date'] : ''; //GET前一頁的DATE
+                $selectedPackage = isset($_GET['package']) ? $_GET['package'] : ''; //Get選擇的套餐
+                echo "Reservation Date:" .$reservationDate;   //顯示預約日期
+                echo "Selected Package:". $selectedPackage;
+   
+                // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 echo "<script>
                 function copyAddress() {
                     var mailingAddress = document.getElementById('address').value;
                     document.getElementById('residence-address').value = mailingAddress;
                 }
-                </script>";
-                ?>
 
+                // 在页面加载时显示 reservationDate 和 selectedPackage 的值
+                document.addEventListener('DOMContentLoaded', function() {
+                    var reservationDate = new URLSearchParams(window.location.search).get('reservationDate');
+                    var selectedPackage = new URLSearchParams(window.location.search).get('package');
+
+                    // 显示 reservationDate 和 selectedPackage 的值
+                    if (reservationDate) {
+                        console.log('Reservation Date:', reservationDate);
+                    }
+
+                    if (selectedPackage) {
+                        console.log('Selected Package:', selectedPackage);
+                    }
+                });
+                </script>";
+
+                ?>
+                <!-- 在表單中加入套餐和日期的隱藏欄位 -->  
+                <input type="hidden" name="package" value="<?php echo $selectedPackage; ?>">
+                <input type="hidden" name="reservationDate" value="<?php echo $reservationDate; ?>">
+                
                 <!-- 按鈕 -->
                 <div class="button-group">
-                    <button type="submit">提交</button>
+                    <button type="submit">送出</button>
                     <button type="reset">重置</button>
-                </div>
-            
+                </div>         
 
 </form>
-<?php
-// 當表單提交時執行
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_form"])) {
-    // 獲取表單欄位的值
-    $chineseName = $_POST['chinese-name'];
-    $englishName = $_POST['english-name'];
-    $idNumber = $_POST['id-number'];
-    $sexual = $_POST['sexual'];
-    $birthdate = $_POST['birthdate'];
-    $address = $_POST['address'];
-    $residenceAddress = $_POST['residence-address'];
-    $sameAsMailing = isset($_POST['same-as-mailing']) ? 1 : 0;
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $wedding = $_POST['wedding'];
-
-    // 在這裡執行資料庫操作
-    try {
-        // 準備 SQL 語句
-        $sql = "INSERT INTO Patient (ChineseName, EnglishName, IDNumber, Sexual, Birthdate, Address, ResidenceAddress, SameAsMailing, Phone, Email, Wedding) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-        $stmt = sqlsrv_prepare($conn, $sql, array(&$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding));
-
-        // 執行 SQL 語句
-        if (sqlsrv_execute($stmt)) {
-            echo "資料已成功提交到資料庫。";
-        } else {
-            die(print_r(sqlsrv_errors(), true));
-        }
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
-}
-
-    // 關閉資料庫連接
-    sqlsrv_close($conn);  
-
-        
-
-        // 使用 PDO 預備語句，防止 SQL 注入攻擊
-        $stmt = $conn->prepare($sql);
-
-        // 綁定參數
-        $stmt->bindParam(':ChineseName', $chineseName);
-        $stmt->bindParam(':EnglishName', $englishName);
-        $stmt->bindParam(':IDNumber', $idNumber);
-        $stmt->bindParam(':Sexual', $sexual);
-        $stmt->bindParam(':Birthdate', $birthdate);
-        $stmt->bindParam(':Address', $address);
-        $stmt->bindParam(':ResidenceAddress', $residenceAddress);
-        $stmt->bindParam(':SameAsMailing', $sameAsMailing, PDO::PARAM_INT);
-        $stmt->bindParam(':Phone', $phone);
-        $stmt->bindParam(':Email', $email);
-        $stmt->bindParam(':Wedding', $wedding);
-
-        
-
-?>
 
             
         </section>

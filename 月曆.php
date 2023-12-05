@@ -12,19 +12,24 @@
 
         table {
             
-            width: 70%; /* 设置表格宽度为50% */
+            width: 50%; /* 设置表格宽度为50% */
             border-collapse: collapse;
-            margin: 20px; /* 设置表格外边距为20px */
+            margin: 100px auto; /* Increase the left and right margins to 100px */
             text-align:center;
-            margin: 70px auto; /* 设置表格居中 */
         }
-        th, td {
+        th {
             border: 1px solid black;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
         }
+        td{
+            border: 1px solid black;
+            padding: 10px; /*調間距*/
+            text-align: center;
+        }
+
         td:hover {
-        background-color: #f0f0f0; /* 滑鼠移至時的背景色 */
+        background-color: pink; /* 滑鼠移至時的背景色 */
         transition-duration: 0.3s;
         
     }
@@ -53,6 +58,23 @@
         .button-container button {
             margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
         }
+
+        .top-block {
+            /* 样式设置上方区块的样式 */
+            color: #ffffff; /* 白色文本 */
+            background-color: transparent; /*背景透明*/
+            border: 2px solid #7aa6cb;
+            padding: 20px;
+            border-radius: 10px;
+            width: 120px;
+            color: black;
+            
+        }
+        .week{
+        border-color: transparent;
+        font-size:20px;
+        }
+               
     </style>
 
 <body>
@@ -119,70 +141,26 @@ $day_of_week = date('D', $first_day);
 // 獲取當前月份天數
 $num_days = date('t', $first_day);
 
+
+
 // 創建月曆表格
-echo "<table border='2'>";
-echo "<th><th colspan='7'>$month/$year</th></tr>";
-echo "<tr><th>星期日</th><th>星期一</th><th>星期二</th><th>星期三</th><th>星期四</th><th>星期五</th><th>星期六</th><tr>";
+echo "<table border='2' style='border-collapse: collapse;'>";
+echo "<th colspan='7'style='font-size: 40px'>$year 年 $month 月</th></tr>";
+echo "<tr>
+          <th class='week'>星期日</th>
+          <th class='week'>星期一</th>
+          <th class='week'>星期二</th>
+          <th class='week'>星期三</th>
+          <th class='week'>星期四</th>
+          <th class='week'>星期五</th>
+          <th class='week'>星期六</th>
+      <tr>";
 
-// 填充月曆表格
-echo"<tr>";
-$day = 1;
-for ($i = 0; $i < 7; $i++) {
-    if ($day_of_week == date('D', strtotime("Sunday +{$i} days"))) {
-        break;
-    }
-    echo "<td></td>";
-}
-while ($day <= $num_days) {
-    if ($day_of_week == 'Sun') {
-        echo "</tr><tr>";
-    }
-
-   
-// 這裡插入了 SQL 查詢
-    $reservationDate = "$year-$month-$day";
-    $sql = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = 1 AND ReservationDate = ?";
-    $params = array($reservationDate);
-    $stmt = sqlsrv_prepare($conn, $sql, $params);
-    
-    if (!$stmt) {
-        die(print_r(sqlsrv_errors(), true));
-    }
-
-    sqlsrv_execute($stmt);
-    sqlsrv_fetch($stmt);
-    $ARD_Count = sqlsrv_get_field($stmt, 0);
-
-    // 獲取套餐預約人數上限
-    $maxCapacity = 10;  // 替換為您套餐的實際預約人數上限
-
-    // 計算每天剩餘可預約人數
-    $remainingCapacity = $maxCapacity - $ARD_Count;
-   // 添加連結，將日期作為參數傳遞到 form.php
-   echo "<td style='text-align: left; vertical-align: top;' class='selectable-day'>
-   <a href='form.php?date=$reservationDate'>$day</a><br>
-   
-   尚可預約人數：$remainingCapacity
- </td>";
-    
-    $day++;
-    $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
-}
-while ($day_of_week != 'Sun') {
-    echo "<td></td>";
-    $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
-}
-echo "</tr>";
-
-// 結束月曆表格
-echo "</table>";
-
-
-// 上一個月和下一個月的按鈕
-$prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
-$prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
-$nextMonth = date('m', strtotime("+1 month", strtotime("$year-$month-01")));
-$nextYear = date('Y', strtotime("+1 month", strtotime("$year-$month-01")));
+    // 上一個月和下一個月的按鈕
+    $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
+    $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
+    $nextMonth = date('m', strtotime("+1 month", strtotime("$year-$month-01")));
+    $nextYear = date('Y', strtotime("+1 month", strtotime("$year-$month-01")));
 ?>
 
 <script>
@@ -201,6 +179,88 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<?php
+// 填充月曆表格
+echo"<tr>";
+$day = 1;
+for ($i = 0; $i < 7; $i++) {
+    if ($day_of_week == date('D', strtotime("Sunday +{$i} days"))) {
+        break;
+    }
+    echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
+        <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
+        1</br>
+        剩餘名額：10
+            </div>
+            </td>";   //最上排沒有日期的空白框
+}
+while ($day <= $num_days) {
+    if ($day_of_week == 'Sun') {
+        echo "</tr><tr >";
+    }
+
+   
+    // 這裡插入了 SQL 查詢
+    $reservationDate = "$year-$month-$day";
+        
+    // 假設 Packages 表中有一條包含 Package_id、MaxCapacity
+    $sql = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = 1 AND ReservationDate = ?";
+    $params = array($reservationDate);
+    $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+    if (!$stmt) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+
+    sqlsrv_execute($stmt); 
+    sqlsrv_fetch($stmt);
+    $ARD_Count = sqlsrv_get_field($stmt, 0);
+
+    // 獲取套餐預約人數上限
+    $maxCapacity = 10;  // 替換為您套餐的實際預約人數上限
+
+    // 計算每天剩餘可預約人數
+    $remainingCapacity = $maxCapacity - $ARD_Count;
+
+    //檢查 $_GET['package'] 是否存在。
+    //如果存在，它將 $_GET['package'] 的值賦給變數 $selectedPackage；
+    //如果不存在，則將空字串（''）賦給 $selectedPackage
+    $selectedPackage = isset($_GET['package']) ? $_GET['package'] : '';  //Get選擇的套餐
+
+
+    // 設置超連結的目標 URL，其中包括日期和套餐的資訊，這些資訊將被傳遞到 form.php 頁面。
+    //預約格子內
+    echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
+            <a href='form.php?date=$reservationDate&package=$selectedPackage' style='display: block; color: inherit; text-decoration: none;'>
+                <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
+                    $day 日</br>剩餘名額：$remainingCapacity
+                </div>
+            </a>
+          </td>";
+
+
+
+    $day++;
+    $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
+}
+while ($day_of_week != 'Sun') {
+    echo "<td style='background-color: white;border-color: white;text-align: left; vertical-align: top;'>
+    <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;'>
+        1</br>
+        剩餘名額：10
+            </div>
+    </td>";  //最下排沒有日期的空白框
+    $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
+}
+echo "</tr>";
+
+// 結束月曆表格
+echo "</table>";
+
+?>
+
+
 </div>
 <?php
 $package = isset($_GET['package']) ? $_GET['package'] : '';
@@ -242,13 +302,13 @@ switch ($package) {
 
 <div class="button-container">
     <!-- 上一個月按鈕 -->
-    <a href="?month=<?php echo $prevMonth; ?>&year=<?php echo $prevYear; ?>"><button class="rl-button"><?php echo "上一個月"; ?></button></a>
+    <a href="?package=<?php echo $package; ?>&month=<?php echo $prevMonth; ?>&year=<?php echo $prevYear; ?>"><button class="rl-button"><?php echo "上一個月"; ?></button></a>
     
     <!-- 回到當月按鈕 -->
-    <a href="?month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
+    <a href="?package=<?php echo $package; ?>&month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
     
     <!-- 下一個月按鈕 -->
-    <a href="?month=<?php echo $nextMonth; ?>&year=<?php echo $nextYear; ?>"><button class="rl-button"><?php echo "下一個月"; ?></button></a>
+    <a href="?package=<?php echo $package; ?>&month=<?php echo $nextMonth; ?>&year=<?php echo $nextYear; ?>"><button class="rl-button"><?php echo "下一個月"; ?></button></a>
 </div>
 </body>
 </html>
