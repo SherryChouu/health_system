@@ -17,8 +17,8 @@
             border-radius: 30px; /* Rounded corners */
             display: flex; /* Use flexbox to center content */
             flex-direction: column; /* Stack content vertically */
-            align-items: center; /* Center content horizontally */
-            justify-content: center; /* Center content vertically */
+            align-items:baseline; /* Center content horizontally */
+            justify-content:left; /* Center content vertically */
         }
         /* CSS for the text inside the gray box */
         .text-inside-box {
