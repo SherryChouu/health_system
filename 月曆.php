@@ -91,8 +91,8 @@
                 <ul class="flex-nav">
                     <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
                     <li><a href="線上預約.php">線上預約</a></li>
-                    <li><a href="contact.php">繳費資訊</a></li>
-                    <li><a href="pay.php">聯絡我們</a></li>
+                    <li><a href="pay.php">繳費資訊</a></li>
+                    <li><a href="contact.php">聯絡我們</a></li>
                 </ul>
             </div>
         </nav>
