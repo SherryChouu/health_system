@@ -38,6 +38,12 @@
             margin: 50px; /* 使用 margin 調整按鈕之間的間距 */
             width:100px;
             height:70px;
+            background-color: #7aa6cb; /*背景透明*/
+            border: 2px solid white;
+            border-radius: 10px;
+            font-size:13px;
+
+
         }
         .rl-button:hover{
             padding : 10px 20px;
@@ -53,6 +59,7 @@
             top: 0;
             width: 100%;
             padding: 5px;
+            
         }
 
         .button-container button {
@@ -246,7 +253,7 @@ while ($day <= $num_days) {
 }
 while ($day_of_week != 'Sun') {
     echo "<td style='background-color: white;border-color: white;text-align: left; vertical-align: top;'>
-    <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;'>
+    <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
         1</br>
         剩餘名額：10
             </div>
@@ -268,27 +275,27 @@ $package = isset($_GET['package']) ? $_GET['package'] : '';
 switch ($package) {
     case '3':
         // 顯示套餐A的月曆內容
-        echo '<div>這是尊爵A的月曆</div>';
+        //echo '<div>這是尊爵A的月曆</div>';
         break;
     case '4':
         // 顯示套餐B的月曆內容
-        echo '<div>這是尊爵B的月曆</div>';
+        //echo '<div>這是尊爵B的月曆</div>';
         break;
     case '5':
         // 顯示套餐B的月曆內容
-        echo '<div>這是尊爵C的月曆</div>';
+        //echo '<div>這是尊爵C的月曆</div>';
         break;
     case '6':
         // 顯示套餐A的月曆內容
-        echo '<div>這是尊爵D的月曆</div>';
+        //echo '<div>這是尊爵D的月曆</div>';
         break;
     case '1':
         // 顯示套餐B的月曆內容
-        echo '<div>這是卓越C的月曆</div>';
+        //echo '<div>這是卓越C的月曆</div>';
         break;
     case '2':
         // 顯示套餐B的月曆內容
-        echo '<div>這是卓越M的月曆</div>';
+        //echo '<div>這是卓越M的月曆</div>';
         break;
 
 

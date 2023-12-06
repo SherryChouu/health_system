@@ -45,11 +45,15 @@ echo "Reservation Date: " . $reservationDate;
 
 
 
-    // 在這裡執行資料庫操作
+    // 執行資料庫操作
 try {
     // 準備 SQL 語句
     // 將資料插入 Patient 資料表
-    $sqlPatient = "INSERT INTO Patient (ChineseName, EnglishName, IDNumber, Sexual, Birthdate, Address, ResidenceAddress, SameAsMailing, Phone, Email, Wedding) 
+    $sqlPatient = "INSERT INTO Patient (
+    ChineseName, EnglishName, 
+    IDNumber, Sexual, Birthdate, 
+    Address, ResidenceAddress, 
+    SameAsMailing, Phone, Email, Wedding) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
@@ -73,19 +77,21 @@ try {
         ));
 
         // 執行 SQL 語句
+        // 執行 SQL 語句
         if (sqlsrv_execute($stmtAppointment)) {
-            echo "資料已成功提交到資料庫。";
-        } else {
+            echo "資料已成功提交到資料庫.";
+
+            // 使用 JavaScript 彈出提示框和重定向
+            echo "<script>alert('預約成功'); window.location='index.php';</script>";exit();
+        }else {
+            die(print_r(sqlsrv_errors(), true));}
+        } 
+        else {
             die(print_r(sqlsrv_errors(), true));
         }
-    } else {
-        die(print_r(sqlsrv_errors(), true));
-    }
-        } catch (Exception $e) {
-            echo "錯誤: " . $e->getMessage();
-        }finally {
-    // 關閉資料庫連接
-    sqlsrv_close($conn);
+            } catch (Exception $e) {
+                echo "錯誤: " . $e->getMessage();
+            }finally { sqlsrv_close($conn); // 關閉資料庫連接
         }
     } 
 
@@ -106,25 +112,4 @@ try {
         $stmt->bindParam(':Phone', $phone);
         $stmt->bindParam(':Email', $email);
         $stmt->bindParam(':Wedding', $wedding);
-
-        
-    // 在這裡可以對數據進行進一步的處理，例如存儲到數據庫中
-
-    // 簡單的示例，將數據輸出到屏幕上
-    echo "<h2>表單提交成功</h2>";
-    echo "<p>中文姓名: $chineseName</p>";
-    echo "<p>英文姓名: $englishName</p>";
-    echo "<p>身份證字號: $idNumber</p>";
-    echo "<p>生理性別: $sexual</p>";
-    echo "<p>出生日期: $birthdate</p>";
-    echo "<p>通訊地址: $address</p>";
-    echo "<p>戶籍地址: $residenceAddress</p>";
-    echo "<p>與通訊地址相同: $sameAsMailing</p>";
-    echo "<p>聯絡電話: $phone</p>";
-    echo "<p>電子郵件: $email</p>";
-    echo "<p>婚姻狀態: $wedding</p>";
-
-
-
-
 ?>
