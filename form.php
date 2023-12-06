@@ -121,8 +121,8 @@
 
                 $reservationDate = isset($_GET['date']) ? $_GET['date'] : ''; //GET前一頁的DATE
                 $selectedPackage = isset($_GET['package']) ? $_GET['package'] : ''; //Get選擇的套餐
-                echo "Reservation Date:" .$reservationDate;   //顯示預約日期
-                echo "Selected Package:". $selectedPackage;
+                //echo "Reservation Date:" .$reservationDate;   //顯示預約日期
+                //echo "Selected Package:". $selectedPackage;
    
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式

@@ -29,7 +29,7 @@
         }
 
         td:hover {
-        background-color: pink; /* 滑鼠移至時的背景色 */
+         /* background-color: pink;滑鼠移至時的背景色 */
         transition-duration: 0.3s;
         
     }
@@ -148,7 +148,7 @@ $day_of_week = date('D', $first_day);
 // 獲取當前月份天數
 $num_days = date('t', $first_day);
 
-
+//麵包屑
 
 // 創建月曆表格
 echo "<table border='2' style='border-collapse: collapse;'>";
@@ -210,22 +210,38 @@ while ($day <= $num_days) {
    
     // 這裡插入了 SQL 查詢
     $reservationDate = "$year-$month-$day";
-        
-    // 假設 Packages 表中有一條包含 Package_id、MaxCapacity
-    $sql = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = 1 AND ReservationDate = ?";
-    $params = array($reservationDate);
-    $stmt = sqlsrv_prepare($conn, $sql, $params);
 
-    if (!$stmt) {
-        die(print_r(sqlsrv_errors(), true));
-    }
+    // 設定套餐 ID，你可以根據實際需要修改
+    $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
 
-    sqlsrv_execute($stmt); 
-    sqlsrv_fetch($stmt);
-    $ARD_Count = sqlsrv_get_field($stmt, 0);
+    // 獲取預約數量
+        $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
+        $paramsAppointmentCount = array($packageId, $reservationDate);
 
-    // 獲取套餐預約人數上限
-    $maxCapacity = 10;  // 替換為您套餐的實際預約人數上限
+        $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
+
+        if (!$stmtAppointmentCount) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        sqlsrv_execute($stmtAppointmentCount); 
+        sqlsrv_fetch($stmtAppointmentCount);
+        $ARD_Count = sqlsrv_get_field($stmtAppointmentCount, 0);
+
+        // 獲取套餐預約人數上限
+        $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
+        $paramsMaxCapacity = array($packageId);
+
+        $stmtMaxCapacity = sqlsrv_prepare($conn, $sqlMaxCapacity, $paramsMaxCapacity);
+
+        if (!$stmtMaxCapacity) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        sqlsrv_execute($stmtMaxCapacity); 
+        sqlsrv_fetch($stmtMaxCapacity);
+        $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
+
 
     // 計算每天剩餘可預約人數
     $remainingCapacity = $maxCapacity - $ARD_Count;
@@ -238,15 +254,23 @@ while ($day <= $num_days) {
 
     // 設置超連結的目標 URL，其中包括日期和套餐的資訊，這些資訊將被傳遞到 form.php 頁面。
     //預約格子內
-    echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
+    if ($remainingCapacity > 0) {
+        // 如果剩餘可預約人數大於0，則顯示可預約的連結
+        echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
             <a href='form.php?date=$reservationDate&package=$selectedPackage' style='display: block; color: inherit; text-decoration: none;'>
                 <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
                     $day 日</br>剩餘名額：$remainingCapacity
                 </div>
             </a>
           </td>";
-
-
+        } else {
+            // 如果剩餘可預約人數為0，則顯示不可預約的內容
+            echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
+                    <div class='top-block' style='color: black; background-color: #ccc;'>
+                        $day 日<div style='text-align: center;font-size:16px;color:black'>額&nbsp;&nbsp;滿</div>
+                    </div>
+                  </td>";
+        }
 
     $day++;
     $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
@@ -282,7 +306,7 @@ switch ($package) {
         //echo '<div>這是尊爵B的月曆</div>';
         break;
     case '5':
-        // 顯示套餐B的月曆內容
+         //顯示套餐B的月曆內容
         //echo '<div>這是尊爵C的月曆</div>';
         break;
     case '6':
@@ -302,7 +326,7 @@ switch ($package) {
 
     // 其他套餐的處理
     default:
-        echo '<div>未知套餐</div>';
+        //echo '<div>未知套餐</div>';
         break;
 }
 ?>

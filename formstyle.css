@@ -95,7 +95,7 @@ nav ul {
     justify-content: center; /* 水平居中 */
     align-items: center; /* 垂直居中 */
     height: 100vh; /* 容器高度設為視口的100% */
-    margin-top: 90px; /* 在表單區域頂部添加邊距 */
+    margin-top: 30px; /* 在表單區域頂部添加邊距 */
     margin-bottom: 20px;
 }
 
