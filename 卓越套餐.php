@@ -432,6 +432,11 @@
                 <td class="centered">✔️</td>
                 <td class="centered">✔️</td>
             </tr>
+            <tr> 
+                <td colspan="3">各項健檢實際收取費用</td>
+                <td class="centered">16000</td>
+                <td class="centered">16000</td>
+            </tr>
             </tbody>
         </table>
         

@@ -125,7 +125,6 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 
-
 // 設定連線至資料庫的伺服器名稱和埠號
 $serverName = "DESKTOP-947P2F9";
 
