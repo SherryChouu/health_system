@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <title>月曆</title>
+
+        <!-- 引入 breadcrumbs.php -->
+        <?php include 'breadcrumbs.php'; ?>
     </head>
 
     <style>
@@ -105,10 +108,23 @@
         </nav>
     </main>
     </br>
-    </br>
+
+
+    //麵包屑
+<?php
+    $pages = array(
+        array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
+        array('title' => '線上預約', 'link' => 'reserve_online.php'), 
+        array('title' => '選擇欲健檢項目', 'link' => 'chooseitem.php'), 
+        array('title' => '選擇預約日期', 'link' => 'calendar.php'), 
+    );
+    generateBreadcrumbs($pages);
+    ?>
+
 <div style="height: 600px;">
 <?php
 header("Content-Type:text/html; charset=utf-8");
+
 
 // 設定連線至資料庫的伺服器名稱和埠號
 $serverName = "DESKTOP-947P2F9";
@@ -148,7 +164,8 @@ $day_of_week = date('D', $first_day);
 // 獲取當前月份天數
 $num_days = date('t', $first_day);
 
-//麵包屑
+
+
 
 // 創建月曆表格
 echo "<table border='2' style='border-collapse: collapse;'>";

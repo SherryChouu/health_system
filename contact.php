@@ -21,9 +21,7 @@
             justify-content:left; /* Center content vertically */
         }
         /* CSS for the text inside the gray box */
-        .text-inside-box {
-            text-align: center; /* Center text horizontally */
-        }
+       
     </style>
 </head>
 <body>
