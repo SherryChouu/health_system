@@ -8,17 +8,9 @@
     <style>
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css'); /*圓體*/
         /* CSS for the gray box */
-        .gray-box {
-            background-color: #d3d3d377; /* Gray background color */
-            width: 1200px; /* Width of the box */
-            height: 1000px; /* Height of the box */
-            margin: 0 auto; /* Center horizontally */
-            margin-top: 100px; /* Add some top margin for spacing */
-            border-radius: 30px; /* Rounded corners */
-            display: flex; /* Use flexbox to center content */
-            flex-direction: column; /* Stack content vertically */
-            align-items:baseline; /* Center content horizontally */
-            justify-content:left; /* Center content vertically */
+        .contactbox {
+            margin-left: 100px; /* Add some top margin for spacing */
+            
         }
         /* CSS for the text inside the gray box */
        
@@ -46,7 +38,7 @@
 </main>
        
     <!-- Gray box -->
-    <div class="gray-box">
+    <div class="contactbox">
         <div class="text-inside-box">
             <p style="font-size: 30px; font-weight: bold;">臺北市立聯合醫院仁愛院區</p>
             
