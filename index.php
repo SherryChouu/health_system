@@ -25,8 +25,8 @@
             <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
     <nav>
             <ul class="flex-nav">
-                <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
-                <li><a href="線上預約.php">線上預約</a></li>
+                <li><a href="item_search.php">健檢類別查詢</a></li>
+                <li><a href="reserve_online.php">線上預約</a></li>
                 <li><a href="pay.php">繳費資訊</a></li>
                 <li><a href="contact.php">聯絡我們</a></li>
             </ul>
@@ -41,14 +41,14 @@
 
         <div class = "flex-container">
             <div class=" box">
-                <a href="健檢類別查詢.php">
+                <a href="item_search.php">
                     <img src="images/健檢類別查詢.jpg" class= "img-responsive" alt="套餐查詢">
                     <p>健檢類別查詢</p>
                 </a> 
             </div>
 
             <div class=" box">
-                <a href="線上預約.php">
+                <a href="reserve_online.php">
                     <img src="images/online_reserve.jpg" class= "img-responsive" alt="預約月曆">
                     <p>線上預約</p>
                 </a> 

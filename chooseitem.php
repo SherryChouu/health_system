@@ -25,8 +25,8 @@
             <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
     <nav>
             <ul class="flex-nav">
-                <li><a href="健檢類別查詢.php">健檢類別查詢</a></li>
-                <li><a href="線上預約.php">線上預約</a></li>
+                <li><a href="item_search.php">健檢類別查詢</a></li>
+                <li><a href="reserve_online.php">線上預約</a></li>
                 <li><a href="pay.php">繳費資訊</a></li>
                 <li><a href="contact.php">聯絡我們</a></li>
             </ul>
@@ -38,7 +38,7 @@
 <?php
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
-        array('title' => '線上預約', 'link' => '線上預約.php'), 
+        array('title' => '線上預約', 'link' => 'reserve_online.php'), 
         array('title' => '選擇欲健檢項目', 'link' => 'chooseitem.php'), 
     );
     generateBreadcrumbs($pages);
