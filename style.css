@@ -346,11 +346,11 @@ th.centered , td.centered {
 .button1:hover{
     padding : 20px;
     background:linear-gradient(#ffffff,#cad6e3) ;
-    box-shadow:1px 1px 4px #d5dde1;
+    box-shadow:1px 1px 4px #bbe4f8;
 }
 
 .button2:hover{
     padding : 20px;
     background :linear-gradient(#f9fafb,#cad6e3);
-    box-shadow:1px 1px 4px #d5dde1;
+    box-shadow:1px 1px 4px #bbe4f8;
 }

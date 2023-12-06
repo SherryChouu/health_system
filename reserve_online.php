@@ -48,7 +48,7 @@
     <div class = "container1">
             <div class=" box2">
                 <a href="chooseitem.php">
-                    <img src="images/reserve.jpg" class= "img-responsive" alt="套餐查詢">
+                    <img src="images\online_.jpg" class= "img-responsive" alt="套餐查詢">
                     <h3>線上預約</h3>
                 </a> 
             </div>
