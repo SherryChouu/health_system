@@ -55,14 +55,14 @@
         <div class = "container">
             <div class=" box1">
                 <a href="卓越套餐.php">
-                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="套餐查詢">
+                    <img src="images\卓越.jpg" class= "img-responsive" alt="套餐查詢">
                     <h3>卓越套餐</h3>
                 </a> 
             </div>
 
             <div class=" box1">
                 <a href="尊爵套餐.php">
-                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="預約月曆">
+                    <img src="images\尊爵套餐.jpg" class= "img-responsive" alt="預約月曆">
                     <h3>尊爵套餐</h3>
                 </a> 
             </div>  
