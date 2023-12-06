@@ -9,32 +9,32 @@
     <!-- 引入 breadcrumbs.php -->
     <?php include 'breadcrumbs.php'; ?>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
-</style>
-<body>
-    <main>
-        <div class="navbar">
-            <a href="index.php">
-                <div class="logo">
-                    <img src="images/logo_hospital.png" alt="醫院Logo">
-                </div>
-            </a>
-            <h1 class="title"><a href="index.php">仁愛醫院健檢中心</a></h1>
-            <nav>
-                <ul class="flex-nav">
-                    <li><a href="item_search.php">健檢類別查詢</a></li>
-                    <li><a href="reserve_online.php">線上預約</a></li>
-                    <li><a href="pay.php">繳費資訊</a></li>
-                    <li><a href="contact.php">聯絡我們</a></li>
-                </ul>
-            </nav>
-        </div>
+    <style>
+        @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
+    </style>
+    <body>
+        <main>
+            <div class="navbar">
+                <a href="index.php">
+                    <div class="logo">
+                        <img src="images/logo_hospital.png" alt="醫院Logo">
+                    </div>
+                </a>
+                <h1 class="title"><a href="index.php">仁愛醫院健檢中心</a></h1>
+                <nav>
+                    <ul class="flex-nav">
+                        <li><a href="item_search.php">健檢類別查詢</a></li>
+                        <li><a href="reserve_online.php">線上預約</a></li>
+                        <li><a href="pay.php">繳費資訊</a></li>
+                        <li><a href="contact.php">聯絡我們</a></li>
+                    </ul>
+                </nav>
+            </div>
 
     <!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->
     <?php
         $pages = array(
-            array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
+            array('title' => '首頁', 'link' => 'index.php'),    // 首頁的連結指向 index.php
             array('title' => '線上預約', 'link' => 'reserve_online.php'), 
             array('title' => '選擇欲健檢項目', 'link' => 'chooseitem.php'), 
             array('title' => '選擇健檢日期', 'link' => 'calendar.php'), 
@@ -45,8 +45,8 @@
 
 
         <section class="form-section">
-        <!--指定了表單提交的目標 URL 為 submit_form.php-->
-        <form id="submit_form" action="final_check.php" method="post">  
+            <!--指定了表單提交的目標 URL 為 submit_form.php-->
+            <form id="submit_form" action="submit_form.php" method="post">  
                 <h2 class="form-title">基本資料填寫</h2>
 
                 <?php
@@ -157,14 +157,13 @@
                 <div class="button-group">
                     <button type="submit">送出</button>
                     <button type="reset">重置</button>
+                    
                 </div>         
 
-</form>
+            </form>
 
             
         </section>
-    </main>
-
-    <!-- 頁尾代碼在這裡 -->
-</body>
+        </main>
+    </body>
 </html>
