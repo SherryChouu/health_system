@@ -46,7 +46,7 @@
 
         <section class="form-section">
         <!--指定了表單提交的目標 URL 為 submit_form.php-->
-        <form id="submit_form" action="final_check.php" method="post">  
+        <form id="submit_form" action="submit_form.php" method="post">  
                 <h2 class="form-title">基本資料填寫</h2>
 
                 <?php
