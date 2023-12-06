@@ -64,7 +64,7 @@
             
 
             <!-- Additional information -->
-            <p style="font-size: 20px; font-weight: bold;">除現金繳費外，亦辦理信用卡、悠遊卡支付醫療費用制度 </p>
+            <p style="font-size: 20px; font-weight: bold;">除現金繳費外，亦辦理信用卡、悠遊卡支付醫療費用制度 要重寫 </p>
 
         </div>
     </div>
