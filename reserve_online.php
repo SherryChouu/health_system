@@ -55,7 +55,7 @@
 
             <div class=" box2">
                 <a href="#">  <!---------未完成!!!!!!!!!!!!!----------->
-                    <img src="images/hoshi.jpeg" class= "img-responsive" alt="預約月曆">
+                    <img src="images/search.png" class= "img-responsive" alt="預約月曆">
                     <h3>預約記錄查詢</h3>
                 </a> 
             </div>  
