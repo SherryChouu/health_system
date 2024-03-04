@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $wedding = $_POST["wedding"];
     $selectedPackage = isset($_POST["package"]) ? $_POST["package"] : '';
-    $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
+    $reservationDate = isset($_POST["date"]) ? $_POST["date"] : '';
     
     
 // 在執行 SQL 語句之前確認 $reservationDate 的值
@@ -53,13 +53,13 @@ try {
     ChineseName, EnglishName, 
     IDNumber, Sexual, Birthdate, 
     Address, ResidenceAddress, 
-    SameAsMailing, Phone, Email, Wedding) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
     $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
         &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding
+        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding,&$Package_id,&$ReservationDate
     ));
 
     // 執行 SQL 語句
