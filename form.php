@@ -94,7 +94,7 @@
                         } elseif ($fieldName === "id-number") {
                             // 為身份證字號欄位增加特殊處理 設定數量為10個字
                             echo "<input type='text' id='$fieldName' name='$fieldName' maxlength='10' minlength='10' oninput='uppercaseFirstLetter(this)' required>";
-                            
+
                         } elseif ($fieldName === "wedding") {
                             $maritalStatusOptions = array("未婚", "已婚", "離婚", "鰥寡", "同居", "分居");
 
@@ -121,6 +121,8 @@
                     }
                     echo "</div>";
                 }             
+                
+                
 
                 $reservationDate = isset($_GET['date']) ? $_GET['date'] : ''; //GET前一頁的DATE
                 $selectedPackage = isset($_GET['package']) ? $_GET['package'] : ''; //Get選擇的套餐
@@ -134,6 +136,28 @@
                     var mailingAddress = document.getElementById('address').value;
                     document.getElementById('residence-address').value = mailingAddress;
                 }
+
+                // 身份證字號首字母為大寫
+                function uppercaseFirstLetter(input) {
+                    input.value = input.value.toUpperCase();
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var form = document.getElementById('submit_form');
+                    form.onsubmit = function(e) {
+                        var idNumberInput = document.getElementById('id-number');
+                        var idNumberValue = idNumberInput.value;
+                        var idNumberPattern = /^[A-Z][0-9]{9}$/;
+                
+                        if (!idNumberPattern.test(idNumberValue)) {
+                            alert('身份證字號格式不正確，應為一個大寫英文字母加上九個數字。');
+                            e.preventDefault(); // 防止表單提交
+                            return false;
+                        }
+                        
+                        return true;
+                    };
+                });
 
                 // 在页面加载时显示 reservationDate 和 selectedPackage 的值
                 document.addEventListener('DOMContentLoaded', function() {

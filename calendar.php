@@ -14,13 +14,24 @@
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
 
         table {
-            
-            width: 50%; /* 设置表格宽度为50% */
-            border-collapse: collapse;
-            margin: 50px auto; /* Increase the left and right margins to 100px */
-            text-align:center;
-           
+        width: 800px; /* 用固定像素值替換百分比 */
+        border-collapse: collapse;
+        margin: 100px auto;
+        text-align: center;
         }
+
+        @media screen and (max-width: 800px) {
+        /* 移除了對表格大小的修改，保持按鈕大小固定 */
+         .rl-button {
+         width: 100px; /* 移動設備上按鈕保持固定寬度 */
+         height: 70px; /* 移動設備上按鈕保持固定高度 */
+         font-size: 13px; /* 移動設備上按鈕保持固定字體大小 */
+         margin: 20px; /* 如果需要，調整按鈕邊距 */
+        }
+        /* ... 可能還需要保持其他樣式不變 ... */
+       }      
+        
+       
         th {
             border: 1px solid black;
             padding: 20px;
@@ -39,7 +50,7 @@
     }
         .rl-button {
         padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
-        margin: 50px; /* 使用 margin 調整按鈕之間的間距 */
+        margin: 25px; /* 使用 margin 調整按鈕之間的間距 */  
         width: 100px; /* 固定寬度 */
         height: 70px; /* 固定高度 */
         background-color: #7aa6cb; /* 背景顏色 */
@@ -54,9 +65,9 @@
         width: 100px; /* 移動設備上固定寬度 */
         height: 70px; /* 移動設備上固定高度 */
         font-size: 13px; /* 移動設備上固定字體大小 */
-        }
-    } /*移動設備的設定*/
-
+       }
+    }
+        
         .rl-button:hover{
             padding : 10px 20px;
             background :linear-gradient(#f9fafb,#abc1cb);
@@ -132,7 +143,7 @@
 
 <div style="height: 600px;">
 <?php
-
+header("Content-Type:text/html; charset=utf-8");
 
 // 設定連線至資料庫的伺服器名稱和埠號
 $serverName = "DESKTOP-947P2F9";
@@ -158,19 +169,12 @@ if (!$conn) {
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
 
-
-// 獲取當前日期
-$currentDate = date('Y-m-d');
-
-// 獲取兩周後的日期
-$twoWeeksLater = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
-
-// 獲取當前日期的月份和年份
-list($year, $month, $day) = explode('-', $twoWeeksLater);
-
 // 獲取當前月份年份
 $month = isset($_GET['month']) ? $_GET['month'] : date('m');
 $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+// 計算6個月後的日期
+$limitDate = date('Y-m-d', strtotime("+6 months"));
 
 // 獲取當前月份的第一天是星期幾
 $first_day = mktime(0, 0, 0, $month, 1, $year);
@@ -179,14 +183,11 @@ $day_of_week = date('D', $first_day);
 // 獲取當前月份天數
 $num_days = date('t', $first_day);
 
-// 計算預約開始日期（兩周後的日期）
-$reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
 
 
 
 // 創建月曆表格
 echo "<table border='2' style='border-collapse: collapse;'>";
-
 echo "<th colspan='7'style='font-size: 40px'>$year 年 $month 月</th></tr>";
 echo "<tr>
           <th class='week'>星期日</th>
@@ -203,7 +204,7 @@ echo "<tr>
     $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
     $nextMonth = date('m', strtotime("+1 month", strtotime("$year-$month-01")));
     $nextYear = date('Y', strtotime("+1 month", strtotime("$year-$month-01")));
-    ?>
+?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -238,20 +239,11 @@ for ($i = 0; $i < 7; $i++) {
             </td>";   //最上排沒有日期的空白框
 }
 while ($day <= $num_days) {
-    
     if ($day_of_week == 'Sun') {
         echo "</tr><tr >";
     }
-    
-    // 將日期字串轉換為日期對象進行比較
-    $currentDateObj = new DateTime($currentDate);
-    $reservationStartDateObj = new DateTime($reservationStartDate);
-    $dateIsBeforeReservationStart = ($currentDateObj < $reservationStartDateObj);
 
-    // 檢查日期是否在最快預約日期之後
-    $dateIsAfterReservationStart = ($currentDateObj >= $reservationStartDateObj);
-
-
+   
     // 這裡插入了 SQL 查詢
     $reservationDate = "$year-$month-$day";
 
@@ -259,69 +251,66 @@ while ($day <= $num_days) {
     $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
 
     // 獲取預約數量
-    $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
-    $paramsAppointmentCount = array($packageId, $reservationDate);
-    $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
+        $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
+        $paramsAppointmentCount = array($packageId, $reservationDate);
 
-    if (!$stmtAppointmentCount) {
-        die(print_r(sqlsrv_errors(), true));
-    }
+        $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
 
-    sqlsrv_execute($stmtAppointmentCount); 
-    sqlsrv_fetch($stmtAppointmentCount);
-    $ARD_Count = sqlsrv_get_field($stmtAppointmentCount, 0);
+        if (!$stmtAppointmentCount) {
+            die(print_r(sqlsrv_errors(), true));
+        }
 
-    // 獲取套餐預約人數上限
-    $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
-    $paramsMaxCapacity = array($packageId);
-    $stmtMaxCapacity = sqlsrv_prepare($conn, $sqlMaxCapacity, $paramsMaxCapacity);
+        sqlsrv_execute($stmtAppointmentCount); 
+        sqlsrv_fetch($stmtAppointmentCount);
+        $ARD_Count = sqlsrv_get_field($stmtAppointmentCount, 0);
 
-    if (!$stmtMaxCapacity) {
-        die(print_r(sqlsrv_errors(), true));
-    }
+        // 獲取套餐預約人數上限
+        $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
+        $paramsMaxCapacity = array($packageId);
 
-    sqlsrv_execute($stmtMaxCapacity); 
-    sqlsrv_fetch($stmtMaxCapacity);
-    $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
+        $stmtMaxCapacity = sqlsrv_prepare($conn, $sqlMaxCapacity, $paramsMaxCapacity);
+
+        if (!$stmtMaxCapacity) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        sqlsrv_execute($stmtMaxCapacity); 
+        sqlsrv_fetch($stmtMaxCapacity);
+        $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
+
 
     // 計算每天剩餘可預約人數
     $remainingCapacity = $maxCapacity - $ARD_Count;
 
-    // 檢查 $_GET['package'] 是否存在。
-    // 如果存在，它將 $_GET['package'] 的值賦給變數 $selectedPackage；
-    // 如果不存在，則將空字串（''）賦給 $selectedPackage
+    //檢查 $_GET['package'] 是否存在。
+    //如果存在，它將 $_GET['package'] 的值賦給變數 $selectedPackage；
+    //如果不存在，則將空字串（''）賦給 $selectedPackage
     $selectedPackage = isset($_GET['package']) ? $_GET['package'] : '';  //Get選擇的套餐
 
-    // 設定超連結的目標 URL，其中包括日期和套餐的資訊，這些資訊將被傳遞到 form.php 頁面。
-    
-// 預約格子內
-if ($remainingCapacity <= 0 || $dateIsBeforeReservationStart) {
-    // 如果剩餘可預約人數為零或者當前日期在最快可預約日期之前，則顯示額滿
-    echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
-            <div class='top-block' style='color: black; background-color: #ccc;'>
-                $day 日<div style='text-align: center;font-size:16px;color:black'>額&nbsp;&nbsp;滿</div>
-            </div>
-          </td>";
-} else if ($remainingCapacity > 0 && !$dateIsBeforeReservationStart) {
-    // 如果剩餘可預約人數大於零且當前日期在最快可預約日期之後，則顯示可預約的連結
-    echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
-        <a href='form.php?date=$reservationDate&package=$selectedPackage' style='display: block; color: inherit; text-decoration: none;'>
-            <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
-                $day 日</br>剩餘名額：$remainingCapacity
-            </div>
-        </a>
-      </td>";
-} else {
-    // 如果以上條件都不滿足，則顯示一個空白的格子
-    echo "<td style='background-color: white; border-color: white;'></td>";
-}
 
+    // 設置超連結的目標 URL，其中包括日期和套餐的資訊，這些資訊將被傳遞到 form.php 頁面。
+    //預約格子內
+    if ($remainingCapacity > 0) {
+        // 如果剩餘可預約人數大於0，則顯示可預約的連結
+        echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
+            <a href='form.php?date=$reservationDate&package=$selectedPackage' style='display: block; color: inherit; text-decoration: none;'>
+                <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
+                    $day 日</br>剩餘名額：$remainingCapacity
+                </div>
+            </a>
+          </td>";
+        } else {
+            // 如果剩餘可預約人數為0，則顯示不可預約的內容
+            echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
+                    <div class='top-block' style='color: black; background-color: #ccc;'>
+                        $day 日<div style='text-align: center;font-size:16px;color:black'>額&nbsp;&nbsp;滿</div>
+                    </div>
+                  </td>";
+        }
 
     $day++;
     $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
 }
-
-
 while ($day_of_week != 'Sun') {
     echo "<td style='background-color: white;border-color: white;text-align: left; vertical-align: top;'>
     <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
@@ -336,14 +325,6 @@ echo "</tr>";
 // 結束月曆表格
 echo "</table>";
 
-echo "當前日期：$currentDate<br>";
-echo "最快預約日期：$reservationStartDate<br>";
-
-if ($dateIsBeforeReservationStart) {
-    echo "當前日期在最快預約日期之前<br>";
-} else {
-    echo "當前日期在最快預約日期之後或與之相等<br>";
-}
 ?>
 
 
@@ -388,14 +369,13 @@ switch ($package) {
 
 <div class="button-container">
     <!-- 上一個月按鈕 -->
-<a href="?package=<?php echo $package; ?>&month=<?php echo $prevMonth; ?>&year=<?php echo $prevYear; ?>"><button class="rl-button"><?php echo "上一個月"; ?></button></a>
-
-<!-- 回到當月按鈕 -->
-<a href="?package=<?php echo $package; ?>&month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
-
-<!-- 下一個月按鈕 -->
-<a href="?package=<?php echo $package; ?>&month=<?php echo $nextMonth; ?>&year=<?php echo $nextYear; ?>"><button class="rl-button"><?php echo "下一個月"; ?></button></a>
-
+    <a href="?package=<?php echo $package; ?>&month=<?php echo $prevMonth; ?>&year=<?php echo $prevYear; ?>"><button class="rl-button"><?php echo "上一個月"; ?></button></a>
+    
+    <!-- 回到當月按鈕 -->
+    <a href="?package=<?php echo $package; ?>&month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
+    
+    <!-- 下一個月按鈕 -->
+    <a href="?package=<?php echo $package; ?>&month=<?php echo $nextMonth; ?>&year=<?php echo $nextYear; ?>"><button class="rl-button"><?php echo "下一個月"; ?></button></a>
 </div>
 </body>
 </html>
