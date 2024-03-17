@@ -38,17 +38,25 @@
         
     }
         .rl-button {
-            padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
-            margin: 50px; /* 使用 margin 調整按鈕之間的間距 */
-            width:100px;
-            height:70px;
-            background-color: #7aa6cb; /*背景透明*/
-            border: 2px solid white;
-            border-radius: 10px;
-            font-size:13px;
+        padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
+        margin: 50px; /* 使用 margin 調整按鈕之間的間距 */
+        width: 100px; /* 固定寬度 */
+        height: 70px; /* 固定高度 */
+        background-color: #7aa6cb; /* 背景顏色 */
+        border: 2px solid white;
+        border-radius: 10px;
+        font-size: 13px; /* 固定字體大小 */
+        box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
+    }
 
-
+    @media screen and (max-width: 768px) {
+    .rl-button {
+        width: 100px; /* 移動設備上固定寬度 */
+        height: 70px; /* 移動設備上固定高度 */
+        font-size: 13px; /* 移動設備上固定字體大小 */
         }
+    } /*移動設備的設定*/
+
         .rl-button:hover{
             padding : 10px 20px;
             background :linear-gradient(#f9fafb,#abc1cb);

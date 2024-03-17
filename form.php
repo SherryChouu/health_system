@@ -91,7 +91,10 @@
                                 echo "<option value='$city'>$city</option>";
                             }
                            
-
+                        } elseif ($fieldName === "id-number") {
+                            // 為身份證字號欄位增加特殊處理 設定數量為10個字
+                            echo "<input type='text' id='$fieldName' name='$fieldName' maxlength='10' minlength='10' oninput='uppercaseFirstLetter(this)' required>";
+                            
                         } elseif ($fieldName === "wedding") {
                             $maritalStatusOptions = array("未婚", "已婚", "離婚", "鰥寡", "同居", "分居");
 
