@@ -175,6 +175,8 @@ $num_days = date('t', $first_day);
 $reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
 
 
+echo "當前日期：$currentDate<br>";
+echo "最快預約日期：$reservationStartDate<br>";
 
 // 創建月曆表格
 echo "<table border='2' style='border-collapse: collapse;'>";
@@ -214,6 +216,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+
+
 <?php
 // 填充月曆表格
 echo"<tr>";
@@ -229,6 +234,36 @@ for ($i = 0; $i < 7; $i++) {
             </div>
             </td>";   //最上排沒有日期的空白框
 }
+// 設置時區
+date_default_timezone_set('Asia/Taipei');
+
+// 獲取當前日期
+$currentDate = date('Y-m-d');
+
+// 獲取兩周後的日期
+$twoWeeksLater = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
+
+// 獲取當前日期的月份和年份
+list($year, $month, $day) = explode('-', $twoWeeksLater);
+
+// 獲取當前月份年份
+$month = isset($_GET['month']) ? $_GET['month'] : date('m');
+$year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+// 獲取當前月份的第一天是星期幾
+$first_day = mktime(0, 0, 0, $month, 1, $year);
+$day_of_week = date('D', $first_day);
+
+// 獲取當前月份天數
+$num_days = date('t', $first_day);
+
+// 計算預約開始日期（兩周後的日期）
+$reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
+
+// 初始化 $day 和 $day_of_week 變數
+$day = 1;
+$day_of_week = date('D', strtotime("$year-$month-$day"));
+
 while ($day <= $num_days) {
     
     if ($day_of_week == 'Sun') {
@@ -236,12 +271,13 @@ while ($day <= $num_days) {
     }
     
     // 將日期字串轉換為日期對象進行比較
-    $currentDateObj = new DateTime($currentDate);
-    $reservationStartDateObj = new DateTime($reservationStartDate);
-    $dateIsBeforeReservationStart = ($currentDateObj < $reservationStartDateObj);
+    // 檢查日期是否在預約開始日期之前
+
+    // $currentDate = "$year-$month-$day";  // 將這行移到迴圈外部初始化
+    $dateIsBeforeReservationStart = ($currentDate < $reservationStartDate);
 
     // 檢查日期是否在最快預約日期之後
-    $dateIsAfterReservationStart = ($currentDateObj >= $reservationStartDateObj);
+    $dateIsAfterReservationStart = ($currentDate >= $reservationStartDate);
 
 
     // 這裡插入了 SQL 查詢
@@ -310,7 +346,9 @@ if ($remainingCapacity <= 0 || $dateIsBeforeReservationStart) {
 
 
     $day++;
-    $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
+    $day_of_week = date('D', strtotime("$year-$month-$day"));
+    $currentDate = date('Y-m-d', strtotime("$year-$month-$day"));
+    
 }
 
 
@@ -328,14 +366,30 @@ echo "</tr>";
 // 結束月曆表格
 echo "</table>";
 
-echo "當前日期：$currentDate<br>";
-echo "最快預約日期：$reservationStartDate<br>";
+// 初始化 $day 和 $day_of_week 變數
+$day = 1;
+$day_of_week = date('D', strtotime("$year-$month-$day"));
 
-if ($dateIsBeforeReservationStart) {
-    echo "當前日期在最快預約日期之前<br>";
-} else {
-    echo "當前日期在最快預約日期之後或與之相等<br>";
+// 剩餘名額表格
+echo "<table border='2' style='border-collapse: collapse;'>";
+echo "<tr><th>日期</th><th>剩餘名額</th></tr>";
+
+while ($day <= $num_days) {
+    // 獲取當天日期
+    $reservationDate = "$year-$month-$day";
+
+    // 進行與預約相關的 SQL 查詢，獲取剩餘名額
+    // 這部分的程式碼需要根據您的資料庫結構和查詢方式進行調整
+
+    // 假設您已經從資料庫中獲取了 $remainingCapacity 變數，這是每天的剩餘名額
+
+    // 顯示每一天的剩餘名額
+    echo "<tr><td>$reservationDate</td><td>$remainingCapacity</td></tr>";
+
+    $day++;
+    $day_of_week = date('D', strtotime("$year-$month-$day"));
 }
+
 ?>
 
 
@@ -379,9 +433,17 @@ switch ($package) {
 ?>
 
 <div class="button-container">
-    <!-- 上一個月按鈕 -->
-<a href="?package=<?php echo $package; ?>&month=<?php echo $prevMonth; ?>&year=<?php echo $prevYear; ?>"><button class="rl-button"><?php echo "上一個月"; ?></button></a>
+<?php 
+$earliestAllowedMonth = date('m', strtotime($reservationStartDate)); // 最早允許的月份
+$earliestAllowedYear = date('Y', strtotime($reservationStartDate)); // 最早允許的年份
 
+     //上一個月按鈕 
+    if ($month != $earliestAllowedMonth || $year != $earliestAllowedYear) {
+    $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
+    $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
+    echo "<a href='?package=$package&month=$prevMonth&year=$prevYear'><button class='rl-button'>上一個月</button></a>";
+}
+?>
 <!-- 回到當月按鈕 -->
 <a href="?package=<?php echo $package; ?>&month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
 
