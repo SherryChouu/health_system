@@ -14,13 +14,24 @@
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
 
         table {
-            
-            width: 50%; /* 设置表格宽度为50% */
-            border-collapse: collapse;
-            margin: 50px auto; /* Increase the left and right margins to 100px */
-            text-align:center;
-           
+        width: 800px; /* 用固定像素值替換百分比 */
+        border-collapse: collapse;
+        margin: 100px auto;
+        text-align: center;
         }
+
+        @media screen and (max-width: 800px) {
+        /* 移除了對表格大小的修改，保持按鈕大小固定 */
+         .rl-button {
+         width: 100px; /* 移動設備上按鈕保持固定寬度 */
+         height: 70px; /* 移動設備上按鈕保持固定高度 */
+         font-size: 13px; /* 移動設備上按鈕保持固定字體大小 */
+         margin: 20px; /* 如果需要，調整按鈕邊距 */
+        }
+        /* ... 可能還需要保持其他樣式不變 ... */
+       }      
+        
+       
         th {
             border: 1px solid black;
             padding: 20px;
@@ -38,17 +49,25 @@
         
     }
         .rl-button {
-            padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
-            margin: 50px; /* 使用 margin 調整按鈕之間的間距 */
-            width:100px;
-            height:70px;
-            background-color: #7aa6cb; /*背景透明*/
-            border: 2px solid white;
-            border-radius: 10px;
-            font-size:13px;
+        padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
+        margin: 25px; /* 使用 margin 調整按鈕之間的間距 */  
+        width: 100px; /* 固定寬度 */
+        height: 70px; /* 固定高度 */
+        background-color: #7aa6cb; /* 背景顏色 */
+        border: 2px solid white;
+        border-radius: 10px;
+        font-size: 13px; /* 固定字體大小 */
+        box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
+    }
 
-
-        }
+    @media screen and (max-width: 768px) {
+    .rl-button {
+        width: 100px; /* 移動設備上固定寬度 */
+        height: 70px; /* 移動設備上固定高度 */
+        font-size: 13px; /* 移動設備上固定字體大小 */
+       }
+    }
+        
         .rl-button:hover{
             padding : 10px 20px;
             background :linear-gradient(#f9fafb,#abc1cb);
@@ -111,7 +130,7 @@
     </br>
 
 
-    //麵包屑
+    
 <?php
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
@@ -123,8 +142,8 @@
     ?>
 
 <div style="height: 600px;">
-<?php
 
+<?php
 
 // 設定連線至資料庫的伺服器名稱和埠號
 $serverName = "DESKTOP-947P2F9";
@@ -145,24 +164,18 @@ if (!$conn) {
 }
 
 ?>
+
 <?php
 
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
 
-
-// 獲取當前日期
-$currentDate = date('Y-m-d');
-
-// 獲取兩周後的日期
-$twoWeeksLater = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
-
-// 獲取當前日期的月份和年份
-list($year, $month, $day) = explode('-', $twoWeeksLater);
-
 // 獲取當前月份年份
 $month = isset($_GET['month']) ? $_GET['month'] : date('m');
 $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+// 計算6個月後的日期
+$limitDate = date('Y-m-d', strtotime("+6 months"));
 
 // 獲取當前月份的第一天是星期幾
 $first_day = mktime(0, 0, 0, $month, 1, $year);
@@ -171,16 +184,17 @@ $day_of_week = date('D', $first_day);
 // 獲取當前月份天數
 $num_days = date('t', $first_day);
 
-// 計算預約開始日期（兩周後的日期）
-$reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
+// ***初始化 $currentDate 計算每天的日期
+$currentDate = date('Y-m-d');
 
+// ***初始化 $reservationStartDate 計算預約開始日期（兩周後的日期）
+$reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
 
 echo "當前日期：$currentDate<br>";
 echo "最快預約日期：$reservationStartDate<br>";
 
 // 創建月曆表格
 echo "<table border='2' style='border-collapse: collapse;'>";
-
 echo "<th colspan='7'style='font-size: 40px'>$year 年 $month 月</th></tr>";
 echo "<tr>
           <th class='week'>星期日</th>
@@ -192,93 +206,40 @@ echo "<tr>
           <th class='week'>星期六</th>
       <tr>";
 
-    // 上一個月和下一個月的按鈕
-    $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
-    $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
-    $nextMonth = date('m', strtotime("+1 month", strtotime("$year-$month-01")));
-    $nextYear = date('Y', strtotime("+1 month", strtotime("$year-$month-01")));
-    ?>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 獲取所有具有 'selectable-day' 類別的元素
-    var selectableDays = document.querySelectorAll('.selectable-day');
-
-    // 對每個可選擇的日期元素添加點擊事件
-    selectableDays.forEach(function(dayElement) {
-        dayElement.addEventListener('click', function() {
-            // 獲取日期數據，這裡假設日期數據儲存在元素的 data-date 屬性中
-            var selectedDate = dayElement.getAttribute('data-date');
-
-            
-        });
-    });
-});
-</script>
-
-
-
-
-<?php
-// 填充月曆表格
-echo"<tr>";
-$day = 1;
-for ($i = 0; $i < 7; $i++) {
-    if ($day_of_week == date('D', strtotime("Sunday +{$i} days"))) {
-        break;
-    }
-    echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
-        <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
-        1</br>
-        剩餘名額：10
-            </div>
-            </td>";   //最上排沒有日期的空白框
-}
-// 設置時區
-date_default_timezone_set('Asia/Taipei');
-
-// 獲取當前日期
-$currentDate = date('Y-m-d');
-
-// 獲取兩周後的日期
-$twoWeeksLater = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
-
-// 獲取當前日期的月份和年份
-list($year, $month, $day) = explode('-', $twoWeeksLater);
-
-// 獲取當前月份年份
-$month = isset($_GET['month']) ? $_GET['month'] : date('m');
-$year = isset($_GET['year']) ? $_GET['year'] : date('Y');
-
-// 獲取當前月份的第一天是星期幾
-$first_day = mktime(0, 0, 0, $month, 1, $year);
-$day_of_week = date('D', $first_day);
-
-// 獲取當前月份天數
-$num_days = date('t', $first_day);
-
-// 計算預約開始日期（兩周後的日期）
-$reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDate)));
+// 上一個月和下一個月的按鈕
+$prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
+$prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
+$nextMonth = date('m', strtotime("+1 month", strtotime("$year-$month-01")));
+$nextYear = date('Y', strtotime("+1 month", strtotime("$year-$month-01")));
 
 // 初始化 $day 和 $day_of_week 變數
 $day = 1;
 $day_of_week = date('D', strtotime("$year-$month-$day"));
 
+// 計算每個月開始的空白格子數量
+$firstDayOfWeekIndex = array_search($day_of_week, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+$blankCells = $firstDayOfWeekIndex;
+
+// 補足每個月開始的空白格子
+for ($i = 0; $i < $blankCells; $i++) {
+    echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
+            <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
+                1</br>
+                剩餘名額：10
+            </div>
+        </td>";
+}
+
+
+// ***設定起始日期 str***
+$strcurrentDate = date('Y-m-d', strtotime("$year-$month-01"));  //strcurrentDate指每天的日期
+$strreservationStartDate = date('Y-m-d', strtotime("$strcurrentDate +14 day"));  //strreservationStartDate指每天日期的最快預約日期
+
+// 填充每個月的日期
 while ($day <= $num_days) {
-    
     if ($day_of_week == 'Sun') {
-        echo "</tr><tr >";
+        echo "</tr><tr>";
     }
-    
-    // 將日期字串轉換為日期對象進行比較
-    // 檢查日期是否在預約開始日期之前
-
-    // $currentDate = "$year-$month-$day";  // 將這行移到迴圈外部初始化
-    $dateIsBeforeReservationStart = ($currentDate < $reservationStartDate);
-
-    // 檢查日期是否在最快預約日期之後
-    $dateIsAfterReservationStart = ($currentDate >= $reservationStartDate);
-
 
     // 這裡插入了 SQL 查詢
     $reservationDate = "$year-$month-$day";
@@ -289,6 +250,7 @@ while ($day <= $num_days) {
     // 獲取預約數量
     $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
     $paramsAppointmentCount = array($packageId, $reservationDate);
+
     $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
 
     if (!$stmtAppointmentCount) {
@@ -302,6 +264,7 @@ while ($day <= $num_days) {
     // 獲取套餐預約人數上限
     $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
     $paramsMaxCapacity = array($packageId);
+
     $stmtMaxCapacity = sqlsrv_prepare($conn, $sqlMaxCapacity, $paramsMaxCapacity);
 
     if (!$stmtMaxCapacity) {
@@ -314,83 +277,65 @@ while ($day <= $num_days) {
 
     // 計算每天剩餘可預約人數
     $remainingCapacity = $maxCapacity - $ARD_Count;
-
-    // 檢查 $_GET['package'] 是否存在。
-    // 如果存在，它將 $_GET['package'] 的值賦給變數 $selectedPackage；
-    // 如果不存在，則將空字串（''）賦給 $selectedPackage
-    $selectedPackage = isset($_GET['package']) ? $_GET['package'] : '';  //Get選擇的套餐
-
-    // 設定超連結的目標 URL，其中包括日期和套餐的資訊，這些資訊將被傳遞到 form.php 頁面。
     
-// 預約格子內
-if ($remainingCapacity <= 0 || $dateIsBeforeReservationStart) {
-    // 如果剩餘可預約人數為零或者當前日期在最快可預約日期之前，則顯示額滿
-    echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
-            <div class='top-block' style='color: black; background-color: #ccc;'>
-                $day 日<div style='text-align: center;font-size:16px;color:black'>額&nbsp;&nbsp;滿</div>
-            </div>
-          </td>";
-} else if ($remainingCapacity > 0 && !$dateIsBeforeReservationStart) {
-    // 如果剩餘可預約人數大於零且當前日期在最快可預約日期之後，則顯示可預約的連結
-    echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
-        <a href='form.php?date=$reservationDate&package=$selectedPackage' style='display: block; color: inherit; text-decoration: none;'>
-            <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
-                $day 日</br>剩餘名額：$remainingCapacity
-            </div>
-        </a>
-      </td>";
-} else {
-    // 如果以上條件都不滿足，則顯示一個空白的格子
-    echo "<td style='background-color: white; border-color: white;'></td>";
-}
+    
+    // 檢查是否在最快預約日期之前或與最快預約日期相等
+    if ($strcurrentDate < $reservationStartDate) { //strcurrentDate < 最快預約日期
+        // 在最快預約日期之前的每個日期都顯示"不可預約"
+        echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
+                $day 日<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate 
+                <div class='top-block' style='color: black; background-color: #ccc;'>
+                    $day 日<br>不可預約
+                </div>
+            </td>";
+    } else if ($strcurrentDate >= $reservationStartDate){
+        // 在最快預約日期之後的情況下，顯示可預約的連結或額滿訊息
+        if ($remainingCapacity > 0) {
+            // 如果剩餘可預約人數大於0，則顯示可預約的連結
+            echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
+                <a href='form.php?date=$reservationDate&package=$packageId' style='display: block; color: inherit; text-decoration: none;'>
+                    <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
+                        $day 日<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate<br>剩餘名額：$remainingCapacity
+                    </div>
+                </a>
+            </td>";
+        } else {
+            // 如果剩餘可預約人數為0，則顯示額滿訊息
+            echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
+                    <div class='top-block' style='color: black; background-color: #ccc;'>
+                        $day 日<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate<br>額&nbsp;&nbsp;滿
+                    </div>
+                </td>";
+        }
+    }
 
-
+    // 移動到下一天
+    $strcurrentDate = date('Y-m-d', strtotime("$strcurrentDate +1 day"));
+    $strreservationStartDate = date('Y-m-d', strtotime("$strreservationStartDate +1 day"));
     $day++;
     $day_of_week = date('D', strtotime("$year-$month-$day"));
-    $currentDate = date('Y-m-d', strtotime("$year-$month-$day"));
-    
 }
 
 
-while ($day_of_week != 'Sun') {
-    echo "<td style='background-color: white;border-color: white;text-align: left; vertical-align: top;'>
-    <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
-        1</br>
-        剩餘名額：10
-            </div>
-    </td>";  //最下排沒有日期的空白框
-    $day_of_week = date('D', strtotime("+1 day", strtotime($day_of_week)));
+
+// 補足本月結束的空白格子
+$remainingBlankCells = 7 - (($num_days + $blankCells) % 7);
+if ($remainingBlankCells != 7) {
+    for ($i = 0; $i < $remainingBlankCells; $i++) {
+        echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
+                <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
+                    1</br>
+                    剩餘名額：10
+                </div>
+            </td>";
+    }
 }
-echo "</tr>";
 
 // 結束月曆表格
-echo "</table>";
-
-// 初始化 $day 和 $day_of_week 變數
-$day = 1;
-$day_of_week = date('D', strtotime("$year-$month-$day"));
-
-// 剩餘名額表格
-echo "<table border='2' style='border-collapse: collapse;'>";
-echo "<tr><th>日期</th><th>剩餘名額</th></tr>";
-
-while ($day <= $num_days) {
-    // 獲取當天日期
-    $reservationDate = "$year-$month-$day";
-
-    // 進行與預約相關的 SQL 查詢，獲取剩餘名額
-    // 這部分的程式碼需要根據您的資料庫結構和查詢方式進行調整
-
-    // 假設您已經從資料庫中獲取了 $remainingCapacity 變數，這是每天的剩餘名額
-
-    // 顯示每一天的剩餘名額
-    echo "<tr><td>$reservationDate</td><td>$remainingCapacity</td></tr>";
-
-    $day++;
-    $day_of_week = date('D', strtotime("$year-$month-$day"));
-}
+echo "</tr></table>";
 
 ?>
+
 
 
 </div>

@@ -27,7 +27,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 這裡可以獲取表單提交的數據
     $chineseName = $_POST["chinese-name"];
     $englishName = $_POST["english-name"];
+    
     $idNumber = $_POST["id-number"];
+
+    // 正則表達式檢查身份證字號格式
+    if (preg_match("/^[A-Z][0-9]{9}$/", $idNumber)) {
+        
+        echo "Reservation Date: " . $reservationDate;
+    } else {
+        // 身份證字號格式不正確
+        echo "身份證字號格式不正確。";
+        // 這裡可以加入額外處理，比如將用戶重定向回表單，顯示錯誤消息等
+    }
+
     $sexual = $_POST["sexual"];
     $birthdate = $_POST["birthdate"];
     $address = $_POST["address"];
@@ -37,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $wedding = $_POST["wedding"];
     $selectedPackage = isset($_POST["package"]) ? $_POST["package"] : '';
-    $reservationDate = isset($_POST["date"]) ? $_POST["date"] : '';
+    $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
     
     
 // 在執行 SQL 語句之前確認 $reservationDate 的值
@@ -53,13 +65,13 @@ try {
     ChineseName, EnglishName, 
     IDNumber, Sexual, Birthdate, 
     Address, ResidenceAddress, 
-    SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    SameAsMailing, Phone, Email, Wedding) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
     $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
         &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding,&$Package_id,&$ReservationDate
+        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding
     ));
 
     // 執行 SQL 語句
