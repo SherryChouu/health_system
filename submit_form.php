@@ -36,8 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Reservation Date: " . $reservationDate;
     } else {
         // 身份證字號格式不正確
-        echo "身份證字號格式不正確。";
-        // 這裡可以加入額外處理，比如將用戶重定向回表單，顯示錯誤消息等
+        echo "<script>alert('身份證字號格式不正確，請重新填寫。(應為一個大寫字母配上9個數字)'); window.location.href='form.php';</script>";
+        exit(); // 停止腳本執行
     }
 
     $sexual = $_POST["sexual"];
