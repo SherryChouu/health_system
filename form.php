@@ -50,7 +50,8 @@
             <form id="checkform.php" action="checkform.php" method="post">
 
                 <h2 class="form-title">基本資料填寫</h2>
-
+                <!-- 表單內容，包括姓名、身份證號碼等輸入欄位 -->
+                
                 <?php
                 // 定義表單項目和其對應的名稱
                 $formFields = array(
@@ -112,7 +113,9 @@
 
                         
                     } elseif ($fieldName === "birthdate") {
-                        echo "<input type='date' id='$fieldName' name='$fieldName' required>";  //使用日期選擇器
+                        // 设置出生日期的最大值为当前年份的12月31日
+                        $maxDate = date("Y") . "-12-31";
+                        echo "<input type='date' id='$fieldName' name='$fieldName' required max='$maxDate'>";  // 使用日期选择器，并限制最大日期
                     } elseif ($fieldName === "same-as-mailing") {
                         echo "<input type='checkbox' id='$fieldName' name='$fieldName' onchange='copyAddress()'>";   //顯示與通訊地址相同的按鈕
                     } else {
@@ -123,8 +126,8 @@
 
                 $reservationDate = isset($_GET['date']) ? $_GET['date'] : ''; //GET前一頁的DATE
                 $selectedPackage = isset($_GET['package']) ? $_GET['package'] : ''; //Get選擇的套餐
-                echo "Reservation Date:" .$reservationDate;   //顯示預約日期
-                echo "Selected Package:". $selectedPackage;
+                //echo "Reservation Date:" .$reservationDate;   //顯示預約日期
+                //echo "Selected Package:". $selectedPackage;
    
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
@@ -133,6 +136,8 @@
                     var mailingAddress = document.getElementById('address').value;
                     document.getElementById('residence-address').value = mailingAddress;
                 }
+
+                
 
                 // 在页面加载时显示 reservationDate 和 selectedPackage 的值
                 document.addEventListener('DOMContentLoaded', function() {
@@ -149,19 +154,22 @@
                     }
                 });
                 </script>";
+              
 
                 ?>
                 <!-- 在表單中加入套餐和日期的隱藏欄位 -->  
                 <input type="hidden" name="package" value="<?php echo $selectedPackage; ?>">
                 <input type="hidden" name="reservationDate" value="<?php echo $reservationDate; ?>">
                 
+                
                 <!-- 按鈕 -->
                 <div class="button-group">
                     <button type="submit">送出</button>
                     <button type="reset">重置</button>
                     
-                </div>         
+                </div>     
 
+                
             </form>
 
             
