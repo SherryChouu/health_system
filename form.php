@@ -46,7 +46,9 @@
 
         <section class="form-section">
             <!--指定了表單提交的目標 URL 為 submit_form.php-->
-            <form id="submit_form" action="submit_form.php" method="post">  
+           <!-- <form id="submit_form" action="submit_form.php" method="post">-->  
+            <form id="checkform.php" action="checkform.php" method="post">
+
                 <h2 class="form-title">基本資料填寫</h2>
 
                 <?php
@@ -121,8 +123,8 @@
 
                 $reservationDate = isset($_GET['date']) ? $_GET['date'] : ''; //GET前一頁的DATE
                 $selectedPackage = isset($_GET['package']) ? $_GET['package'] : ''; //Get選擇的套餐
-                //echo "Reservation Date:" .$reservationDate;   //顯示預約日期
-                //echo "Selected Package:". $selectedPackage;
+                echo "Reservation Date:" .$reservationDate;   //顯示預約日期
+                echo "Selected Package:". $selectedPackage;
    
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式

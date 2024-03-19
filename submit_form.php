@@ -1,3 +1,4 @@
+
 <?php
 
 header("Content-Type:text/html; charset=utf-8");
@@ -92,9 +93,16 @@ try {
         // 執行 SQL 語句
         if (sqlsrv_execute($stmtAppointment)) {
             echo "資料已成功提交到資料庫.";
-
-            // 使用 JavaScript 彈出提示框和重定向
-            echo "<script>alert('預約成功'); window.location='index.php';</script>";exit();
+            $to = "reset920215@gmail.com";
+            $subject = "Test Email";
+            $message = "This is a test email.";
+            $headers = "From: sender@example.com";
+            
+            echo "<script>alert('預約成功'); window.location='index.php'
+            
+            ;</script>"
+            ;exit();
+            
         }else {
             die(print_r(sqlsrv_errors(), true));}
         } 
