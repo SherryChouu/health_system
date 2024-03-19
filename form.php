@@ -126,9 +126,32 @@
 
                 $reservationDate = isset($_GET['date']) ? $_GET['date'] : ''; //GET前一頁的DATE
                 $selectedPackage = isset($_GET['package']) ? $_GET['package'] : ''; //Get選擇的套餐
-                //echo "Reservation Date:" .$reservationDate;   //顯示預約日期
-                //echo "Selected Package:". $selectedPackage;
-   
+                echo "<p><span style='font-size: 20px;'>預約日期: </span>" . $reservationDate . "</p>";
+
+switch ($selectedPackage) {
+    case 1:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 卓越C套餐</p>";
+        break;
+    case 2:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 卓越M套餐</p>";
+        break;
+    case 3:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 尊爵A套餐</p>";
+        break;
+    case 4:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 尊爵B套餐</p>";
+        break;
+    case 5:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 尊爵C套餐</p>";
+        break;
+    case 6:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 卓越C套餐</p>";
+        break;
+    default:
+        echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 未選擇</p>";
+        break;
+}
+
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 echo "<script>

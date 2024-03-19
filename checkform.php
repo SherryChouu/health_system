@@ -35,13 +35,36 @@
                 }
             }
             // 顯示套餐和日期
-            $package = isset($_POST['package']) ? $_POST['package'] : '未選擇';
-            $reservationDate = isset($_POST['reservationDate']) ? $_POST['reservationDate'] : '未選擇';
-            echo "<p><label>套餐: </label> $package</p>";
-            echo "<p><label>預約日期: </label> $reservationDate</p>";
-        } else {
-            echo "<p>沒有收到任何資料。</p>";
-        }
+$package = isset($_POST['package']) ? $_POST['package'] : '未選擇';
+$reservationDate = isset($_POST['reservationDate']) ? $_POST['reservationDate'] : '未選擇';
+
+echo "<p><label>預約日期: </label> $reservationDate</p>";
+
+// 根據不同的套餐類型顯示相應的文字
+switch ($package) {
+    case 1:
+        echo "<p><label>健檢套餐: </label> 卓越C套餐</p>";
+        break;
+    case 2:
+        echo "<p><label>健檢套餐: </label> 卓越M套餐</p>";
+        break;
+    case 3:
+        echo "<p><label>健檢套餐: </label> 尊爵A套餐</p>";
+        break;
+    case 4:
+        echo "<p><label>健檢套餐: </label> 尊爵B套餐</p>";
+        break;
+    case 5:
+        echo "<p><label>健檢套餐: </label> 尊爵C套餐</p>";
+        break;
+    case 6:
+        echo "<p><label>健檢套餐: </label> 卓越C套餐</p>";
+        break;
+    default:
+        echo "<p><label>套餐: </label> 未選擇</p>";
+        break;
+}
+}
         ?>
     </div>
     <section class="form-section">
