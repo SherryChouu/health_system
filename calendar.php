@@ -198,7 +198,7 @@ echo "當前日期：$currentDate<br>"; //這之後會刪掉
 echo"網路預約--開放至$limitDate"; //這之後會刪掉
 
 // 創建月曆表格
-echo "<table border='2' style='border-collapse: collapse; width: 90%; height: 400px;margin: 0 auto; margin-left: 50px;'>";
+echo "<table border='2' style='border-collapse: collapse;'>";
 echo "<th colspan='7' style='font-size: 40px'>$year 年 $month 月</th></tr>";
 echo "<tr>
         <th class='week' style='width: 12%;'>星期日</th>
