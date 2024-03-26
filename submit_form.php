@@ -66,13 +66,13 @@ try {
     ChineseName, EnglishName, 
     IDNumber, Sexual, Birthdate, 
     Address, ResidenceAddress, 
-    SameAsMailing, Phone, Email, Wedding) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
     $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
         &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding
+        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding, &$selectedPackage, $reservationDate
     ));
 
     // 執行 SQL 語句
