@@ -68,15 +68,15 @@ switch ($package) {
         ?>
     </div>
     <section class="form-section">
-    <!-- 送出按鈕 -->
-    <form action="submit_form.php" method="post">
+    <!-- 发送确认邮件 -->
+    <form action="send_confirmation_email.php" method="post">
         <?php
-        // 將原本的 POST 資料再次傳送
+        // 将原本的 POST 数据再次传送
         foreach ($_POST as $key => $value) {
             echo "<input type='hidden' name='$key' value='$value'>";
         }
         ?>
-        <button type="submit">送出</button>
+        <button type="submit">發送確認信件</button>
     </form>
 
     <!-- 重新填寫按鈕 -->
