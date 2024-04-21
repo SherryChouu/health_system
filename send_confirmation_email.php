@@ -4,9 +4,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -36,23 +36,75 @@ try {
     // 郵件地址
     $mail->Body = '您的預約已成功';
 
+    $mail->isHTML(true); // 郵件格式為 HTML
+    $cancelURL = "http://localhost:8000/process_cancel.php"; // 取消預約連結
+
+    // 使用CSS
+    $mail->Body = <<<EOT
+    <!DOCTYPE html>
+    <html>
+    <head>
+       <style>
+           body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .button {
+            padding: 15px 25px;
+            background-color: rgb(3, 104, 185); 
+            color: white;
+            text-decoration: none; 
+            border-radius: 20px; /* 增加圆角 */
+            font-weight: bold; /* 文字加粗 */
+            display: inline-block; 
+            transition: background-color 0.3s ease; 
+            border: none; /* 移除邊框 */
+            outline: none; 
+            text-align: center; 
+        }
+        .button:hover {
+            background-color: #AFC2D5; 
+        }
+
+           .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>您的預約已成功</h1>
+        <p>感謝您選擇我們的服務。如果您需要取消預約，請點擊下面的按鈕。</p>
+        <a href="$cancelURL" style="padding: 15px 25px; background-color: rgb(3, 104, 185); color: white; text-decoration: none; border-radius: 20px; font-weight: bold; display: inline-block; transition: background-color 0.3s ease; border: none; outline: none; text-align: center;">取消預约</a>
+    </div>
+</body>
+</html>
+EOT;
+    
     // 發送郵件
     $mail->send();
-    echo 'Confirmation email sent successfully!';
+    echo "<script>alert('信件已寄出，請查看信箱！');</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
+
 header("Content-Type:text/html; charset=utf-8");
 
 // 設定連線至資料庫的伺服器名稱和埠號
-$serverName = "DESKTOP-947P2F9";
+$serverName = "GRU-LAPTOP\SQLEXPRESS";
 
 // 設定連線選項，包括資料庫名稱、使用者名稱和密碼
 $connectionOptions = array(
     "Database" => "health_system", // 資料庫名稱
     "Uid" => "sa", // 使用者名稱
-    "PWD" => "1106Evelyn", // 密碼
+    "PWD" => "1104", // 密碼
     "CharacterSet" => "UTF-8"
 );
 
