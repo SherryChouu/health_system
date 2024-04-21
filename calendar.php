@@ -74,14 +74,14 @@
             box-shadow:1px 1px 4px #ccc;
         }
         .button-container {
-    position: fixed; /* 將容器固定 */
-    bottom: 0; /* 將容器置於頁面底部 */
-    right: -20px; /* 距離視窗右側 10px */
-    display: flex;
-    flex-direction: column; /* 垂直排列 */
-    justify-content: space-between;
-    align-items: flex-end; /* 右對齊 */
-    padding: 5px;
+        position: fixed; /* 將容器固定 */
+        bottom: 0; /* 將容器置於頁面底部 */
+        right: -20px; /* 距離視窗右側 10px */
+        display: flex;
+        flex-direction: column; /* 垂直排列 */
+        justify-content: space-between;
+        align-items: flex-end; /* 右對齊 */
+        padding: 5px;
 }
 
 .button-container button {
@@ -120,7 +120,7 @@
         <nav>
                 <ul class="flex-nav">
                     <li><a href="item_search.php">健檢類別查詢</a></li>
-                    <li><a href="chooseitem.php">線上預約</a></li>
+                    <li><a href="reserve_online.php">線上預約</a></li>
                     <li><a href="pay.php">繳費資訊</a></li>
                     <li><a href="contact.php">聯絡我們</a></li>
                 </ul>
@@ -134,8 +134,7 @@
 <?php
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
-        array('title' => '線上預約', 'link' => 'reserve_online.php'), 
-        array('title' => '選擇欲健檢項目', 'link' => 'chooseitem.php'), 
+        array('title' => '線上預約', 'link' => 'reserve_online.php'),  
         array('title' => '選擇預約日期', 'link' => 'calendar.php'), 
     );
     generateBreadcrumbs($pages);
