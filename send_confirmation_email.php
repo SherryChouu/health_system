@@ -1,5 +1,5 @@
 <?php
-// 导入必要的文件
+// 導入必要的文件
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -19,23 +19,23 @@ try {
     $mail->SMTPSecure = 'tsl';
     $mail->Port       = 587;
 
-    // 设置发件人信息
+    // 設置發件人信息
 
     $mail->setFrom('renaihealthcheck@gmail.com', '仁愛醫院健檢中心' );
 
-    // 获取患者邮箱地址
+    // 獲取受檢者email
     $to = $_POST["email"];
 
-    // 设置收件人信息
+    // 設置收件人信息
     $mail->addAddress($to);
 
-    // 邮件主题
+    // 郵件主題
     $mail->Subject = '預約成功信件';
 
-    // 邮件内容
+    // 郵件地址
     $mail->Body = '您的預約已成功';
 
-    // 发送邮件
+    // 發送郵件
     $mail->send();
     echo 'Confirmation email sent successfully!';
 } catch (Exception $e) {
