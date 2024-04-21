@@ -120,7 +120,7 @@
         <nav>
                 <ul class="flex-nav">
                     <li><a href="item_search.php">健檢類別查詢</a></li>
-                    <li><a href="reserve_online.php">線上預約</a></li>
+                    <li><a href="chooseitem.php">線上預約</a></li>
                     <li><a href="pay.php">繳費資訊</a></li>
                     <li><a href="contact.php">聯絡我們</a></li>
                 </ul>
@@ -146,15 +146,16 @@
 <?php
 
 // 設定連線至資料庫的伺服器名稱和埠號
-$serverName = "GRU-LAPTOP\SQLEXPRESS";
+$serverName = "SHERRYCHOU";
 
 // 設定連線選項，包括資料庫名稱、使用者名稱和密碼
 $connectionOptions = array(
     "Database" => "health_system", // 資料庫名稱
     "Uid" => "sa", // 使用者名稱
-    "PWD" => "1104", // 密碼
+    "PWD" => "Sherry920710", // 密碼
     "CharacterSet" => "UTF-8"
 );
+
 
 // 使用 sqlsrv_connect 函數建立資料庫連線
 $conn = sqlsrv_connect($serverName, $connectionOptions);

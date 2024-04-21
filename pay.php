@@ -16,58 +16,57 @@
 
 <body>
     <main>       
-        <div class="navbar">
-                <a href="index.php">
-                    <div class="logo">
-                        <img src="images/logo_hospital.png" alt="醫院Logo">
-                    </div>
-                </a>
+            <div class="navbar">
+                    <a href="index.php">
+                        <div class="logo">
+                            <img src="images/logo_hospital.png" alt="醫院Logo">
+                        </div>
+                    </a>
 
-            <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
-    <nav>
-            <ul class="flex-nav">
-                <li><a href="item_search.php">健檢類別查詢</a></li>
-                <li><a href="reserve_online.php">線上預約</a></li>
-                <li><a href="pay.php">繳費資訊</a></li>
-                <li><a href="contact.php">聯絡我們</a></li>
-            </ul>
-        </div>
-    </nav>
-</main>
+                <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
+        <nav>
+                <ul class="flex-nav">
+                    <li><a href="item_search.php">健檢類別查詢</a></li>
+                    <li><a href="chooseitem.php">線上預約</a></li>
+                    <li><a href="pay.php">繳費資訊</a></li>
+                    <li><a href="contact.php">聯絡我們</a></li>
+                </ul>
+            </div>
+        </nav>
+    </main>
 
+<!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->
+<?php
+    $pages = array(
+        array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
+        array('title' => '繳費資訊', 'link' => 'pay.php'), // 健檢類別查詢的連結指向:pay.php 
+    );
+    generateBreadcrumbs($pages);
+    ?>
 
-    <style>
-        
-        /* CSS for the gray box */
-        .gray-box {
-            background-color: #d3d3d377; /* Gray background color */
-            width: 1000px; /* Width of the box */
-            height: 200px; /* Height of the box */
-            margin: 0 auto; /* Center horizontally */
-            margin-top: 100px; /* Add some top margin for spacing */
-            border-radius: 30px; /* Rounded corners */
-            display: flex; /* Use flexbox to center content */
-            flex-direction: column; /* Stack content vertically */
-            align-items: center; /* Center content horizontally */
-            justify-content: center; /* Center content vertically */
-        }
-        /* CSS for the text inside the gray box */
-        .text-inside-box {
-            text-align: center; /* Center text horizontally */
-        }
-    </style>
-
-    <!-- Gray box -->
-    <div class="gray-box">
-        <div class="text-inside-box">
-            <p style="font-size: 30px; font-weight: bold;">繳費方式</p>
-            
-
-            <!-- Additional information -->
-            <p style="font-size: 20px; font-weight: bold;">除現金繳費外，亦辦理信用卡、悠遊卡支付醫療費用制度 要重寫 </p>
-
-        </div>
+    <div class= "title">
+        <h2>繳費方式選擇</h2>
+        <hr width="70%"> <!--橫線-->
     </div>
-    <!-- Rest of your body content... -->
+
+        <div class = "container">
+                <div class=" pay1">
+                        <img src="images\現金.png" class= "img-responsive">
+                        <h3>臨櫃現金繳費</h3>
+                    </a> 
+                </div>
+
+                <div class=" pay1">
+                        <img src="images\信用卡.png" class= "img-responsive">
+                        <h3>信用卡支付</h3>
+                    </a> 
+                </div>  
+
+                <div class=" pay1"> 
+                        <img src="images\悠遊卡.png" class= "img-responsive">
+                        <h3>悠遊卡支付</h3>
+                    </a> 
+                </div> 
+        </div>
 </body>
-</html>
+</html

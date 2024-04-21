@@ -87,7 +87,7 @@ nav ul {
     margin-top:90px; /*圖片上邊距*/
 }
 
-/*-----------------------------------首頁(健檢類別查詢、線上預約)---------------------------------*/
+/*-----------------------------------首頁(健檢類別查詢、線上預約)index.php---------------------------------*/
 
 /*flexbox容器樣式（排列框）*/
 .flex-container{
@@ -141,7 +141,7 @@ nav ul {
     line-height:120px;   /*文字位置*/
 }
 
- /*--------------------------------健檢類別查詢.php-----------------------------------------*/
+ /*--------------------------------健檢類別查詢 item_search.php-----------------------------------------*/
 
 /*健檢類別*/
 .title h2{
@@ -193,62 +193,6 @@ nav ul {
 
 /*文字樣式*/
 .box1 h3{
-    text-align: center; /* 文本居中 */
-    margin: 0; /* 移除段落的默认边距 */
-    color:rgb(255, 255, 255);  /*文字顏色*/
-    text-align: center;   /*文字水平居中*/
-    font-size: 1.6rem;    /*文字大小*/
-    line-height:120px;   /*文字位置*/
-}
-
-
-/*----------------------------------------線上預約.php---------------------------------------------*/
-
-
-/*flexbox容器樣式（排列框）*/
-.container1{
-    display: flex;  /*外容器宣告為flex*/
-    text-align: center;
-    flex-direction: row;  /*元件排列方向*/
-    justify-content: center;  
-    gap: 30px;   
-}
-
-/*框的樣式*/
-.box2{
-    display: inline-block; /*水平排列*/
-    width: 350px;    /*方框寬度*/
-    height: 400px;   /*方框高度*/
-    background-color: rgb(3, 104, 185) ;
-    margin: 10px;    /*方框間間距*/
-    border-radius: 20px;   /*圓角*/
-    margin-top: 50px;   /*物件跟頂部的距離*/
-    padding: 10px; /*內邊距*/
-}
-
-/*鏈接樣式*/
-.box2 a{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none; /*移除鏈結底線*/  
-}
-
-.box2:hover{
-    background-color:rgb(122, 166, 203);
-}
-
-/*圖片樣式*/
-.box2 img {
-    margin: auto;
-    max-width: 70%;
-    height:auto;
-    margin-top: 10%;
-    border-radius: 15px;
-}
-
-/*文字樣式*/
-.box2 h3{
     text-align: center; /* 文本居中 */
     margin: 0; /* 移除段落的默认边距 */
     color:rgb(255, 255, 255);  /*文字顏色*/
@@ -353,4 +297,76 @@ th.centered , td.centered {
     padding : 20px;
     background :linear-gradient(#f9fafb,#cad6e3);
     box-shadow:1px 1px 4px #bbe4f8;
+}
+
+
+
+/*------------------------------------pay.php-------------------------------------*/
+/*繳費方式選擇*/
+.title h2{
+    margin-left: 220px;
+}
+
+/*flexbox容器樣式（排列框）*/
+.container{
+    display: flex;  /*外容器宣告為flex*/
+    text-align: center;
+    flex-direction: row;  /*元件排列方向*/
+    justify-content: center;  
+    gap: 30px;   
+}
+
+/*框的樣式*/
+.pay1{
+    display: inline-block; /*水平排列*/
+    width: 220px;    /*方框寬度*/
+    height: 220px;   /*方框高度*/
+    background-color: #7aa6cb;
+    margin: 10px;    /*方框間間距*/
+    border-radius: 20px;   /*圓角*/
+    margin-top: 50px; 
+    padding: 10px; /*內邊距*/
+}
+
+/*圖片樣式*/
+.pay1 img {
+    margin: auto;
+    max-width: 70%;
+    height:auto;
+    margin-top:10%;
+    border-radius: 15px;
+}
+
+/*文字樣式*/
+.pay1 h3{
+    text-align: center; /* 文本居中 */
+    margin: 0; /* 移除段落的默认边距 */
+    color:rgb(255, 255, 255);  /*文字顏色*/
+    text-align: center;   /*文字水平居中*/
+    font-size: 1.2rem;    /*文字大小*/
+    line-height:50px;   /*文字位置*/
+}
+
+/*------------------------------------contact.php-------------------------------------*/
+
+table.type3 {
+    border-collapse: collapse; /* 合併框為單線條 */
+    margin:auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 70%;
+}
+
+td.c1{
+    border: 1px solid black; /* 單線條邊框 */
+    padding: 6px; /*表格大小*/
+    text-align: left;
+    width:180px;
+}
+td.c2{
+    width:100px;
+}
+
+tr.category3{
+    background-color: #fbfbfb;
 }
