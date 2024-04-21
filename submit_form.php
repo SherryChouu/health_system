@@ -4,16 +4,15 @@
 header("Content-Type:text/html; charset=utf-8");
 
 // 設定連線至資料庫的伺服器名稱和埠號
-$serverName = "SHERRYCHOU";
+$serverName = "DESKTOP-947P2F9";
 
 // 設定連線選項，包括資料庫名稱、使用者名稱和密碼
 $connectionOptions = array(
     "Database" => "health_system", // 資料庫名稱
     "Uid" => "sa", // 使用者名稱
-    "PWD" => "Sherry920710", // 密碼
+    "PWD" => "1106Evelyn", // 密碼
     "CharacterSet" => "UTF-8"
 );
-
 
 // 使用 sqlsrv_connect 函數建立資料庫連線
 $conn = sqlsrv_connect($serverName, $connectionOptions);
@@ -94,16 +93,8 @@ try {
         // 執行 SQL 語句
         if (sqlsrv_execute($stmtAppointment)) {
             echo "資料已成功提交到資料庫.";
-            $to = "reset920215@gmail.com";
-            $subject = "Test Email";
-            $message = "This is a test email.";
-            $headers = "From: sender@example.com";
-            // 發送確認郵件
-    include 'send_confirmation_email.php'; // 發送確認郵件
-
-    // 重定向到成功頁面
-    echo "<script>alert('預約成功，確認信已寄出'); window.location='index.php';</script>";
-    exit();
+            
+            ;exit();
             
         }else {
             die(print_r(sqlsrv_errors(), true));}
