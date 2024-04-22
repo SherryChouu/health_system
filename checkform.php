@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f4f4f4; /* 整體背景颜色 */
+            font-size: 16px; /* 整體字體大小 */
         }
         .form-section {
             background-color: #fff; /* 淡灰色背景 */
@@ -26,6 +27,8 @@
         h2 {
             color: #333;
             text-align: center;
+            font-size: 24px; /* 標題字體大小 */
+            margin-bottom: 20px; /* 標題底部間距 */
         }
 
         .form-data p {
@@ -39,6 +42,11 @@
         .form-data label {
             font-weight: bold;
             margin-right: 10px; 
+            font-size: 18px; /* 標籤字體大小 */
+        }
+
+        .form-data span {
+            font-size: 18px; /* 內容字體大小 */
         }
 
         input[type='hidden'] {
@@ -53,6 +61,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            font-size: 18px; /* 按鈕字體大小 */
         }
 
         button:hover{
@@ -92,26 +101,37 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // 遍歷所有的 POST 參數並顯示
                  foreach ($_POST as $key => $value) {
-                     if (array_key_exists($key, $labels)) {
-                     // 使用 htmlspecialchars 函數來避免 XSS 
-                     $safeValue = htmlspecialchars($value);
+                     // 處理與通訊地址相同的情況
+                     if ($key == 'same-as-mailing') {
+                         $safeValue = ($value == 'on') ? '是' : '否';
+                     }
+                     elseif ($key == 'package') {
+                         // 將套餐的 ID 轉換為對應的套餐名稱
+                         $package_name = getPackageName($value);
+                         // 使用 htmlspecialchars 函數來避免 XSS 
+                         $safeValue = htmlspecialchars($package_name);
+                     } else {
+                         $safeValue = htmlspecialchars($value);
+                     }
+                     
                      echo "<p><label>{$labels[$key]}:</label><span>{$safeValue}</span></p>";
                 }
             }
             
-                $package = isset($_POST['package']) ? $_POST['package'] : '未選擇';
-                $reservationDate = isset($_POST['reservationDate']) ? $_POST['reservationDate'] : '未選擇';
-                echo "<p><label>預約日期: </label> $reservationDate</p>";
-                switch ($package) {
-                    case 1: echo "<p><label>健檢套餐: </label> 卓越C套餐</p>"; break;
-                    case 2: echo "<p><label>健檢套餐: </label> 卓越M套餐</p>"; break;
-                    case 3: echo "<p><label>健檢套餐: </label> 尊爵A套餐</p>"; break;
-                    case 4: echo "<p><label>健檢套餐: </label> 尊爵B套餐</p>"; break;
-                    case 5: echo "<p><label>健檢套餐: </label> 尊爵C套餐</p>"; break;
-                    case 6: echo "<p><label>健檢套餐: </label> 卓越C套餐</p>"; break;
-                    default: echo "<p><label>套餐: </label> 未選擇</p>";
-                }
+            function getPackageName($package_id) {
+                // 定義套餐資料
+                $packages = [
+                    '1' => '卓越C',
+                    '2' => '卓越M',
+                    '3' => '尊爵A',
+                    '4' => '尊爵B',
+                    '5' => '尊爵C',
+                    '6' => '尊爵D'
+                ];
+
+                return isset($packages[$package_id]) ? $packages[$package_id] : '未選擇';
             }
+                
             ?>
         </div>
         <div class="button-group">

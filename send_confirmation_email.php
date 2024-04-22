@@ -2,6 +2,7 @@
 <?php
 
 // 導入必要的文件
+// 導入必要的文件
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -27,6 +28,21 @@ try {
     // 獲取受檢者email
     $to = $_POST["email"];
 
+    // 獲取受檢者姓名
+    $chineseName = $_POST["chinese-name"];
+
+   // 套餐陣列
+   $packages = array(
+    '1' => '卓越C',
+    '2' => '卓越M',
+    '3' => '尊爵A',
+    '4' => '尊爵B',
+    '5' => '尊爵C',
+    '6' => '尊爵D'
+);
+
+// 將套餐的 ID 轉換為對應的套餐名稱
+$selectedPackage = $packages[$_POST["package"]];
     // 設置收件人信息
     $mail->addAddress($to);
 
@@ -77,9 +93,29 @@ try {
 </head>
 <body>
     <div class="content">
-        <h1>您的預約已成功</h1>
-        <p>感謝您選擇我們的服務。如果您需要取消預約，請點擊下面的按鈕。</p>
-        <a href="$cancelURL" class="button">取消預约</a>
+        <h1>健檢預約確認</h1>
+        <p>
+
+        尊敬的 $chineseName 先生/小姐，
+        <br><br>
+        感謝您選擇我們的醫院進行健康檢查。我們已經收到了您的預約，詳細信息如下：
+        <br><br>
+        受檢者姓名： $chineseName
+        <br>
+        身份證字號： {$_POST["id-number"]}
+        <br>
+        預約套餐： $selectedPackage
+        <br>
+        預約日期時間： {$_POST["reservationDate"]} {$_POST["reservationTime"]}
+        <br><br>
+        請注意，您可以在預約日期前一天進行預約確認。請您準時到達醫院，並攜帶相關身份證明文件。
+        <br><br>
+        如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
+        <br><br>
+        祝您健康！
+        <br><br>
+        仁愛醫院健檢中心</p>
+        <a href="$cancelURL" class="button">取消預約</a>
     </div>
 </body>
 </html>

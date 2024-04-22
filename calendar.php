@@ -263,9 +263,6 @@ while ($day <= $num_days) {
     $remainingCapacity = $maxCapacity - $ARD_Count;
 
     
-    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate 
-    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
-    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
     //<br>當前日期：$strcurrentDate<br>最遠預約日期：$limitDate 
     // 檢查是否在最快預約日期之前或與最快預約日期相等
     if ($strcurrentDate < $reservationStartDate) { //strcurrentDate < 最快預約日期
