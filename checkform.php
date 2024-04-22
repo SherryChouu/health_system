@@ -128,9 +128,7 @@
             </form>
 
             <!-- 重新填寫按鈕 -->
-            <form action="form.php" method="get" style="display: inline;">
-                <button type="submit">重新填寫</button>
-            </form>
+            <button onclick="history.back()">重新填寫</button>
         </div>
     </div>
 </body>

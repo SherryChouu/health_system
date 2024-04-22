@@ -9,7 +9,7 @@
 <body>
     <?php
     // 設定連線至資料庫的伺服器名稱和埠號
-    $serverName = "SHERRYCHOU";
+    $serverName = "DESKTOP-947P2F9";
 
     // 設定連線選項，包括資料庫名稱、使用者名稱和密碼
     $connectionOptions = array(

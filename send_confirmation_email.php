@@ -143,7 +143,7 @@ try {
         &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding, &$selectedPackage, $reservationDate
     ));
 
-    // 執行 SQL 語句
+    // 執行 SQL 語句  
     if (sqlsrv_execute($stmtPatient)) {
         // 獲取剛插入的 Patient ID
         $lastPatientID = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT SCOPE_IDENTITY()"));
@@ -159,9 +159,7 @@ try {
 
         // 執行 SQL 語句
         // 執行 SQL 語句
-        if (sqlsrv_execute($stmtAppointment)) {
-           // echo "資料已成功提交到資料庫.";
-            
+        if (sqlsrv_execute($stmtAppointment)) {            
             ;exit();
             
         }else {
