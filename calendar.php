@@ -14,10 +14,11 @@
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
 
         table {
-        width: 800px; /* 用固定像素值替換百分比 */
+        width: 700px; /* 用固定像素值替換百分比 */
         border-collapse: collapse;
-        margin: 100px auto;
+        margin: 40px auto;
         text-align: center;
+        ;
         }
 
         @media screen and (max-width: 800px) {
@@ -30,7 +31,6 @@
         }
         /* ... 可能還需要保持其他樣式不變 ... */
        }      
-        
        
         th {
             border: 1px solid black;
@@ -39,40 +39,46 @@
         }
         td{
             border: 1px solid black;
-            padding: 20px; /*調間距*/
+            padding: 40px; /*調間距*/
             text-align: center;
+            text-align: left; 
+            vertical-align: top; 
+            border-color: white;
         }
 
         td:hover {
-         /* background-color: pink;滑鼠移至時的背景色 */
-        transition-duration: 0.3s;
-        
-    }
+        transition-duration: 0.3s;   
+        }
+
         .rl-button {
-        padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
-        margin: 25px; /* 使用 margin 調整按鈕之間的間距 */  
-        width: 100px; /* 固定寬度 */
-        height: 80px; /* 固定高度 */
-        background-color: #7aa6cb; /* 背景顏色 */
+        padding : 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
+        margin-right: 40px; /* 使用 margin 調整按鈕之間的間距 */  
+        margin-left: 25px;
+        margin-bottom: 120px;
+        
+        width: 80px; /* 固定寬度 */
+        height: 100px; /* 固定高度 */
+        background-color: #aac0cb; /* 背景顏色 */
         border: 2px solid white;
         border-radius: 10px;
-        font-size: 13px; /* 固定字體大小 */
+        font-size: 15px; /* 固定字體大小 */
         box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
-    }
+        }/* 選擇月份的按鈕 */
 
-    @media screen and (max-width: 768px) {
-    .rl-button {
-        width: 50px; /* 移動設備上固定寬度 */
-        height: 70px; /* 移動設備上固定高度 */
-        font-size: 13px; /* 移動設備上固定字體大小 */
-       }
-    }
+        @media screen and (max-width: 600px) {
+        .rl-button {
+            width: 50px; /* 移動設備上固定寬度 */
+            height: 70px; /* 移動設備上固定高度 */
+            font-size: 13px; /* 移動設備上固定字體大小 */
+        }
+        }
         
         .rl-button:hover{
             padding : 10px 20px;
             background :linear-gradient(#f9fafb,#abc1cb);
             box-shadow:1px 1px 4px #ccc;
-        }
+        }/* 選擇月份的按鈕 */
+
         .button-container {
     position: fixed; /* 將容器固定 */
     bottom: 0; /* 將容器置於頁面底部 */
@@ -84,27 +90,43 @@
     padding: 5px;
 }
 
-.button-container button {
-    margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
-}
-
+        .button-container button {
+            margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
+        } 
 
         .top-block {
             /* 样式设置上方区块的样式 */
             color: #ffffff; /* 白色文本 */
             background-color: transparent; /*背景透明*/
-            border: 2px solid #7aa6cb;
-            padding: 20px;
-            border-radius: 10px;
+            border: 2px solid #7aa6cb; /*邊框*/
+            padding: 18px; /*月曆日期格子大小*/
+            border-radius: 10px; /*圓角*/
             width: 120px;
             color: black;
-            
-        }
+        } /* 月曆日期的格子 */
+
         .week{
         border-color: transparent;
         font-size:20px;
-        }
-               
+        text-align: center;
+        }  /* 星期幾的文字 */
+
+        .blank-cell{
+            background-color: white;
+            border-color: white;
+            text-align: center; 
+            vertical-align: top;
+            padding: auto;
+            color:black;
+        }/* 每月多出來的空格 */
+        .blank{ 
+            background-color: #cad6e3;
+            border-radius:10px;
+            width: 124px;
+            padding:18px;
+            color: #cad6e3;
+        }  /* 每月多出來的空格 */
+
     </style>
 
 <body>
@@ -117,20 +139,18 @@
                     </a>
 
                 <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
-        <nav>
-                <ul class="flex-nav">
-                    <li><a href="item_search.php">健檢類別查詢</a></li>
-                    <li><a href="reserve_online.php">線上預約</a></li>
-                    <li><a href="pay.php">繳費資訊</a></li>
-                    <li><a href="contact.php">聯絡我們</a></li>
-                </ul>
+                    <nav>
+                        <ul class="flex-nav">
+                            <li><a href="item_search.php">健檢類別查詢</a></li>
+                            <li><a href="reserve_online.php">線上預約</a></li>
+                            <li><a href="pay.php">繳費資訊</a></li>
+                            <li><a href="contact.php">聯絡我們</a></li>
+                        </ul>
+                    </nav>
             </div>
-        </nav>
-    </main>
-    </br>
+</main>
 
 
-    
 <?php
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
@@ -139,33 +159,11 @@
         array('title' => '選擇預約日期', 'link' => 'calendar.php'), 
     );
     generateBreadcrumbs($pages);
-    ?>
-
-<div style="height: 600px;">
-
-<?php
-
-// 設定連線至資料庫的伺服器名稱和埠號
-$serverName = "DESKTOP-947P2F9";
-
-// 設定連線選項，包括資料庫名稱、使用者名稱和密碼
-$connectionOptions = array(
-    "Database" => "health_system", // 資料庫名稱
-    "Uid" => "sa", // 使用者名稱
-    "PWD" => "1106Evelyn", // 密碼
-    "CharacterSet" => "UTF-8"
-);
-
-// 使用 sqlsrv_connect 函數建立資料庫連線
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-// 檢查連線是否成功
-if (!$conn) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
 ?>
 
 <?php
+//將資料庫引入
+include 'sql_connect.php';
 
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
@@ -193,9 +191,11 @@ $reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDa
 // 計算6個月後的日期
 $limitDate = date('Y-m-d', strtotime("+6 months"));
 
-echo "當前日期：$currentDate<br>"; //這之後會刪掉
-//echo "最快預約日期：$reservationStartDate<br>"; //這之後會刪掉
-echo"網路預約--開放至$limitDate"; //這之後會刪掉
+    echo "當前日期：$currentDate<br>"; //這之後會刪掉
+    //echo "最快預約日期：$reservationStartDate<br>"; //這之後會刪掉
+    echo"網路預約開放至：$limitDate"; //這之後會刪掉
+
+
 
 // 創建月曆表格
 echo "<table border='2' style='border-collapse: collapse;'>";
@@ -208,9 +208,7 @@ echo "<tr>
         <th class='week' style='width: 12%;'>星期四</th>
         <th class='week' style='width: 12%;'>星期五</th>
         <th class='week' style='width: 12%;'>星期六</th>
-    </tr>
-";
-
+    </tr>";
 
 // 上一個月和下一個月的按鈕
 $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
@@ -228,18 +226,17 @@ $blankCells = $firstDayOfWeekIndex;
 
 // 補足每個月開始的空白格子
 for ($i = 0; $i < $blankCells; $i++) {
-    echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
-            <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
-                1</br>
-                <br>剩餘名額：10
-            </div>
-        </td>";
+    echo "<td class='blank-cell'>
+                <div class='blank'>
+                    1</br>
+                    <br>剩餘名額：10
+                </div>
+            </td>";
 }
 
-
-// ***設定起始日期 str***
-$strcurrentDate = date('Y-m-d', strtotime("$year-$month-01"));  //strcurrentDate指每天的日期
-$strreservationStartDate = date('Y-m-d', strtotime("$strcurrentDate +14 day"));  //strreservationStartDate指每天日期的最快預約日期
+// 設定起始日期 
+$strcurrentDate = date('Y-m-d', strtotime("$year-$month-01"));  //strcurrentDate 指每天的日期
+$strreservationStartDate = date('Y-m-d', strtotime("$strcurrentDate +14 day"));  //strreservationStartDate 指每天日期的最快預約日期
 
 // 填充每個月的日期
 while ($day <= $num_days) {
@@ -250,7 +247,7 @@ while ($day <= $num_days) {
     // 這裡插入了 SQL 查詢
     $reservationDate = "$year-$month-$day";
 
-    // 設定套餐 ID，你可以根據實際需要修改
+    // 設定套餐 ID
     $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
 
     // 獲取預約數量
@@ -331,30 +328,23 @@ while ($day <= $num_days) {
     $day_of_week = date('D', strtotime("$year-$month-$day"));
 }
 
-
-
-// 補足本月結束的空白格子
-$remainingBlankCells = 7 - (($num_days + $blankCells) % 7);
-if ($remainingBlankCells != 7) {
-    for ($i = 0; $i < $remainingBlankCells; $i++) {
-        echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
-                <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
-                    1</br>
-
-                    <br>剩餘名額：10
-                </div>
-            </td>";
+    // 補足本月結束的空白格子
+    $remainingBlankCells = 7 - (($num_days + $blankCells) % 7);
+    if ($remainingBlankCells != 7) {
+        for ($i = 0; $i < $remainingBlankCells; $i++) {
+            echo "<td class='blank-cell'>
+                    <div class='blank'>
+                        1</br>
+                        <br>剩餘名額：10
+                    </div>
+                </td>";
+        }
     }
-}
 
 // 結束月曆表格
 echo "</tr></table>";
-
 ?>
 
-
-
-</div>
 <?php
 $package = isset($_GET['package']) ? $_GET['package'] : '';
 
@@ -384,8 +374,6 @@ switch ($package) {
         //echo '<div>這是卓越M的月曆</div>';
         break;
 
-
-
     // 其他套餐的處理
     default:
         //echo '<div>未知套餐</div>';
@@ -394,36 +382,34 @@ switch ($package) {
 ?>
 
 <div class="button-container">
-<?php 
-$earliestAllowedMonth = date('m', strtotime($currentDate)); // 最早允許的月份
-$earliestAllowedYear = date('Y', strtotime($currentDate)); // 最早允許的年份
+    <?php 
+    $earliestAllowedMonth = date('m', strtotime($currentDate)); // 最早允許的月份
+    $earliestAllowedYear = date('Y', strtotime($currentDate)); // 最早允許的年份
 
-     //上一個月按鈕 
-    if ($month != $earliestAllowedMonth || $year != $earliestAllowedYear) {
-    $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
-    $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
-    echo "<a href='?package=$package&month=$prevMonth&year=$prevYear'><button class='rl-button'>上一個月</button></a>";
-}
-?>
-<!-- 回到當月按鈕 -->
-<a href="?package=<?php echo $package; ?>&month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
+        //上一個月按鈕 
+        if ($month != $earliestAllowedMonth || $year != $earliestAllowedYear) {
+        $prevMonth = date('m', strtotime("-1 month", strtotime("$year-$month-01")));
+        $prevYear = date('Y', strtotime("-1 month", strtotime("$year-$month-01")));
+        echo "<a href='?package=$package&month=$prevMonth&year=$prevYear'><button class='rl-button'>上一個月</button></a>";
+        }
+    ?>
+    <!-- 回到當月按鈕 -->
+    <a href="?package=<?php echo $package; ?>&month=<?php echo date('m'); ?>&year=<?php echo date('Y'); ?>"><button class="rl-button"><?php echo "回到當月"; ?></button></a>
 
-<!-- 下一個月按鈕 -->
-<?php
-// 計算下一個月的日期
-$nextMonthDate = date('Y-m', strtotime('+1 month', strtotime("$year-$month-01")));
+    <!-- 下一個月按鈕 -->
+    <?php
+    // 計算下一個月的日期
+    $nextMonthDate = date('Y-m', strtotime('+1 month', strtotime("$year-$month-01")));
 
-// 檢查下一個月是否超過了 $limitDate
-if ($nextMonthDate <= $limitDate) {
-    // 生成下一個月按鈕
-    echo "<a href='?package=$package&month=$nextMonth&year=$nextYear'><button class='rl-button'>下一個月</button></a>";
-} else {
-    // 顯示尚未開放
-    echo "<button class='rl-button' disabled>尚未開放</button>";
-}
-?>
-
-
+    // 檢查下一個月是否超過了 $limitDate
+    if ($nextMonthDate <= $limitDate) {
+        // 生成下一個月按鈕
+        echo "<a href='?package=$package&month=$nextMonth&year=$nextYear'><button class='rl-button'>下一個月</button></a>";
+    } else {
+        // 顯示尚未開放
+        echo "<button class='rl-button' disabled>尚未開放</button>";
+    }
+    ?>
 </div>
 </body>
 </html>
