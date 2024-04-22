@@ -39,7 +39,7 @@
     <?php
         $pages = array(
             array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
-            array('title' => '聯絡資訊', 'link' => 'contact.php'), // 健檢類別查詢的連結指向:contact.php 
+            array('title' => '聯絡我們', 'link' => 'contact.php'), // 健檢類別查詢的連結指向:contact.php 
         );
         generateBreadcrumbs($pages);
         ?>

@@ -268,7 +268,7 @@ th.centered , td.centered {
 }
 
 
-/*------------------------------------reserveonline.php-------------------------------------*/
+/*------------------------------------reserve_online.php-------------------------------------*/
 .ck{ 
     text-align:center;
     align-items: center;
@@ -370,3 +370,84 @@ td.c2{
 tr.category3{
     background-color: #fbfbfb;
 }
+
+
+/*------------------------------form.php預約表格---------------------------*/
+
+.form-section {
+    display: flex;
+    flex-direction: column; /* 使子元素垂直排列 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 容器高度設為視口的100% */
+    margin-top: 120px; /* 在表單區域頂部添加邊距 */
+    margin-bottom: 120px;
+}
+
+.form-title {
+    margin-bottom: 40px; /* 為標題和表單之間增加一些間距 */
+    text-align: center; /* 標題文字居中 */ 
+}
+
+form {
+    width: 60%;     /* 表格大小*/
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+select {
+    width: 80%; /* 寬度 */
+    padding: 10px; /* 內邊距 */
+    position: relative;
+    border-radius: 15px; /* 圓角 */
+    border: 1px solid #ccc; /* 邊框 */
+    outline: none; /* 去除點擊時的藍色外框 */
+    -moz-appearance: none; /* 移除Firefox的預設樣式 */
+    -webkit-appearance: none; /* 移除Chrome和Safari的預設樣式 */
+    appearance: none; /* 移除預設的外觀 */
+    background-color: white; /* 背景顏色 */
+    color: black; /* 文字顏色 */
+    margin-left: 10px; /* 往右移動 10px */
+    display: inline-block; /* 讓每個元素在同一行顯示 */
+    box-sizing: border-box; /* 讓 padding 和 border 不會改變元素的寬度 */
+}
+
+/* 針對IE瀏覽器，移除下拉箭頭 */
+select::-ms-expand {
+    display: none;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* 這會將按鈕組水平居中 */
+}
+
+.button3 {
+    margin: 0 10px; /* 按鈕之間的間距 */
+    padding: 10px 20px; /* 為按鈕增加內邊距 */
+    border-radius: 15px; /* 同樣為按鈕增加圓角 */
+    border: none; /* 去除按鈕的邊框 */
+    background-color: #abc1cb; /* 為按鈕增加背景顏色，這裡使用的是一種藍色 */
+    color: white; /* 設置按鈕文字為白色 */
+    cursor: pointer; /* 當鼠標懸停在按鈕上時，顯示指針手型 */
+    outline: none; /* 去除點擊時的藍色外框 */
+}
+
+.required {
+    color: red; /* 將星號設置為紅色來突出顯示 */
+    margin-right: 5px; /* 為了美觀，在星號和文字之間添加一些間距 */
+}
+
+
+
+

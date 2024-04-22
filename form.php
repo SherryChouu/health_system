@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="formstyle.css">
+    <link rel="stylesheet" href="style.css">
     <title>form</title>
     
     <!-- 引入 breadcrumbs.php -->
@@ -186,8 +186,8 @@ switch ($selectedPackage) {
                 
                 <!-- 按鈕 -->
                 <div class="button-group">
-                    <button type="submit">送出</button>
-                    <button type="reset">重置</button>
+                    <button type="submit" class="button3">送出</button>
+                    <button type="reset" class="button3">重置</button>
                     
                 </div>     
 

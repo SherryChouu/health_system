@@ -36,7 +36,7 @@
             text-align: left; 
         }
 
-         .form-data label {
+        .form-data label {
             font-weight: bold;
             margin-right: 10px; 
         }
@@ -48,11 +48,15 @@
         button {
             padding: 10px 20px;
             margin: 5px; 
-            background-color: rgb(3, 104, 185);
+            background-color: #7aa6cb;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
+        }
+
+        button:hover{
+            background-color: #bbe4f8;
         }
 
         .button-group {
@@ -60,6 +64,8 @@
         }
     </style>
 </head>
+
+
 <body>
     <div class="form-section">
         <h2>健檢資料確認</h2>

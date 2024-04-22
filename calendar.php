@@ -47,7 +47,7 @@
          /* background-color: pink;滑鼠移至時的背景色 */
         transition-duration: 0.3s;
         
-    }
+        }
         .rl-button {
         padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
         margin: 25px; /* 使用 margin 調整按鈕之間的間距 */  
@@ -58,15 +58,15 @@
         border-radius: 10px;
         font-size: 13px; /* 固定字體大小 */
         box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
-    }
+        }
 
-    @media screen and (max-width: 768px) {
-    .rl-button {
-        width: 50px; /* 移動設備上固定寬度 */
-        height: 70px; /* 移動設備上固定高度 */
-        font-size: 13px; /* 移動設備上固定字體大小 */
-       }
-    }
+        @media screen and (max-width: 768px) {
+        .rl-button {
+            width: 50px; /* 移動設備上固定寬度 */
+            height: 70px; /* 移動設備上固定高度 */
+            font-size: 13px; /* 移動設備上固定字體大小 */
+        }
+        }
         
         .rl-button:hover{
             padding : 10px 20px;
@@ -82,11 +82,11 @@
         justify-content: space-between;
         align-items: flex-end; /* 右對齊 */
         padding: 5px;
-}
+        }
 
-.button-container button {
-    margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
-}
+        .button-container button {
+            margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
+        }
 
 
         .top-block {
@@ -143,28 +143,7 @@
 <div style="height: 600px;">
 
 <?php
-
-// 設定連線至資料庫的伺服器名稱和埠號
-$serverName = "GRU-LAPTOP\SQLEXPRESS";
-
-// 設定連線選項，包括資料庫名稱、使用者名稱和密碼
-$connectionOptions = array(
-    "Database" => "health_system", // 資料庫名稱
-    "Uid" => "sa", // 使用者名稱
-    "PWD" => "1104", // 密碼
-    "CharacterSet" => "UTF-8"
-);
-
-// 使用 sqlsrv_connect 函數建立資料庫連線
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-// 檢查連線是否成功
-if (!$conn) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-?>
-
-<?php
+include 'sql_connect.php';
 
 // 設置時區
 date_default_timezone_set('Asia/Taipei');

@@ -1,29 +1,12 @@
-
 <?php
 
-header("Content-Type:text/html; charset=utf-8");
+    header("Content-Type:text/html; charset=utf-8");
 
-// 設定連線至資料庫的伺服器名稱和埠號
-$serverName = "GRU-LAPTOP\SQLEXPRESS";
-
-// 設定連線選項，包括資料庫名稱、使用者名稱和密碼
-$connectionOptions = array(
-    "Database" => "health_system", // 資料庫名稱
-    "Uid" => "sa", // 使用者名稱
-    "PWD" => "1104", // 密碼
-    "CharacterSet" => "UTF-8"
-);
-
-// 使用 sqlsrv_connect 函數建立資料庫連線
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-// 檢查連線是否成功
-if (!$conn) {
-    die(print_r(sqlsrv_errors(), true));
-}
+    include 'sql_connect.php';
 
 
-// 檢查是否是 POST 請求
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // 檢查是否是 POST 請求
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // 這裡可以獲取表單提交的數據
     $chineseName = $_POST["chinese-name"];
@@ -53,27 +36,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
     
     
-// 在執行 SQL 語句之前確認 $reservationDate 的值
-echo "Reservation Date: " . $reservationDate;
+    // 在執行 SQL 語句之前確認 $reservationDate 的值
+    echo "Reservation Date: " . $reservationDate;
 
 
 
     // 執行資料庫操作
-try {
-    // 準備 SQL 語句
-    // 將資料插入 Patient 資料表
-    $sqlPatient = "INSERT INTO Patient (
-    ChineseName, EnglishName, 
-    IDNumber, Sexual, Birthdate, 
-    Address, ResidenceAddress, 
-    SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    try {
+        // 準備 SQL 語句
+        // 將資料插入 Patient 資料表
+        $sqlPatient = "INSERT INTO Patient (
+        ChineseName, EnglishName, 
+        IDNumber, Sexual, Birthdate, 
+        Address, ResidenceAddress, 
+        SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
-    // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-    $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
-        &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding, &$selectedPackage, $reservationDate
-    ));
+        // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
+        $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
+            &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
+            &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding, &$selectedPackage, $reservationDate
+        ));
 
     // 執行 SQL 語句
     if (sqlsrv_execute($stmtPatient)) {
