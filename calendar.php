@@ -47,7 +47,7 @@
          /* background-color: pink;滑鼠移至時的背景色 */
         transition-duration: 0.3s;
         
-        }
+    }
         .rl-button {
         padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
         margin: 25px; /* 使用 margin 調整按鈕之間的間距 */  
@@ -58,15 +58,15 @@
         border-radius: 10px;
         font-size: 13px; /* 固定字體大小 */
         box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
-        }
+    }
 
-        @media screen and (max-width: 768px) {
-        .rl-button {
-            width: 50px; /* 移動設備上固定寬度 */
-            height: 70px; /* 移動設備上固定高度 */
-            font-size: 13px; /* 移動設備上固定字體大小 */
-        }
-        }
+    @media screen and (max-width: 768px) {
+    .rl-button {
+        width: 50px; /* 移動設備上固定寬度 */
+        height: 70px; /* 移動設備上固定高度 */
+        font-size: 13px; /* 移動設備上固定字體大小 */
+       }
+    }
         
         .rl-button:hover{
             padding : 10px 20px;
@@ -74,19 +74,19 @@
             box-shadow:1px 1px 4px #ccc;
         }
         .button-container {
-        position: fixed; /* 將容器固定 */
-        bottom: 0; /* 將容器置於頁面底部 */
-        right: -20px; /* 距離視窗右側 10px */
-        display: flex;
-        flex-direction: column; /* 垂直排列 */
-        justify-content: space-between;
-        align-items: flex-end; /* 右對齊 */
-        padding: 5px;
-        }
+    position: fixed; /* 將容器固定 */
+    bottom: 0; /* 將容器置於頁面底部 */
+    right: -20px; /* 距離視窗右側 10px */
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    justify-content: space-between;
+    align-items: flex-end; /* 右對齊 */
+    padding: 5px;
+}
 
-        .button-container button {
-            margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
-        }
+.button-container button {
+    margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
+}
 
 
         .top-block {
@@ -134,7 +134,8 @@
 <?php
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
-        array('title' => '線上預約', 'link' => 'reserve_online.php'),  
+        array('title' => '線上預約', 'link' => 'reserve_online.php'), 
+        array('title' => '選擇欲健檢項目', 'link' => 'chooseitem.php'), 
         array('title' => '選擇預約日期', 'link' => 'calendar.php'), 
     );
     generateBreadcrumbs($pages);
@@ -143,7 +144,28 @@
 <div style="height: 600px;">
 
 <?php
-include 'sql_connect.php';
+
+// 設定連線至資料庫的伺服器名稱和埠號
+$serverName = "DESKTOP-947P2F9";
+
+// 設定連線選項，包括資料庫名稱、使用者名稱和密碼
+$connectionOptions = array(
+    "Database" => "health_system", // 資料庫名稱
+    "Uid" => "sa", // 使用者名稱
+    "PWD" => "1106Evelyn", // 密碼
+    "CharacterSet" => "UTF-8"
+);
+
+// 使用 sqlsrv_connect 函數建立資料庫連線
+$conn = sqlsrv_connect($serverName, $connectionOptions);
+// 檢查連線是否成功
+if (!$conn) {
+    die(print_r(sqlsrv_errors(), true));
+}
+
+?>
+
+<?php
 
 // 設置時區
 date_default_timezone_set('Asia/Taipei');
@@ -261,8 +283,10 @@ while ($day <= $num_days) {
 
     // 計算每天剩餘可預約人數
     $remainingCapacity = $maxCapacity - $ARD_Count;
-
     
+    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate 
+    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
+    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
     //<br>當前日期：$strcurrentDate<br>最遠預約日期：$limitDate 
     // 檢查是否在最快預約日期之前或與最快預約日期相等
     if ($strcurrentDate < $reservationStartDate) { //strcurrentDate < 最快預約日期
