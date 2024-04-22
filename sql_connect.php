@@ -8,16 +8,17 @@
 
 <body>
     <?php
-    // 設定連線至資料庫的伺服器名稱和埠號
-    $serverName = "DESKTOP-947P2F9";
+        // 設定連線至資料庫的伺服器名稱和埠號
+    $serverName = "SHERRYCHOU";
 
     // 設定連線選項，包括資料庫名稱、使用者名稱和密碼
     $connectionOptions = array(
         "Database" => "health_system", // 資料庫名稱
         "Uid" => "sa", // 使用者名稱
-        "PWD" => "1106Evelyn", // 密碼
+        "PWD" => "Sherry920710", // 密碼
         "CharacterSet" => "UTF-8"
     );
+
 
     // 使用 sqlsrv_connect 函數建立資料庫連線
     $conn = sqlsrv_connect($serverName, $connectionOptions);

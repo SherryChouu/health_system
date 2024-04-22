@@ -39,15 +39,17 @@
         }
         td{
             border: 1px solid black;
-            padding: 20px; /*調間距*/
+            padding: 40px; /*調間距*/
             text-align: center;
+            text-align: left; 
+            vertical-align: top; 
+            border-color: white;
         }
 
         td:hover {
-         /* background-color: pink;滑鼠移至時的背景色 */
-        transition-duration: 0.3s;
-        
+        transition-duration: 0.3s;   
         }
+
         .rl-button {
         padding: 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
         margin: 25px; /* 使用 margin 調整按鈕之間的間距 */  
@@ -86,25 +88,41 @@
 
         .button-container button {
             margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
-        }
-
+        } 
 
         .top-block {
             /* 样式设置上方区块的样式 */
             color: #ffffff; /* 白色文本 */
             background-color: transparent; /*背景透明*/
-            border: 2px solid #7aa6cb;
-            padding: 20px;
-            border-radius: 10px;
+            border: 2px solid #7aa6cb; /*邊框*/
+            padding: 18px; /*月曆日期格子大小*/
+            border-radius: 10px; /*圓角*/
             width: 120px;
             color: black;
-            
-        }
+        } /* 月曆日期的格子 */
+
         .week{
         border-color: transparent;
         font-size:20px;
-        }
-               
+        text-align: center;
+        }  /* 星期幾的文字 */
+
+        .blank-cell{
+            background-color: white;
+            border-color: white;
+            text-align: center; 
+            vertical-align: top;
+            padding: auto;
+            color:black;
+        }/* 每月多出來的空格 */
+        .blank{ 
+            background-color: #cad6e3;
+            border-radius:10px;
+            width: 124px;
+            padding:18px;
+            color: #cad6e3;
+        }  /* 每月多出來的空格 */
+
     </style>
 
 <body>
@@ -117,20 +135,18 @@
                     </a>
 
                 <h1 class= "title"><a href="index.php">仁愛醫院健檢中心</a></h1>
-        <nav>
-                <ul class="flex-nav">
-                    <li><a href="item_search.php">健檢類別查詢</a></li>
-                    <li><a href="reserve_online.php">線上預約</a></li>
-                    <li><a href="pay.php">繳費資訊</a></li>
-                    <li><a href="contact.php">聯絡我們</a></li>
-                </ul>
+                    <nav>
+                        <ul class="flex-nav">
+                            <li><a href="item_search.php">健檢類別查詢</a></li>
+                            <li><a href="reserve_online.php">線上預約</a></li>
+                            <li><a href="pay.php">繳費資訊</a></li>
+                            <li><a href="contact.php">聯絡我們</a></li>
+                        </ul>
+                    </nav>
             </div>
-        </nav>
-    </main>
-    </br>
+</main>
 
 
-    
 <?php
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
@@ -140,7 +156,7 @@
     generateBreadcrumbs($pages);
     ?>
 
-<div style="height: 600px;">
+
 
 <?php
 include 'sql_connect.php';
@@ -206,12 +222,12 @@ $blankCells = $firstDayOfWeekIndex;
 
 // 補足每個月開始的空白格子
 for ($i = 0; $i < $blankCells; $i++) {
-    echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
-            <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
-                1</br>
-                <br>剩餘名額：10
-            </div>
-        </td>";
+    echo "<td class='blank-cell'>
+                <div class='blank'>
+                    1</br>
+                    <br>剩餘名額：10
+                </div>
+            </td>";
 }
 
 
@@ -313,10 +329,9 @@ while ($day <= $num_days) {
 $remainingBlankCells = 7 - (($num_days + $blankCells) % 7);
 if ($remainingBlankCells != 7) {
     for ($i = 0; $i < $remainingBlankCells; $i++) {
-        echo "<td style='background-color: white;border-color: white;text-align: center; vertical-align: top;'>
-                <div style='background-color: #7aa6cb;padding: 15px;border-radius: 10px;width: 110px;color: #7aa6cb;padding: 20px;'>
+        echo "<td class='blank-cell'>
+                <div class='blank'>
                     1</br>
-
                     <br>剩餘名額：10
                 </div>
             </td>";

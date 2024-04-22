@@ -6,19 +6,19 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
 try {
     $mail->CharSet = 'UTF-8';
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com'; // SMTP服务器地址
+    $mail->Host       = 'smtp.gmail.com'; // SMTP服務氣地址
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'renaihealthcheck@gmail.com'; // SMTP用户名
-    $mail->Password   = 'ixehchoociqvdate';   // SMTP密码
+    $mail->Username   = 'renaihealthcheck@gmail.com'; // SMTP用戶名
+    $mail->Password   = 'ixehchoociqvdate';   // SMTP密碼
     $mail->SMTPSecure = 'tls';
     $mail->Port       = 587;
 
@@ -65,6 +65,10 @@ $selectedPackage = $packages[$_POST["package"]];
             background-color: #f4f4f4;
             padding: 20px;
         }
+        
+        content.h1{
+            text: size 20px;
+        }
 
         .button {
             padding: 15px 25px;
@@ -93,7 +97,7 @@ $selectedPackage = $packages[$_POST["package"]];
 </head>
 <body>
     <div class="content">
-        <h1>健檢預約確認</h1>
+        <h1>【健檢預約確認信件】</h1>
         <p>
 
         尊敬的 $chineseName 先生/小姐，
@@ -123,7 +127,7 @@ EOT;
     
     // 發送郵件
     $mail->send();
-    echo "<script>alert('信件已寄出，請查看信箱！'); window.location.href = '首頁的URL';</script>";
+    echo "<script>alert('預約成功，請至信箱查看確認信件！'); window.location.href = '首頁的URL';</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

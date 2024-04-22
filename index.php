@@ -38,7 +38,6 @@
 
     <div class="banner" id="p1"></div>
 
-
         <div class = "flex-container">
             <div class=" box">
                 <a href="item_search.php">

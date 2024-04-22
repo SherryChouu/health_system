@@ -5,10 +5,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(3, 104, 185);
+    background-color: #0368b9;
     margin: 0; 
     color: white;
-    height: 80px;
+    height: 70px;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,6 +25,7 @@
     margin: 0%;
     padding: 0;
     margin-left: 40px;  /*增加左邊距讓logo往右移*/
+    margin-top: 1px;
 }
 
 /*導覽列鏈接的樣式*/
@@ -46,11 +47,11 @@ ul a:hover {
 /*導覽列表樣式*/
 nav ul {
     list-style: none;
-    background-color: rgb(3, 104, 185);
+    background-color: #0368b9;
     margin: 0;
     padding:0;
     border: 0;
-    height: 80px;
+    height: 70px;
     align-items: center;
 }
 
@@ -84,7 +85,7 @@ nav ul {
     height: 250px; /*圖片高度*/
     width: 100%; /*寬度滿版*/
     margin-bottom: 0px;
-    margin-top:90px; /*圖片上邊距*/
+    margin-top:75px; /*圖片上邊距*/
 }
 
 /*-----------------------------------首頁(健檢類別查詢、線上預約)index.php---------------------------------*/
@@ -101,9 +102,9 @@ nav ul {
 /*框的樣式*/
 .box{
     display: inline-block; /*水平排列*/
-    width: 350px;    /*方框寬度*/
-    height: 400px;   /*方框高度*/
-    background-color: rgb(3, 104, 185) ;
+    width: 280px;    /*方框寬度*/
+    height: 300px;   /*方框高度*/
+    background-color: #0368b9 ;
     margin: 10px;    /*方框間間距*/
     border-radius: 20px;   /*圓角*/
     margin-top: 30px; 
@@ -125,7 +126,7 @@ nav ul {
 /*圖片樣式*/
 .box img {
     margin: auto;
-    max-width: 70%;
+    max-width: 60%;
     height:auto;
     margin-top: 10%;
     border-radius: 15px;
@@ -135,10 +136,10 @@ nav ul {
 .box p{
     text-align: center; /* 文本居中 */
     margin: 0; /* 移除段落的默认边距 */
-    color:rgb(255, 255, 255);  /*文字顏色*/
+    color:#ffffff;  /*文字顏色*/
     text-align: center;   /*文字水平居中*/
     font-size: 1.6rem;    /*文字大小*/
-    line-height:120px;   /*文字位置*/
+    line-height:100px;   /*文字位置*/
 }
 
  /*--------------------------------健檢類別查詢 item_search.php-----------------------------------------*/
@@ -161,9 +162,9 @@ nav ul {
 /*框的樣式*/
 .box1{
     display: inline-block; /*水平排列*/
-    width: 350px;    /*方框寬度*/
-    height: 400px;   /*方框高度*/
-    background-color: rgb(3, 104, 185) ;
+    width: 300px;    /*方框寬度*/
+    height: 320px;   /*方框高度*/
+    background-color: #0368b9 ;
     margin: 10px;    /*方框間間距*/
     border-radius: 20px;   /*圓角*/
     margin-top: 30px; 
@@ -179,13 +180,13 @@ nav ul {
 }
 
 .box1:hover{
-    background-color:rgb(122, 166, 203);
+    background-color:#7aa6cb;
 }
 
 /*圖片樣式*/
 .box1 img {
     margin: auto;
-    max-width: 70%;
+    max-width: 60%;
     height:auto;
     margin-top: 10%;
     border-radius: 15px;
@@ -194,11 +195,11 @@ nav ul {
 /*文字樣式*/
 .box1 h3{
     text-align: center; /* 文本居中 */
-    margin: 0; /* 移除段落的默认边距 */
+    margin: 0; /* 移除段落的默認邊距 */
     color:rgb(255, 255, 255);  /*文字顏色*/
     text-align: center;   /*文字水平居中*/
     font-size: 1.6rem;    /*文字大小*/
-    line-height:120px;   /*文字位置*/
+    line-height:100px;   /*文字位置*/
 }
 
 
@@ -256,7 +257,7 @@ th, td {
 }
 
 tr.category1 {
-    background-color:#abc1cb ; 
+    background-color:rgb(170, 192, 203) ; 
 }
 
 tr.category2 {
@@ -443,11 +444,13 @@ select::-ms-expand {
     outline: none; /* 去除點擊時的藍色外框 */
 }
 
+.button3:hover{
+    background-color: #cad6e3;
+}
 .required {
     color: red; /* 將星號設置為紅色來突出顯示 */
     margin-right: 5px; /* 為了美觀，在星號和文字之間添加一些間距 */
 }
-
 
 
 
