@@ -15,7 +15,7 @@
     $connectionOptions = array(
         "Database" => "health_system", // 資料庫名稱
         "Uid" => "sa", // 使用者名稱
-        "PWD" => "Sherry920710", // 密碼
+        "PWD" => "1106Evelyn", // 密碼
         "CharacterSet" => "UTF-8"
     );
 

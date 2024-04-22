@@ -1,12 +1,13 @@
 
 <?php
+
 // 導入必要的文件
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -21,7 +22,6 @@ try {
     $mail->Port       = 587;
 
     // 設置發件人信息
-
     $mail->setFrom('renaihealthcheck@gmail.com', '仁愛醫院健檢中心' );
 
     // 獲取受檢者email
@@ -34,12 +34,10 @@ try {
     $mail->Subject = '預約成功信件';
 
     // 郵件地址
-    $mail->Body = '您的預約已成功';
-
     $mail->isHTML(true); // 郵件格式為 HTML
     $cancelURL = "http://localhost:8000/process_cancel.php"; // 取消預約連結
 
-    // 使用CSS
+    // 使用確認資料表
     $mail->Body = <<<EOT
     <!DOCTYPE html>
     <html>
@@ -81,7 +79,7 @@ try {
     <div class="content">
         <h1>您的預約已成功</h1>
         <p>感謝您選擇我們的服務。如果您需要取消預約，請點擊下面的按鈕。</p>
-        <a href="$cancelURL" style="padding: 15px 25px; background-color: rgb(3, 104, 185); color: white; text-decoration: none; border-radius: 20px; font-weight: bold; display: inline-block; transition: background-color 0.3s ease; border: none; outline: none; text-align: center;">取消預约</a>
+        <a href="$cancelURL" class="button">取消預约</a>
     </div>
 </body>
 </html>
@@ -89,12 +87,14 @@ EOT;
     
     // 發送郵件
     $mail->send();
-    echo "<script>alert('信件已寄出，請查看信箱！');</script>";
+    echo "<script>alert('信件已寄出，請查看信箱！'); window.location.href = '首頁的URL';</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
 
+
+//以下為"預約成功後，資料庫預約人數會減少的程式"
 header("Content-Type:text/html; charset=utf-8");
 
 include 'sql_connect.php';
