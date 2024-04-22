@@ -93,11 +93,11 @@ EOT;
 }
 
 
-
+ 
 //以下為"預約成功後，資料庫預約人數會減少的程式"
 header("Content-Type:text/html; charset=utf-8");
 
-include 'sql_connect.php';
+ include 'sql_connect.php';
 
 
 // 檢查是否是 POST 請求
