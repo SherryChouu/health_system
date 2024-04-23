@@ -9,8 +9,8 @@
         padding: 1px; /*框的寬*/
         border-radius: 10px; /*圓角*/
         margin-top:100px ; /*頂部和框的距離*/
-        margin-left:200px ;
-        margin-right: 200px;  
+        margin-left:240px ;
+        margin-right: 240px;  
         align-items: center; 
     }
 
