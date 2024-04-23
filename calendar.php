@@ -16,22 +16,10 @@
         table {
         width: 700px; /* 用固定像素值替換百分比 */
         border-collapse: collapse;
-        margin: 40px auto;
+        margin: 40px auto; /* 上下各 40px，左右自動居中 */
         text-align: center;
-        ;
         }
 
-        @media screen and (max-width: 800px) {
-        /* 移除了對表格大小的修改，保持按鈕大小固定 */
-         .rl-button {
-         width: 100px; /* 移動設備上按鈕保持固定寬度 */
-         height: 70px; /* 移動設備上按鈕保持固定高度 */
-         font-size: 13px; /* 移動設備上按鈕保持固定字體大小 */
-         margin: 20px; /* 如果需要，調整按鈕邊距 */
-        }
-        /* ... 可能還需要保持其他樣式不變 ... */
-       }      
-       
         th {
             border: 1px solid black;
             padding: 20px;
@@ -50,56 +38,56 @@
         transition-duration: 0.3s;   
         }
 
+        @media screen and (max-width: 800px) {
+        /* 移除了對表格大小的修改，保持按鈕大小固定 */
+         .rl-button {
+         width: 100px; /* 移動設備上按鈕保持固定寬度 */
+         height: 70px; /* 移動設備上按鈕保持固定高度 */
+         font-size: 13px; /* 移動設備上按鈕保持固定字體大小 */
+         margin: 20px; /* 如果需要，調整按鈕邊距 */
+        }
+       }      
+       
         .rl-button {
         padding : 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
         margin-right: 40px; /* 使用 margin 調整按鈕之間的間距 */  
-        margin-left: 25px;
-        margin-bottom: 120px;
-        
+        margin-left: 25px;        
         width: 80px; /* 固定寬度 */
         height: 100px; /* 固定高度 */
-        background-color: #aac0cb; /* 背景顏色 */
+        background-color: #cad6e3; /* 背景顏色 */
         border: 2px solid white;
         border-radius: 10px;
         font-size: 15px; /* 固定字體大小 */
         box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
         }/* 選擇月份的按鈕 */
-
-        @media screen and (max-width: 600px) {
-        .rl-button {
-            width: 50px; /* 移動設備上固定寬度 */
-            height: 70px; /* 移動設備上固定高度 */
-            font-size: 13px; /* 移動設備上固定字體大小 */
-        }
-        }
         
         .rl-button:hover{
             padding : 10px 20px;
-            background :linear-gradient(#f9fafb,#abc1cb);
+            background :linear-gradient(#f9fafb,#cad6e3);
             box-shadow:1px 1px 4px #ccc;
         }/* 選擇月份的按鈕 */
 
         .button-container {
-    position: fixed; /* 將容器固定 */
-    bottom: 0; /* 將容器置於頁面底部 */
-    right: -20px; /* 距離視窗右側 10px */
-    display: flex;
-    flex-direction: column; /* 垂直排列 */
-    justify-content: space-between;
-    align-items: flex-end; /* 右對齊 */
-    padding: 5px;
-}
+        position: fixed; /* 將容器固定 */
+        bottom: 50%; /* 將容器置於頁面垂直中間 */
+        right: 0; /* 將容器置於頁面右側 */
+        transform: translateY(70%); /* 使用 transform 屬性進行垂直居中調整 */
+        display: flex;
+        flex-direction: column; /* 垂直排列 */
+        justify-content: space-between;
+        align-items: flex-end; /* 右對齊 */
+        padding: 5px;
+        } /* 選擇月份的按鈕 */
 
         .button-container button {
             margin-bottom: 2px; /* 調整按鈕之間的垂直間距 */
-        } 
+        }  /* 選擇月份的按鈕 */
 
         .top-block {
-            /* 样式设置上方区块的样式 */
             color: #ffffff; /* 白色文本 */
             background-color: transparent; /*背景透明*/
             border: 2px solid #7aa6cb; /*邊框*/
-            padding: 18px; /*月曆日期格子大小*/
+            padding: 16px; /*月曆日期格子大小*/
             border-radius: 10px; /*圓角*/
             width: 120px;
             color: black;
@@ -123,7 +111,7 @@
             background-color: #cad6e3;
             border-radius:10px;
             width: 124px;
-            padding:18px;
+            padding:16px;
             color: #cad6e3;
         }  /* 每月多出來的空格 */
 
@@ -299,7 +287,7 @@ while ($day <= $num_days) {
             // 如果剩餘可預約人數大於0，則顯示可預約的連結
             echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
                 <a href='form.php?date=$reservationDate&package=$packageId' style='display: block; color: inherit; text-decoration: none;'>
-                    <div class='top-block' onmouseover='this.style.backgroundColor=\"#7aa6cb\"' onmouseout='this.style.backgroundColor=\"\"'>
+                    <div class='top-block' onmouseover='this.style.backgroundColor=\"#b7d2ef\"' onmouseout='this.style.backgroundColor=\"\"'>
                         $day 日<br><br>剩餘名額：$remainingCapacity
                     </div>
                 </a>
