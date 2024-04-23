@@ -6,11 +6,11 @@
     /* 添加麵包屑導航的樣式 */
     .breadcrumbs-nav {
         background-color: #f9f9f9;
-        padding: 0.1%; /*框的寬*/
+        padding: 1px; /*框的寬*/
         border-radius: 10px; /*圓角*/
-        margin-top:110px ; /*頂部和框的距離*/
-        margin-left:220px ;
-        margin-right: 220px;  
+        margin-top:100px ; /*頂部和框的距離*/
+        margin-left:200px ;
+        margin-right: 200px;  
         align-items: center; 
     }
 
@@ -23,7 +23,6 @@
 
     .breadcrumbs-item {
         margin-right: 10px; /* 項目間距 */
-        font-size: 20px;
         display: block; 
         align-items: center; 
         display: flex;
@@ -42,9 +41,9 @@
 
     .breadcrumbs-item::after {
         content: " > ";
-        margin-left: 2px; /* 加上右箭頭後的间距 */
+        margin-left: 2px; /* 加上右箭頭後的間距 */
         margin-right: 2px ;
-        color: #333; /* 箭头颜色 */
+        color: #333; /* 箭頭颜色 */
         font-size: 20px; /* ">" 的大小 */
         position: absolute;
         top: 50%;

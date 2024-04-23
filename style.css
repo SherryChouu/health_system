@@ -103,8 +103,8 @@ nav ul {
 .box{
     display: inline-block; /*水平排列*/
     width: 280px;    /*方框寬度*/
-    height: 300px;   /*方框高度*/
-    background-color: #0368b9 ;
+    height: 280px;   /*方框高度*/
+    background-color:  #0368b9 ;
     margin: 10px;    /*方框間間距*/
     border-radius: 20px;   /*圓角*/
     margin-top: 30px; 
@@ -126,7 +126,7 @@ nav ul {
 /*圖片樣式*/
 .box img {
     margin: auto;
-    max-width: 60%;
+    max-width: 55%;
     height:auto;
     margin-top: 10%;
     border-radius: 15px;

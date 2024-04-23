@@ -14,15 +14,14 @@
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
 
         table {
-        width: 700px; /* 用固定像素值替換百分比 */
-        border-collapse: collapse;
-        margin: 40px auto; /* 上下各 40px，左右自動居中 */
-        text-align: center;
+            width: 700px; /* 用固定像素值替換百分比 */
+            border-collapse: collapse;
+            margin:10px auto; /* ，左右自動居中 */
+            text-align: center;
         }
 
         th {
             border: 1px solid black;
-            padding: 20px;
             text-align: center;
         }
         td{
@@ -35,30 +34,30 @@
         }
 
         td:hover {
-        transition-duration: 0.3s;   
+            transition-duration: 0.3s;   
         }
 
         @media screen and (max-width: 800px) {
         /* 移除了對表格大小的修改，保持按鈕大小固定 */
          .rl-button {
-         width: 100px; /* 移動設備上按鈕保持固定寬度 */
-         height: 70px; /* 移動設備上按鈕保持固定高度 */
-         font-size: 13px; /* 移動設備上按鈕保持固定字體大小 */
-         margin: 20px; /* 如果需要，調整按鈕邊距 */
-        }
+            width: 100px; /* 移動設備上按鈕保持固定寬度 */
+            height: 70px; /* 移動設備上按鈕保持固定高度 */
+            font-size: 13px; /* 移動設備上按鈕保持固定字體大小 */
+            margin: 20px; /* 如果需要，調整按鈕邊距 */
+            }
        }      
        
         .rl-button {
-        padding : 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
-        margin-right: 40px; /* 使用 margin 調整按鈕之間的間距 */  
-        margin-left: 25px;        
-        width: 80px; /* 固定寬度 */
-        height: 100px; /* 固定高度 */
-        background-color: #cad6e3; /* 背景顏色 */
-        border: 2px solid white;
-        border-radius: 10px;
-        font-size: 15px; /* 固定字體大小 */
-        box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
+            padding : 10px 20px;   /* 使用 padding 調整按鈕內的間距 */
+            margin-right: 40px; /* 使用 margin 調整按鈕之間的間距 */  
+            margin-left: 25px;        
+            width: 80px; /* 固定寬度 */
+            height: 100px; /* 固定高度 */
+            background-color: #cad6e3; /* 背景顏色 */
+            border: 2px solid white;
+            border-radius: 10px;
+            font-size: 15px; /* 固定字體大小 */
+            box-sizing: border-box; /* 確保邊框和填充不會增加按鈕的大小 */
         }/* 選擇月份的按鈕 */
         
         .rl-button:hover{
@@ -68,15 +67,15 @@
         }/* 選擇月份的按鈕 */
 
         .button-container {
-        position: fixed; /* 將容器固定 */
-        bottom: 50%; /* 將容器置於頁面垂直中間 */
-        right: 0; /* 將容器置於頁面右側 */
-        transform: translateY(70%); /* 使用 transform 屬性進行垂直居中調整 */
-        display: flex;
-        flex-direction: column; /* 垂直排列 */
-        justify-content: space-between;
-        align-items: flex-end; /* 右對齊 */
-        padding: 5px;
+            position: fixed; /* 將容器固定 */
+            bottom: 50%; /* 將容器置於頁面垂直中間 */
+            right: 0; /* 將容器置於頁面右側 */
+            transform: translateY(70%); /* 使用 transform 屬性進行垂直居中調整 */
+            display: flex;
+            flex-direction: column; /* 垂直排列 */
+            justify-content: space-between;
+            align-items: flex-end; /* 右對齊 */
+            padding: 5px;
         } /* 選擇月份的按鈕 */
 
         .button-container button {
@@ -87,16 +86,17 @@
             color: #ffffff; /* 白色文本 */
             background-color: transparent; /*背景透明*/
             border: 2px solid #7aa6cb; /*邊框*/
-            padding: 16px; /*月曆日期格子大小*/
+            padding: 12px; /*月曆日期格子大小*/
             border-radius: 10px; /*圓角*/
             width: 120px;
             color: black;
         } /* 月曆日期的格子 */
 
         .week{
-        border-color: transparent;
-        font-size:20px;
-        text-align: center;
+            border-color: transparent;
+            font-size:20px;
+            text-align: center;
+            padding-top: 20px;
         }  /* 星期幾的文字 */
 
         .blank-cell{
@@ -104,14 +104,13 @@
             border-color: white;
             text-align: center; 
             vertical-align: top;
-            padding: auto;
             color:black;
         }/* 每月多出來的空格 */
         .blank{ 
             background-color: #cad6e3;
             border-radius:10px;
-            width: 124px;
-            padding:16px;
+            width: 120px;
+            padding:14px;
             color: #cad6e3;
         }  /* 每月多出來的空格 */
 
@@ -143,7 +142,6 @@
     $pages = array(
         array('title' => '首頁', 'link' => 'index.php'), // 首頁的連結指向 index.php
         array('title' => '線上預約', 'link' => 'reserve_online.php'), 
-        array('title' => '選擇欲健檢項目', 'link' => 'chooseitem.php'), 
         array('title' => '選擇預約日期', 'link' => 'calendar.php'), 
     );
     generateBreadcrumbs($pages);
@@ -179,15 +177,19 @@ $reservationStartDate = date('Y-m-d', strtotime("+2 weeks", strtotime($currentDa
 // 計算6個月後的日期
 $limitDate = date('Y-m-d', strtotime("+6 months"));
 
-    echo "當前日期：$currentDate<br>"; //這之後會刪掉
-    //echo "最快預約日期：$reservationStartDate<br>"; //這之後會刪掉
-    echo"網路預約開放至：$limitDate"; //這之後會刪掉
+echo "<div style='text-align: center;'>";
+echo "<p style='display: inline-block; font-weight: bold; color: #0c416d;'>今天是 $currentDate </p>";
+echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+echo "<p style='display: inline-block; font-weight: bold; color: #0c416d;'>網路預約開放至 $limitDate</p>";
+echo "</div>";
+
 
 
 
 // 創建月曆表格
-echo "<table border='2' style='border-collapse: collapse;'>";
-echo "<th colspan='7' style='font-size: 40px; border-bottom: 2px solid white;'>{$year} 年 {$month} 月</th></tr>";
+echo "<table border='2' style='border-collapse: collapse; border-radius: 10px;'>";
+echo "<th colspan='7' style='font-size: 30px; border-bottom: 2px solid black; text-align: center; vertical-align: middle; line-height: 2;background-color: #f2f2f2;'>{$year} 年 {$month} 月</th></tr>";
+
 echo "<tr>
         <th class='week' style='width: 12%;'>星期日</th>
         <th class='week' style='width: 12%;'>星期一</th>
@@ -277,7 +279,7 @@ while ($day <= $num_days) {
     if ($strcurrentDate < $reservationStartDate) { //strcurrentDate < 最快預約日期
         // 在最快預約日期之前的每個日期都顯示"不可預約"
         echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
-                <div class='top-block' style='color: black; background-color:#CCE4FF;'>
+                <div class='top-block' style='color: black; background-color:#bdd4e8;'>
                     $day 日<br><br>不可預約
                 </div>
             </td>";
