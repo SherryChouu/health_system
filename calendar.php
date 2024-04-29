@@ -230,87 +230,97 @@ $strreservationStartDate = date('Y-m-d', strtotime("$strcurrentDate +14 day")); 
 
 // 填充每個月的日期
 while ($day <= $num_days) {
-    if ($day_of_week == 'Sun') {
-        echo "</tr><tr>";
-    }
-
-    // 這裡插入了 SQL 查詢
-    $reservationDate = "$year-$month-$day";
-
-    // 設定套餐 ID
-    $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
-
-    // 獲取預約數量
-    $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
-    $paramsAppointmentCount = array($packageId, $reservationDate);
-
-    $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
-
-    if (!$stmtAppointmentCount) {
-        die(print_r(sqlsrv_errors(), true));
-    }
-
-    sqlsrv_execute($stmtAppointmentCount); 
-    sqlsrv_fetch($stmtAppointmentCount);
-    $ARD_Count = sqlsrv_get_field($stmtAppointmentCount, 0);
-
-    // 獲取套餐預約人數上限
-    $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
-    $paramsMaxCapacity = array($packageId);
-
-    $stmtMaxCapacity = sqlsrv_prepare($conn, $sqlMaxCapacity, $paramsMaxCapacity);
-
-    if (!$stmtMaxCapacity) {
-        die(print_r(sqlsrv_errors(), true));
-    }
-
-    sqlsrv_execute($stmtMaxCapacity); 
-    sqlsrv_fetch($stmtMaxCapacity);
-    $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
-
-    // 計算每天剩餘可預約人數
-    $remainingCapacity = $maxCapacity - $ARD_Count;
-    
-    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate 
-    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
-    //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
-    //<br>當前日期：$strcurrentDate<br>最遠預約日期：$limitDate 
-    // 檢查是否在最快預約日期之前或與最快預約日期相等
-    if ($strcurrentDate < $reservationStartDate) { //strcurrentDate < 最快預約日期
-        // 在最快預約日期之前的每個日期都顯示"不可預約"
+        
+    // 如果是星期六或星期日，則顯示為假日
+    if ($day_of_week == 'Sun' || $day_of_week == 'Sat') {
         echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
-                <div class='top-block' style='color: black; background-color:#bdd4e8;'>
-                    $day 日<br><br>不可預約
+                <div class='top-block' style='color: black; background-color:#f2f2f2;'>
+                    $day 日<br><br>假日
                 </div>
             </td>";
-    } else if ($strcurrentDate >= $reservationStartDate && $strcurrentDate <= $limitDate){
-        // 在最快預約日期之後且在限制日期內的情況下，顯示可預約的連結或額滿訊息
-        if ($remainingCapacity > 0) {
-            // 如果剩餘可預約人數大於0，則顯示可預約的連結
-            echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
-                <a href='form.php?date=$reservationDate&package=$packageId' style='display: block; color: inherit; text-decoration: none;'>
-                    <div class='top-block' onmouseover='this.style.backgroundColor=\"#b7d2ef\"' onmouseout='this.style.backgroundColor=\"\"'>
-                        $day 日<br><br>剩餘名額：$remainingCapacity
-                    </div>
-                </a>
-            </td>";
-        } else {
-            // 如果剩餘可預約人數為0，則顯示額滿訊息
+            // 如果是星期六，則換行
+            if ($day_of_week == 'Sat') {
+                echo "</tr><tr>"; // 換行
+                $day_of_week = 'Sun'; // 重置星期幾
+            }
+    } else {
+        // 這裡插入了 SQL 查詢
+        $reservationDate = "$year-$month-$day";
+
+        // 設定套餐 ID
+        $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
+
+        // 獲取預約數量
+        $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
+        $paramsAppointmentCount = array($packageId, $reservationDate);
+
+        $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
+
+        if (!$stmtAppointmentCount) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        sqlsrv_execute($stmtAppointmentCount); 
+        sqlsrv_fetch($stmtAppointmentCount);
+        $ARD_Count = sqlsrv_get_field($stmtAppointmentCount, 0);
+
+        // 獲取套餐預約人數上限
+        $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
+        $paramsMaxCapacity = array($packageId);
+
+        $stmtMaxCapacity = sqlsrv_prepare($conn, $sqlMaxCapacity, $paramsMaxCapacity);
+
+        if (!$stmtMaxCapacity) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        sqlsrv_execute($stmtMaxCapacity); 
+        sqlsrv_fetch($stmtMaxCapacity);
+        $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
+
+        // 計算每天剩餘可預約人數
+        $remainingCapacity = $maxCapacity - $ARD_Count;
+        
+        //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
+        //<br>當前日期：$strcurrentDate<br>最遠預約日期：$limitDate 
+        // 檢查是否在最快預約日期之前或與最快預約日期相等
+        if ($strcurrentDate < $reservationStartDate) { //strcurrentDate < 最快預約日期
+            // 在最快預約日期之前的每個日期都顯示"不可預約"
             echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
-                    <div class='top-block' style='color: red; background-color:white;'>
-                        $day 日<br><br>額&nbsp;&nbsp;滿
+                    <div class='top-block' style='color: black; background-color:#bdd4e8;'>
+                        $day 日<br><br>不可預約
+                    </div>
+                </td>";
+        } else if ($strcurrentDate >= $reservationStartDate && $strcurrentDate <= $limitDate){
+            // 在最快預約日期之後且在限制日期內的情況下，顯示可預約的連結或額滿訊息
+            if ($remainingCapacity > 0) {
+                // 如果剩餘可預約人數大於0，則顯示可預約的連結
+                echo "<td style='text-align: left; vertical-align: top; border-color: white; background-color: white;' class='selectable-day' data-date='$reservationDate'>
+                    <a href='form.php?date=$reservationDate&package=$packageId' style='display: block; color: inherit; text-decoration: none;'>
+                        <div class='top-block' onmouseover='this.style.backgroundColor=\"#b7d2ef\"' onmouseout='this.style.backgroundColor=\"\"'>
+                            $day 日<br><br>剩餘名額：$remainingCapacity
+                        </div>
+                    </a>
+                </td>";
+            } else {
+                // 如果剩餘可預約人數為0，則顯示額滿訊息
+                echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
+                        <div class='top-block' style='color: red; background-color:white;'>
+                            $day 日<br><br>額&nbsp;&nbsp;滿
+                        </div>
+                    </td>";
+            }
+        } else {
+            // 超過最遠預約日期的日期顯示為尚未開放
+            echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
+                   
+                    <div class='top-block' style='color: white; background-color: #003D7A;'>
+                        $day 日<br><br>尚未開放
                     </div>
                 </td>";
         }
-    } else {
-        // 超過最遠預約日期的日期顯示為尚未開放
-        echo "<td style='text-align: left; vertical-align: top; border-color: white; '>
-               
-                <div class='top-block' style='color: white; background-color: #003D7A;'>
-                    $day 日<br><br>尚未開放
-                </div>
-            </td>";
     }
+    
     // 移動到下一天
     $strcurrentDate = date('Y-m-d', strtotime("$strcurrentDate +1 day"));
     $strreservationStartDate = date('Y-m-d', strtotime("$strreservationStartDate +1 day"));
@@ -318,21 +328,22 @@ while ($day <= $num_days) {
     $day_of_week = date('D', strtotime("$year-$month-$day"));
 }
 
-    // 補足本月結束的空白格子
-    $remainingBlankCells = 7 - (($num_days + $blankCells) % 7);
-    if ($remainingBlankCells != 7) {
-        for ($i = 0; $i < $remainingBlankCells; $i++) {
-            echo "<td class='blank-cell'>
-                    <div class='blank'>
-                        1</br>
-                        <br>剩餘名額：10
-                    </div>
-                </td>";
-        }
+// 補足本月結束的空白格子
+$remainingBlankCells = 7 - (($num_days + $blankCells) % 7);
+if ($remainingBlankCells != 7) {
+    for ($i = 0; $i < $remainingBlankCells; $i++) {
+        echo "<td class='blank-cell'>
+                <div class='blank'>
+                    1</br>
+                    <br>剩餘名額：10
+                </div>
+            </td>";
     }
+}
 
 // 結束月曆表格
 echo "</tr></table>";
+
 ?>
 
 <?php
