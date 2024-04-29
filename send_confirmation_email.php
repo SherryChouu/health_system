@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -156,32 +156,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sameAsMailing = isset($_POST["same-as-mailing"]) ? 1 : 0; // 如果勾選，設置為1，否則設置為0
     $phone = $_POST["phone"];
     $email = $_POST["email"];
-    $dietaryhabit = $_POST["dietary-habit"];
+    $dietary_habits = $_POST["dietary-habit"]; // 注意這裡的變量名稱已修改
     $selectedPackage = isset($_POST["package"]) ? $_POST["package"] : '';
     $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
     
-    
-// 在執行 SQL 語句之前確認 $reservationDate 的值
-echo "Reservation Date: " . $reservationDate;
-
-
+    // 在執行 SQL 語句之前確認 $reservationDate 的值
+    echo "Reservation Date: " . $reservationDate;
 
     // 執行資料庫操作
-try {
-    // 準備 SQL 語句
-    // 將資料插入 Patient 資料表
-    $sqlPatient = "INSERT INTO Patient (
-    ChineseName, EnglishName, 
-    IDNumber, Sexual, Birthdate, 
-    Address, ResidenceAddress, 
-    SameAsMailing, Phone, Email, Dietaryhabit,Package_id,ReservationDate) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    try {
+        // 準備 SQL 語句
+        // 將資料插入 Patient 資料表
+        $sqlPatient = "INSERT INTO Patient (
+        ChineseName, EnglishName, 
+        IDNumber, Sexual, Birthdate, 
+        Address, ResidenceAddress, 
+        SameAsMailing, Phone, Email, dietary_habits,Package_id,ReservationDate) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
-    // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-    $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
-        &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietaryhabit, &$selectedPackage, $reservationDate
-    ));
+        // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
+        $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
+            &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
+            &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietary_habits, &$selectedPackage, $reservationDate
+        ));
 
     // 執行 SQL 語句  
     if (sqlsrv_execute($stmtPatient)) {
