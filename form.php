@@ -64,20 +64,20 @@
                     "same-as-mailing" => "與通訊地址相同",
                     "phone" => "聯絡電話",
                     "email" => "電子郵件",
-                    "wedding" => "婚姻狀態",
+                    "dietary-habit" => "飲食習慣",
                 );
 
                 foreach ($formFields as $fieldName => $fieldLabel) {
                     echo "<div class='form-group'>";
                     echo "<label for='$fieldName'>$fieldLabel";
-                    if ($fieldName === "chinese-name" || $fieldName === "id-number" || $fieldName === "sexual" || $fieldName === "birthdate" || $fieldName === "address" || $fieldName === "phone" || $fieldName === "email") {
+                    if ($fieldName === "chinese-name" || $fieldName === "id-number" || $fieldName === "sexual" || $fieldName === "birthdate" || $fieldName === "address" || $fieldName === "phone" || $fieldName === "email" || $fieldName === "dietary-habit") {
                         echo " <span class='required'>*</span>";
                     }
                     echo "：</label>";
 
                     /*--自動給選項的欄位 --*/
 
-                    if ($fieldName === "address" || $fieldName === "wedding" || $fieldName === "sexual") {                       
+                    if ($fieldName === "address" || $fieldName === "dietary-habit" || $fieldName === "sexual") {                       
                         echo "<select id=$fieldName  name='$fieldName' required>"; //這段很重要 id、name是屬性
                         echo "<option value=''>請選擇...</option>";
 
@@ -94,8 +94,8 @@
                             }
                            
 
-                        } elseif ($fieldName === "wedding") {
-                            $maritalStatusOptions = array("未婚", "已婚", "離婚", "鰥寡", "同居", "分居");
+                        } elseif ($fieldName === "dietary-habit") {
+                            $maritalStatusOptions = array("葷", "素");
 
                             foreach ($maritalStatusOptions as $status) {
                                 echo "<option value='$status'>$status</option>";
@@ -112,9 +112,9 @@
 
                         
                     } elseif ($fieldName === "birthdate") {
-                        // 设置出生日期的最大值为当前年份的12月31日
+                        // 設置出生日期的最大值是當前年份的12/31
                         $maxDate = date("Y") . "-12-31";
-                        echo "<input type='date' id='$fieldName' name='$fieldName' required max='$maxDate'>";  // 使用日期选择器，并限制最大日期
+                        echo "<input type='date' id='$fieldName' name='$fieldName' required max='$maxDate'>";  // 使用日期選擇棄，並限制最大日期
                     } elseif ($fieldName === "same-as-mailing") {
                         echo "<input type='checkbox' id='$fieldName' name='$fieldName' onchange='copyAddress()'>";   //顯示與通訊地址相同的按鈕
                     } else {
@@ -159,14 +159,12 @@ switch ($selectedPackage) {
                     document.getElementById('residence-address').value = mailingAddress;
                 }
 
-                
-
-                // 在页面加载时显示 reservationDate 和 selectedPackage 的值
+                // 在頁面加載時顯示 reservationDate 和 selectedPackage 的值
                 document.addEventListener('DOMContentLoaded', function() {
                     var reservationDate = new URLSearchParams(window.location.search).get('reservationDate');
                     var selectedPackage = new URLSearchParams(window.location.search).get('package');
 
-                    // 显示 reservationDate 和 selectedPackage 的值
+                    // 顯示 reservationDate 和 selectedPackage 的值
                     if (reservationDate) {
                         console.log('Reservation Date:', reservationDate);
                     }
@@ -176,9 +174,9 @@ switch ($selectedPackage) {
                     }
                 });
                 </script>";
-              
-
+            
                 ?>
+
                 <!-- 在表單中加入套餐和日期的隱藏欄位 -->  
                 <input type="hidden" name="package" value="<?php echo $selectedPackage; ?>">
                 <input type="hidden" name="reservationDate" value="<?php echo $reservationDate; ?>">

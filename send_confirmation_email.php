@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sameAsMailing = isset($_POST["same-as-mailing"]) ? 1 : 0; // 如果勾選，設置為1，否則設置為0
     $phone = $_POST["phone"];
     $email = $_POST["email"];
-    $wedding = $_POST["wedding"];
+    $dietaryhabit = $_POST["dietary-habit"];
     $selectedPackage = isset($_POST["package"]) ? $_POST["package"] : '';
     $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
     
@@ -174,13 +174,13 @@ try {
     ChineseName, EnglishName, 
     IDNumber, Sexual, Birthdate, 
     Address, ResidenceAddress, 
-    SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
+    SameAsMailing, Phone, Email, Dietaryhabit,Package_id,ReservationDate) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
     $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
         &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding, &$selectedPackage, $reservationDate
+        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietaryhabit, &$selectedPackage, $reservationDate
     ));
 
     // 執行 SQL 語句  
@@ -230,5 +230,5 @@ try {
         $stmt->bindParam(':SameAsMailing', $sameAsMailing, PDO::PARAM_INT);
         $stmt->bindParam(':Phone', $phone);
         $stmt->bindParam(':Email', $email);
-        $stmt->bindParam(':Wedding', $wedding);
+        $stmt->bindParam(':Dietaryhabit', $dietaryhabit);
 ?>

@@ -91,7 +91,7 @@
                 'same-as-mailing' => '與通訊地址相同',
                 'phone' => '聯絡電話',
                 'email' => '電子郵件',
-                'wedding' => '婚姻狀態',
+                'dietary-habit' => '飲食習慣',
                 'package' => '健檢套餐',
                 'reservationDate' => '預約日期'
             ];
