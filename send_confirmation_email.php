@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -53,73 +53,84 @@ $selectedPackage = $packages[$_POST["package"]];
     $mail->isHTML(true); // 郵件格式為 HTML
     $cancelURL = "http://localhost:8000/process_cancel.php"; // 取消預約連結
 
+    // 隨機生成一組驗證碼
+    $verificationCode = rand(100000, 999999);
+
     // 使用確認資料表
     $mail->Body = <<<EOT
-    <!DOCTYPE html>
-    <html>
-    <head>
-       <style>
-           body {
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
             font-family: 'Arial', sans-serif;
             color: #333;
             background-color: #f4f4f4;
             padding: 20px;
         }
-        
-        content.h1{
-            text: size 20px;
-        }
-
-        .button {
-            padding: 15px 25px;
-            background-color: rgb(3, 104, 185); 
-            color: white;
-            text-decoration: none; 
-            border-radius: 20px; /* 增加圆角 */
-            font-weight: bold; /* 文字加粗 */
-            display: inline-block; 
-            transition: background-color 0.3s ease; 
-            border: none; /* 移除邊框 */
-            outline: none; 
-            text-align: center; 
-        }
-        .button:hover {
-            background-color: #AFC2D5; 
-        }
-
-           .content {
+        .content {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .button {
+            padding: 15px 25px;
+            color: white; /* 设置字体颜色为白色 */
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            outline: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            background-color: #abc1cb; 
+        }
+        .button:hover {
+            opacity: 0.8;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
     </style>
+    <script>
+        function confirmReservation() {
+            alert('預約已完成！');
+        }
+    </script>
 </head>
 <body>
     <div class="content">
-        <h1>【健檢預約確認信件】</h1>
+        <h1>【健檢預約確認郵件】</h1>
         <p>
-
-        尊敬的 $chineseName 先生/小姐，
-        <br><br>
-        感謝您選擇我們的醫院進行健康檢查。我們已經收到了您的預約，詳細信息如下：
-        <br><br>
-        受檢者姓名： $chineseName
-        <br>
-        身份證字號： {$_POST["id-number"]}
-        <br>
-        預約套餐： $selectedPackage
-        <br>
-        預約日期時間： {$_POST["reservationDate"]} {$_POST["reservationTime"]}
-        <br><br>
-        請注意，您可以在預約日期前一天進行預約確認。請您準時到達醫院，並攜帶相關身份證明文件。
-        <br><br>
-        如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
-        <br><br>
-        祝您健康！
-        <br><br>
-        仁愛醫院健檢中心</p>
-        <a href="$cancelURL" class="button">取消預約</a>
+            尊敬的 $chineseName 先生/小姐，
+            <br><br>
+           感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳细信息如下：
+            <br><br>
+            受检者姓名： $chineseName
+            <br>
+            身分證字號： {$_POST["id-number"]}
+            <br>
+            預約套餐： $selectedPackage
+            <br>
+            預約日期時間： {$_POST["reservationDate"]} {$_POST["reservationTime"]}
+            <br>
+            您的驗證碼為： $verificationCode
+            <br><br>
+            如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
+            <br><br>
+            祝您健康！
+            <br><br>
+            仁愛醫院健檢中心
+        </p>
+        <div class="button-container">
+            <a href="javascript:void(0);" onclick="confirmReservation()" class="button confirm-button">確認預約</a>
+            <a href="$cancelURL" class="button cancel-button">取消預約</a>
+        </div>
     </div>
 </body>
 </html>
