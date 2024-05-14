@@ -80,6 +80,7 @@
         <h2>健檢資料確認</h2>
         <div class="form-data">
             <?php
+            
             $labels = [
                 'chinese-name' => '中文名稱',
                 'english-name' => '英文名稱',
@@ -100,6 +101,13 @@
             // 檢查是否有 POST 過來的資料
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // 遍歷所有的 POST 參數並顯示
+                $idNumber = $_POST["id-number"];
+                // 檢查身分證字號格式
+                if (!preg_match("/^[A-Z][0-9]{9}$/", $idNumber)) {
+                    echo "<script>alert('身份證字號格式不正確，請重新填寫。(應為一個大寫字母配上9個數字)'); window.location.href='form.php';</script>";
+                    exit(); // 停止腳本進行
+                }
+
                  foreach ($_POST as $key => $value) {
                      // 處理與通訊地址相同的情況
                      if ($key == 'same-as-mailing') {

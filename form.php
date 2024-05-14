@@ -9,6 +9,23 @@
     <!-- 引入 breadcrumbs.php -->
     <?php include 'breadcrumbs.php'; ?>
 </head>
+<script>
+        function validateForm() {
+            var idNumber = document.getElementById('id-number').value;
+            var regex = /^[A-Z][0-9]{9}$/;
+            if (!regex.test(idNumber)) {
+                alert('身份證字號格式不正確，請輸入一個大寫英文字母後接九位數字。');
+                return false; // 阻止表單提交
+            }
+            return true; // 允許表單提交
+        }
+        
+        function copyAddress() {
+            if (document.getElementById('same-as-mailing').checked) {
+                document.getElementById('residence-address').value = document.getElementById('address').value;
+            }
+        }
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
     </style>
@@ -33,6 +50,8 @@
 
     <!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->
     <?php
+       
+
         $pages = array(
             array('title' => '首頁', 'link' => 'index.php'),    // 首頁的連結指向 index.php
             array('title' => '線上預約', 'link' => 'reserve_online.php'),  
@@ -66,6 +85,9 @@
                     "email" => "電子郵件",
                     "dietary-habit" => "飲食習慣",
                 );
+
+                
+            
 
                 foreach ($formFields as $fieldName => $fieldLabel) {
                     echo "<div class='form-group'>";
