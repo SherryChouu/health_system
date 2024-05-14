@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -31,6 +31,11 @@ try {
     // 獲取受檢者姓名
     $chineseName = $_POST["chinese-name"];
 
+    //獲取ID
+    $id_number = $_POST["id-number"];
+    $reservationDate = $_POST["reservationDate"];
+    $reservationTime = $_POST["reservationTime"];
+
    // 套餐陣列
    $packages = array(
     '1' => '卓越C',
@@ -51,89 +56,87 @@ $selectedPackage = $packages[$_POST["package"]];
 
     // 郵件地址
     $mail->isHTML(true); // 郵件格式為 HTML
-    $cancelURL = "http://localhost:8000/process_cancel.php"; // 取消預約連結
+    $cancelURL = "http://localhost:8000/process_cancel.php";// 取消預約連結
+    $confirmURL = "http://localhost:8000/process_confirm.php" ;// 確認預約連結
 
     // 隨機生成一組驗證碼
     $verificationCode = rand(100000, 999999);
 
     // 使用確認資料表
     $mail->Body = <<<EOT
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            color: #333;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            text-align: left;
-        }
-        .button {
-            padding: 15px 25px;
-            color: white; /* 设置字体颜色为白色 */
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            border: none;
-            outline: none;
-            text-align: center;
-            transition: background-color 0.3s ease;
-            background-color: #abc1cb; 
-        }
-        .button:hover {
-            opacity: 0.8;
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-    </style>
-    <script>
-        function confirmReservation() {
-            alert('預約已完成！');
-        }
-    </script>
-</head>
-<body>
-    <div class="content">
-        <h1>【健檢預約確認郵件】</h1>
-        <p>
-            尊敬的 $chineseName 先生/小姐，
-            <br><br>
-           感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳细信息如下：
-            <br><br>
-            受检者姓名： $chineseName
-            <br>
-            身分證字號： {$_POST["id-number"]}
-            <br>
-            預約套餐： $selectedPackage
-            <br>
-            預約日期時間： {$_POST["reservationDate"]} {$_POST["reservationTime"]}
-            <br>
-            您的驗證碼為： $verificationCode
-            <br><br>
-            如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
-            <br><br>
-            祝您健康！
-            <br><br>
-            仁愛醫院健檢中心
-        </p>
-        <div class="button-container">
-            <a href="javascript:void(0);" onclick="confirmReservation()" class="button confirm-button">確認預約</a>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                color: #333;
+                background-color: #f4f4f4;
+                padding: 20px;
+            }
+            .content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                text-align: left;
+            }
+            .button {
+                padding: 15px 25px;
+                color: white;
+                text-decoration: none;
+                border-radius: 20px;
+                font-weight: bold;
+                display: inline-block;
+                border: none;
+                outline: none;
+                text-align: center;
+                transition: background-color 0.3s ease;
+                background-color: #abc1cb; 
+            }
+            .button:hover {
+                opacity: 0.8;
+            }
+            .button-container {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <h1>【健檢預約確認郵件】</h1>
+            <p>
+                尊敬的 $chineseName; 先生/小姐，
+                <br><br>
+                感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳細信息如下：
+                <br><br>
+                受检者姓名： $chineseName; 
+                <br>
+                身分證字號：  $id_number; 
+                <br>
+                預約套餐： $selectedPackage; 
+                <br>
+                預約日期時間： $reservationDate ; $reservationTime;
+                <br>
+                您的驗證碼為： $verificationCode;
+                <br><br>
+                如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
+                <br><br>
+                祝您健康！
+                <br><br>
+                仁愛醫院健檢中心
+            </p>
+            <div class="button-container">
+            <a href="$confirmURL" class="button confirm-button">確認預約</a>
             <a href="$cancelURL" class="button cancel-button">取消預約</a>
+
+            </div>
         </div>
-    </div>
-</body>
-</html>
+    </body>
+    </html>
+    
 EOT;
     
     // 發送郵件
