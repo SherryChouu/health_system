@@ -104,8 +104,10 @@
                 $idNumber = $_POST["id-number"];
                 // 檢查身分證字號格式
                 if (!preg_match("/^[A-Z][0-9]{9}$/", $idNumber)) {
-                    echo "<script>alert('身份證字號格式不正確，請重新填寫。(應為一個大寫字母配上9個數字)'); window.location.href='form.php';</script>";
-                    exit(); // 停止腳本進行
+                    $error_message = "身份證字號格式不正確，請重新填寫。(應為一個大寫字母配上9個數字)";
+                } else {
+                    // 這裡處理其餘的表單數據和資料庫操作
+                    // 如果一切順利，可以重定向或顯示成功消息
                 }
 
                  foreach ($_POST as $key => $value) {

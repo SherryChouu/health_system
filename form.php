@@ -8,6 +8,22 @@
     
     <!-- 引入 breadcrumbs.php -->
     <?php include 'breadcrumbs.php'; ?>
+    <style>
+        @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');    /*圓體*/
+        .error-message {
+            display: none; /* 初始不顯示 */
+            width: 100%; /* 全寬 */
+            background-color: #f8d7da; /* 背景色 */
+            color: #721c24; /* 文字色 */
+            text-align: center; /* 文字居中 */
+            padding: 10px; /* 內邊距 */
+            border: 1px solid #f5c6cb; /* 邊框 */
+            position: fixed; /* 固定定位，隨著頁面滾動 */
+            top: 0; /* 頂部對齊 */
+            left: 0; /* 左側對齊 */
+            z-index: 1000; /* 確保在頂層 */
+        }
+    </style>
 </head>
 <script>
         function validateForm() {
@@ -62,10 +78,9 @@
         ?>
 
 
-        <section class="form-section">
-            <!--指定了表單提交的目標 URL 為 submit_form.php-->
-           <!-- <form id="submit_form" action="submit_form.php" method="post">-->  
-            <form id="checkform.php" action="checkform.php" method="post">
+<section class="form-section">
+            <form id="checkform" action="checkform.php" method="post" onsubmit="return validateForm()">
+                <div id="error-message" class="error-message"></div> <!-- 錯誤信息的顯示位置 -->
 
                 <h2 class="form-title">基本資料填寫</h2>
                 <!-- 表單內容，包括姓名、身份證號碼等輸入欄位 -->
@@ -217,5 +232,26 @@ switch ($selectedPackage) {
             
         </section>
         </main>
+        <script>
+function validateForm() {
+    var idNumber = document.getElementById('id-number').value;
+    var regex = /^[A-Z][0-9]{9}$/;
+    var errorMessageDiv = document.getElementById('error-message');
+
+    if (!regex.test(idNumber)) {
+        errorMessageDiv.style.display = 'block'; // 顯示錯誤信息
+        errorMessageDiv.textContent = '身份證字號格式不正確，請輸入一個大寫英文字母後接九位數字。';
+        return false; // 阻止表單提交
+    }
+    errorMessageDiv.style.display = 'none'; // 隱藏錯誤信息
+    return true; // 允許表單提交
+}
+
+function copyAddress() {
+    if (document.getElementById('same-as-mailing').checked) {
+        document.getElementById('residence-address').value = document.getElementById('address').value; // 如果勾選同通訊地址，自動複製地址
+    }
+}
+    </script>
     </body>
 </html>

@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
