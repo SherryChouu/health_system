@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -56,10 +56,10 @@ $selectedPackage = $packages[$_POST["package"]];
     // 郵件主題
     $mail->Subject = '預約成功信件';
 
-    // 郵件地址
-    $mail->isHTML(true); // 郵件格式為 HTML
-    $cancelURL = "http://localhost:8000/process_cancel.php";// 取消預約連結
-    $confirmURL = "http://localhost:8000/process_confirm.php" ;// 確認預約連結
+   // 郵件地址
+   $mail->isHTML(true); // 郵件格式為 HTML
+   $cancelURL = "http://localhost:8000/process_cancel.php"; // 取消預約連結
+   $confirmURL = "http://localhost:8000/process_confirm.php"; // 確認預約連結
 
     // 使用確認資料表
     $mail->Body = <<<EOT
@@ -129,8 +129,9 @@ $selectedPackage = $packages[$_POST["package"]];
             </p>
             <div class="button-container">
             <a href="http://localhost:8000/process_confirm.php?uid=$id_number" class="button confirm-button">確認預約</a>
-
             <a href="$cancelURL" class="button cancel-button">取消預約</a>
+            <a href="$testURL">測試連結</a>
+
 
             </div>
         </div>
