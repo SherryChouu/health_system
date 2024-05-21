@@ -35,6 +35,8 @@ try {
     $id_number = $_POST["id-number"];
     $reservationDate = $_POST["reservationDate"];
     $reservationTime = $_POST["reservationTime"];
+    $randomCode = $_POST['random_code'];  // 接收提交的隱藏驗證碼
+
 
    // 套餐陣列
    $packages = array(
@@ -58,9 +60,6 @@ $selectedPackage = $packages[$_POST["package"]];
     $mail->isHTML(true); // 郵件格式為 HTML
     $cancelURL = "http://localhost:8000/process_cancel.php";// 取消預約連結
     $confirmURL = "http://localhost:8000/process_confirm.php" ;// 確認預約連結
-
-    // 隨機生成一組驗證碼
-    $verificationCode = rand(100000, 999999);
 
     // 使用確認資料表
     $mail->Body = <<<EOT
@@ -112,7 +111,7 @@ $selectedPackage = $packages[$_POST["package"]];
                 <br><br>
                 感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳細信息如下：
                 <br><br>
-                受检者姓名： $chineseName; 
+                受檢者姓名： $chineseName; 
                 <br>
                 身分證字號：  $id_number; 
                 <br>
@@ -120,7 +119,7 @@ $selectedPackage = $packages[$_POST["package"]];
                 <br>
                 預約日期時間： $reservationDate ; $reservationTime;
                 <br>
-                您的驗證碼為： $verificationCode;
+                您的驗證碼為： $randomCode ;
                 <br><br>
                 如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
                 <br><br>
@@ -129,7 +128,8 @@ $selectedPackage = $packages[$_POST["package"]];
                 仁愛醫院健檢中心
             </p>
             <div class="button-container">
-            <a href="$confirmURL" class="button confirm-button">確認預約</a>
+            <a href="http://localhost:8000/process_confirm.php?uid=$id_number" class="button confirm-button">確認預約</a>
+
             <a href="$cancelURL" class="button cancel-button">取消預約</a>
 
             </div>
@@ -173,7 +173,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dietary_habits = $_POST["dietary-habit"]; // 注意這裡的變量名稱已修改
     $selectedPackage = isset($_POST["package"]) ? $_POST["package"] : '';
     $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
-    
+    $randomCode = $_POST['random_code'];  // 接收提交的隱藏驗證碼
+
     // 在執行 SQL 語句之前確認 $reservationDate 的值
     echo "Reservation Date: " . $reservationDate;
 
@@ -185,13 +186,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ChineseName, EnglishName, 
         IDNumber, Sexual, Birthdate, 
         Address, ResidenceAddress, 
-        SameAsMailing, Phone, Email, dietary_habits,Package_id,ReservationDate) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        SameAsMailing, Phone, Email, dietary_habits,Package_id,ReservationDate,random_code) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
         // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
         $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
             &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-            &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietary_habits, &$selectedPackage, $reservationDate
+            &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietary_habits, &$selectedPackage, $reservationDate, $randomCode
         ));
 
     // 執行 SQL 語句  
@@ -242,4 +243,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':Phone', $phone);
         $stmt->bindParam(':Email', $email);
         $stmt->bindParam(':Dietaryhabit', $dietaryhabit);
+        $stmt->bindParam(':random_code', $randomCode);
 ?>

@@ -66,7 +66,8 @@
 
     <!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->
     <?php
-       
+$randomCode = rand(100000, 999999); // 生成一組六位數字的隨機碼
+echo '<!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->';
 
         $pages = array(
             array('title' => '首頁', 'link' => 'index.php'),    // 首頁的連結指向 index.php
@@ -187,7 +188,7 @@ switch ($selectedPackage) {
         echo "<p><span style='font-size: 20px;'>健檢套餐: </span> 未選擇</p>";
         break;
 }
-
+                
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 // 戶籍地址自動填入通訊地址的 JavaScript 函式
                 echo "<script>
@@ -217,7 +218,8 @@ switch ($selectedPackage) {
                 <!-- 在表單中加入套餐和日期的隱藏欄位 -->  
                 <input type="hidden" name="package" value="<?php echo $selectedPackage; ?>">
                 <input type="hidden" name="reservationDate" value="<?php echo $reservationDate; ?>">
-                
+                <input type="hidden" name="random_code" value="<?php echo $randomCode; ?>"> <!-- 存儲六位數字隨機碼的隱藏欄位 -->
+
                 
                 <!-- 按鈕 -->
                 <div class="button-group">

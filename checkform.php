@@ -94,12 +94,14 @@
                 'email' => '電子郵件',
                 'dietary-habit' => '飲食習慣',
                 'package' => '健檢套餐',
-                'reservationDate' => '預約日期'
+                'reservationDate' => '預約日期',
+                'random_code' => '驗證碼',
             ];
        
 
             // 檢查是否有 POST 過來的資料
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                
                 // 遍歷所有的 POST 參數並顯示
                 $idNumber = $_POST["id-number"];
                 // 檢查身分證字號格式
@@ -111,6 +113,7 @@
                 }
 
                  foreach ($_POST as $key => $value) {
+                    
                      // 處理與通訊地址相同的情況
                      if ($key == 'same-as-mailing') {
                          $safeValue = ($value == 'on') ? '是' : '否';

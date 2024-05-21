@@ -1,24 +1,20 @@
 <?php
 
-    header("Content-Type:text/html; charset=utf-8");
+header("Content-Type:text/html; charset=utf-8");
 
-    include 'sql_connect.php';
+include 'sql_connect.php';
 
 
-    // 檢查是否是 POST 請求
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+// 檢查是否是 POST 請求
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // 這裡可以獲取表單提交的數據
     $chineseName = $_POST["chinese-name"];
     $englishName = $_POST["english-name"];
-    
     $idNumber = $_POST["id-number"];
 
     // 正則表達式檢查身份證字號格式
-    if (preg_match("/^[A-Z][0-9]{9}$/", $idNumber)) {
-        
-        echo "Reservation Date: " . $reservationDate;
-    } else {
+    if (!preg_match("/^[A-Z][0-9]{9}$/", $idNumber)) {
         // 身份證字號格式不正確
         echo "<script>alert('身份證字號格式不正確，請重新填寫。(應為一個大寫字母配上9個數字)'); window.location.href='form.php';</script>";
         exit(); // 停止腳本執行
@@ -36,76 +32,42 @@
     $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
     
     
-    // 在執行 SQL 語句之前確認 $reservationDate 的值
-    echo "Reservation Date: " . $reservationDate;
-
-
 
     // 執行資料庫操作
     try {
-        // 準備 SQL 語句
         // 將資料插入 Patient 資料表
-        $sqlPatient = "INSERT INTO Patient (
-        ChineseName, EnglishName, 
-        IDNumber, Sexual, Birthdate, 
-        Address, ResidenceAddress, 
-        SameAsMailing, Phone, Email, Wedding,Package_id,ReservationDate) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        $sqlPatient = "INSERT INTO Patient (ChineseName, EnglishName, IDNumber, Sexual, Birthdate, Address, ResidenceAddress, SameAsMailing, Phone, Email, Wedding, Package_id, ReservationDate, dietary_habits,random_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
 
         // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
         $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
-            &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-            &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$wedding, &$selectedPackage, $reservationDate
-        ));
-
-    // 執行 SQL 語句
-    if (sqlsrv_execute($stmtPatient)) {
-        // 獲取剛插入的 Patient ID
-        $lastPatientID = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT SCOPE_IDENTITY()"));
-
-        // 將資料插入 Appointment 資料表
-        $sqlAppointment = "INSERT INTO Appointments (Package_id,PatientID,ReservationDate) 
-        VALUES (?, ?, ?)";
-
-        // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-        $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
-            &$selectedPackage, &$lastPatientID[0], &$reservationDate
+            $chineseName, $englishName, $idNumber, $sexual, $birthdate, $address, 
+            $residenceAddress, $sameAsMailing, $phone, $email, $wedding, $selectedPackage, $reservationDate,$dietary_habits, $randomCode
         ));
 
         // 執行 SQL 語句
-        // 執行 SQL 語句
-        if (sqlsrv_execute($stmtAppointment)) {
-            echo "資料已成功提交到資料庫.";
-            
-            ;exit();
-            
-        }else {
-            die(print_r(sqlsrv_errors(), true));}
-        } 
-        else {
+        if (sqlsrv_execute($stmtPatient)) {
+            // 獲取剛插入的 Patient ID
+            $lastPatientID = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT SCOPE_IDENTITY()"));
+
+            // 將資料插入 Appointment 資料表
+            $sqlAppointment = "INSERT INTO Appointments (Package_id, PatientID, ReservationDate) VALUES (?, ?, ?)";
+            $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
+                $selectedPackage, $lastPatientID[0], $reservationDate
+            ));
+
+            if (sqlsrv_execute($stmtAppointment)) {
+                echo "資料已成功提交到資料庫.";
+                exit();
+            } else {
+                die(print_r(sqlsrv_errors(), true));
+            }
+        } else {
             die(print_r(sqlsrv_errors(), true));
         }
-            } catch (Exception $e) {
-                echo "錯誤: " . $e->getMessage();
-            }finally { sqlsrv_close($conn); // 關閉資料庫連接
-        }
-    } 
-
-        
-
-        // 使用 PDO 預備語句，防止 SQL 注入攻擊
-        $stmt = $conn->prepare($sql);
-
-        // 綁定參數
-        $stmt->bindParam(':ChineseName', $chineseName);
-        $stmt->bindParam(':EnglishName', $englishName);
-        $stmt->bindParam(':IDNumber', $idNumber);
-        $stmt->bindParam(':Sexual', $sexual);
-        $stmt->bindParam(':Birthdate', $birthdate);
-        $stmt->bindParam(':Address', $address);
-        $stmt->bindParam(':ResidenceAddress', $residenceAddress);
-        $stmt->bindParam(':SameAsMailing', $sameAsMailing, PDO::PARAM_INT);
-        $stmt->bindParam(':Phone', $phone);
-        $stmt->bindParam(':Email', $email);
-        $stmt->bindParam(':Wedding', $wedding);
+    } catch (Exception $e) {
+        echo "錯誤: " . $e->getMessage();
+    } finally {
+        sqlsrv_close($conn); // 關閉資料庫連接
+    }
+}
 ?>
