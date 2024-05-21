@@ -57,29 +57,6 @@
             background-color: #45a049; /* 鼠標懸停時的背景顏色 */
         }
     </style>
-    <script>
-        function confirmCancel(event) {
-            event.preventDefault(); // 阻止表單的預設提交行為
-            var idNumber = document.getElementById('idNumber').value; // 獲取身份證字號輸入值
-            var captcha = document.getElementById('captcha').value; // 獲取驗證碼輸入值
-
-            if (!idNumber || !captcha) {
-                alert('請填寫所有字段'); // 若未填寫完整，彈出提示
-                return;
-            }
-
-            // 創建確認對話框
-            if (confirm('你確定要取消本次的健檢預約嗎?')) {
-                // 用戶確認取消
-                // 這裡可以添加 AJAX 請求向伺服器發送取消請求，並處理返回結果
-                alert('已發送取消預約請求'); // 模擬發送請求
-                // 這裡可以根據實際的伺服器響應進行處理，比如跳轉或顯示更多信息
-            } else {
-                // 用戶選擇不取消
-                return;
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="form-container">
@@ -90,11 +67,119 @@
                 <input type="text" id="idNumber" name="idNumber" required>
             </div>
             <div class="form-field">
-                <label for="captcha">驗證碼:</label>
-                <input type="text" id="captcha" name="captcha" required>
+                <label for="randomCode">驗證碼:</label>
+                <input type="text" id="randomCode" name="randomCode" required>
             </div>
             <button type="submit">確認取消</button>
         </form>
     </div>
 </body>
 </html>
+
+<?php
+include 'sql_connect.php'; // 確保這個路徑正確並且包含連接資料庫的代碼
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+
+// 檢查連接是否成功
+if ($conn === false) {
+    die("連接失敗: " . print_r(sqlsrv_errors(), true));
+}
+
+// 檢查是否收到 POST 請求
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $idNumber = $_POST["idNumber"];
+    $randomCode = $_POST["randomCode"];
+
+    // 先查詢是否有匹配的預約以獲取email
+    $sql = "SELECT email FROM Patient WHERE idNumber = ? AND random_code = ?";
+    $stmt = sqlsrv_query($conn, $sql, array($idNumber, $randomCode));
+
+
+    if ($stmt === false) {
+        die("Error in execution of SELECT statement: " . print_r(sqlsrv_errors(), true));
+    } elseif ($email = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $email = $email['email'];
+
+
+
+        // 更新預約狀態為已取消
+        $updateSql = "UPDATE Patient SET appointment_status = '已取消' WHERE idNumber = ? AND random_code = ?";
+        $updateStmt = sqlsrv_prepare($conn, $updateSql, array(&$idNumber, &$randomCode));
+        if (sqlsrv_execute($updateStmt)) {
+            // 發送取消郵件
+            $mail = new PHPMailer(true);
+            try {
+                $mail->CharSet = 'UTF-8';
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'renaihealthcheck@gmail.com'; // SMTP用戶名
+                $mail->Password   = 'ixehchoociqvdate';   // SMTP密碼
+                $mail->SMTPSecure = 'tls';
+                $mail->Port       = 587;
+                $mail->setFrom('renaihealthcheck@gmail.com', '仁愛醫院健檢中心');
+                $mail->addAddress($email);
+
+                $mail->Subject = '健檢預約取消通知';
+                $mail->isHTML(true);
+                $mail->Body    =<<<EOT
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body {
+                            font-family: 'Arial', sans-serif;
+                            color: #333;
+                            background-color: #f4f4f4;
+                            padding: 20px;
+                        }
+                        .content {
+                            background-color: #fff;
+                            padding: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                            text-align: left;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="content">
+                        <h1>【健檢預約取消郵件】</h1>
+                        <p>
+                            <br><br>
+                            您的健檢預約已被取消。如有疑問，請聯繫客服。
+                            <br><br>
+                            祝您健康！
+                            <br><br>
+                            仁愛醫院健檢中心
+                        </p>
+            
+                        </div>
+                    </div>
+                </body>
+                </html>
+                
+            EOT;
+
+                $mail->send();
+                echo "<script>alert('預約已取消，確認信件已發送至您的郵箱。'); window.location.href = '首頁的URL';</script>";
+            } catch (Exception $e) {
+                echo "郵件發送失敗。Mailer Error: {$mail->ErrorInfo}";
+            }
+        } else {
+            die("Error updating record: " . print_r(sqlsrv_errors(), true));
+        }
+    } else {
+        echo "<script>alert('無法找到對應的預約紀錄，請檢查輸入的身分證字號和驗證碼。');</script>";
+    }
+}
+
+sqlsrv_close($conn);
+?>

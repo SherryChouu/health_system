@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -107,19 +107,19 @@ $selectedPackage = $packages[$_POST["package"]];
         <div class="content">
             <h1>【健檢預約確認郵件】</h1>
             <p>
-                尊敬的 $chineseName; 先生/小姐，
+                尊敬的 $chineseName 先生/小姐，
                 <br><br>
                 感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳細信息如下：
                 <br><br>
-                受檢者姓名： $chineseName; 
+                受檢者姓名： $chineseName
                 <br>
-                身分證字號：  $id_number; 
+                身分證字號：  $id_number
                 <br>
-                預約套餐： $selectedPackage; 
+                預約套餐： $selectedPackage 
                 <br>
-                預約日期時間： $reservationDate ; $reservationTime;
+                預約日期時間： $reservationDate  $reservationTime
                 <br>
-                您的驗證碼為： $randomCode ;
+                您的驗證碼為： $randomCode 
                 <br><br>
                 如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
                 <br><br>
@@ -130,7 +130,7 @@ $selectedPackage = $packages[$_POST["package"]];
             <div class="button-container">
             <a href="http://localhost:8000/process_confirm.php?uid=$id_number" class="button confirm-button">確認預約</a>
             <a href="$cancelURL" class="button cancel-button">取消預約</a>
-            <a href="$testURL">測試連結</a>
+            
 
 
             </div>
