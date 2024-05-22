@@ -82,9 +82,10 @@ $selectedPackage = $packages[$_POST["package"]];
             }
             .button {
                 padding: 15px 25px;
+                margin:10px;
                 color: white;
                 text-decoration: none;
-                border-radius: 20px;
+                border-radius: 10px;  
                 font-weight: bold;
                 display: inline-block;
                 border: none;
@@ -92,6 +93,7 @@ $selectedPackage = $packages[$_POST["package"]];
                 text-align: center;
                 transition: background-color 0.3s ease;
                 background-color: #abc1cb; 
+                font-size: 14px;
             }
             .button:hover {
                 opacity: 0.8;
@@ -152,7 +154,7 @@ EOT;
 //以下為"預約成功後，資料庫預約人數會減少的程式"
 header("Content-Type:text/html; charset=utf-8");
 
- include 'sql_connect.php';
+include 'sql_connect.php';
 
 
 // 檢查是否是 POST 請求
@@ -161,9 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 這裡可以獲取表單提交的數據
     $chineseName = $_POST["chinese-name"];
     $englishName = $_POST["english-name"];
-    
     $idNumber = $_POST["id-number"];
-
     $sexual = $_POST["sexual"];
     $birthdate = $_POST["birthdate"];
     $address = $_POST["address"];
@@ -211,7 +211,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ));
 
         // 執行 SQL 語句
-        // 執行 SQL 語句
         if (sqlsrv_execute($stmtAppointment)) {            
             ;exit();
             
@@ -225,9 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "錯誤: " . $e->getMessage();
             }finally { sqlsrv_close($conn); // 關閉資料庫連接
         }
-    } 
-
-        
+    }    
 
         // 使用 PDO 預備語句，防止 SQL 注入攻擊
         $stmt = $conn->prepare($sql);
