@@ -109,7 +109,7 @@ $selectedPackage = $packages[$_POST["package"]];
         <div class="content">
             <h1>【健檢預約確認郵件】</h1>
             <p>
-                尊敬的 $chineseName 先生/小姐，
+                $chineseName 先生/小姐 您好，
                 <br><br>
                 感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳細信息如下：
                 <br><br>
@@ -123,7 +123,7 @@ $selectedPackage = $packages[$_POST["package"]];
                 <br>
                 您的驗證碼為： $randomCode 
                 <br><br>
-                如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
+                若有任何問題請隨時與我們聯繫。
                 <br><br>
                 祝您健康！
                 <br><br>

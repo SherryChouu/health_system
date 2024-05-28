@@ -67,13 +67,15 @@
     <!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->
     <?php
 $randomCode = rand(100000, 999999); // 生成一組六位數字的隨機碼
+
+
 echo '<!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->';
 
         $pages = array(
             array('title' => '首頁', 'link' => 'index.php'),    // 首頁的連結指向 index.php
             array('title' => '線上預約', 'link' => 'reserve_online.php'),  
             array('title' => '選擇健檢日期', 'link' => 'calendar.php'), 
-            array('title' => '填寫個資', 'link' => 'form.php'), 
+            array('title' => '基本資料填寫', 'link' => 'form.php'), 
         );
         generateBreadcrumbs($pages);
         ?>
@@ -115,24 +117,12 @@ echo '<!-- 調用 generateBreadcrumbs 函數，傳遞相應的頁面數據 -->';
 
                     /*--自動給選項的欄位 --*/
 
-                    if ($fieldName === "address" || $fieldName === "dietary-habit" || $fieldName === "sexual") {                       
+                    if ($fieldName === "dietary-habit" || $fieldName === "sexual") {                       
                         echo "<select id=$fieldName  name='$fieldName' required>"; //這段很重要 id、name是屬性
                         echo "<option value=''>請選擇...</option>";
-
-                        if ($fieldName === "address") {
-                            $taiwanCities = array(
-                                "台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市",
-                                "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣",
-                                "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣",
-                                "台東縣", "澎湖縣", "金門縣", "連江縣"
-                            );
-
-                            foreach ($taiwanCities as $city) {
-                                echo "<option value='$city'>$city</option>";
-                            }
                            
 
-                        } elseif ($fieldName === "dietary-habit") {
+                        if ($fieldName === "dietary-habit") {
                             $maritalStatusOptions = array("葷", "素");
 
                             foreach ($maritalStatusOptions as $status) {
