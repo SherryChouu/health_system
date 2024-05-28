@@ -154,9 +154,12 @@ EOT;
 header("Content-Type:text/html; charset=utf-8");
 
 include 'sql_connect.php';
+<<<<<<< HEAD
 
 // 獲取當前時間
 $currentDateTime = date('Y-m-d H:i:s');
+=======
+>>>>>>> ec43a4e466135d56c57fd42a8d74e6a4c339620c
 
 
 // 檢查是否是 POST 請求
@@ -212,6 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sqlAppointment = "INSERT INTO Appointments (Package_id, PatientID, ReservationDate) 
                                VALUES (?, ?, ?)";
 
+<<<<<<< HEAD
             // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
             $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
                 &$selectedPackage, &$lastPatientID, &$reservationDate
@@ -234,6 +238,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+=======
+        // 執行 SQL 語句
+        if (sqlsrv_execute($stmtAppointment)) {            
+            ;exit();
+            
+        }else {
+            die(print_r(sqlsrv_errors(), true));}
+        } 
+        else {
+            die(print_r(sqlsrv_errors(), true));
+        }
+            } catch (Exception $e) {
+                echo "錯誤: " . $e->getMessage();
+            }finally { sqlsrv_close($conn); // 關閉資料庫連接
+        }
+    }    
+>>>>>>> ec43a4e466135d56c57fd42a8d74e6a4c339620c
 
         // 使用 PDO 預備語句，防止 SQL 注入攻擊
         $stmt = $conn->prepare($sql);
