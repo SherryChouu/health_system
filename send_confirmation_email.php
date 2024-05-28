@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -151,10 +151,12 @@ EOT;
 
 
  
-//以下為"預約成功後，資料庫預約人數會減少的程式"
 header("Content-Type:text/html; charset=utf-8");
 
 include 'sql_connect.php';
+
+// 獲取當前時間
+$currentDateTime = date('Y-m-d H:i:s');
 
 
 // 檢查是否是 POST 請求
@@ -182,49 +184,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 執行資料庫操作
     try {
         // 準備 SQL 語句
-        // 將資料插入 Patient 資料表
-        $sqlPatient = "INSERT INTO Patient (
-        ChineseName, EnglishName, 
-        IDNumber, Sexual, Birthdate, 
-        Address, ResidenceAddress, 
-        SameAsMailing, Phone, Email, dietary_habits,Package_id,ReservationDate,random_code) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+       // 將資料插入 Patient 資料表
+    $sqlPatient = "INSERT INTO Patient (
+        ChineseName, EnglishName, IDNumber, Sexual, Birthdate, 
+        Address, ResidenceAddress, SameAsMailing, Phone, Email, 
+        dietary_habits, Package_id, ReservationDate, random_code, email_sent_time
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-        $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
-            &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
-            &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietary_habits, &$selectedPackage, $reservationDate, $randomCode
-        ));
+       $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
+        &$chineseName, &$englishName, &$idNumber, &$sexual, &$birthdate, &$address, 
+        &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietary_habits, 
+        &$selectedPackage, &$reservationDate, &$randomCode, &$currentDateTime
+    ));
 
-    // 執行 SQL 語句  
-    if (sqlsrv_execute($stmtPatient)) {
-        // 獲取剛插入的 Patient ID
-        $lastPatientID = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT SCOPE_IDENTITY()"));
+        // 執行 SQL 語句  
+        if (sqlsrv_execute($stmtPatient)) {
+            // 獲取剛插入的 Patient ID
+            $result = sqlsrv_query($conn, "SELECT SCOPE_IDENTITY() AS lastID");
+            $lastPatientID = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)['lastID'];
 
-        // 將資料插入 Appointment 資料表
-        $sqlAppointment = "INSERT INTO Appointments (Package_id,PatientID,ReservationDate) 
-        VALUES (?, ?, ?)";
+            if ($lastPatientID === false) {
+                die("無法獲取插入的 Patient ID: " . print_r(sqlsrv_errors(), true));
+            }
 
-        // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-        $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
-            &$selectedPackage, &$lastPatientID[0], &$reservationDate
-        ));
+            // 將資料插入 Appointment 資料表
+            $sqlAppointment = "INSERT INTO Appointments (Package_id, PatientID, ReservationDate) 
+                               VALUES (?, ?, ?)";
 
-        // 執行 SQL 語句
-        if (sqlsrv_execute($stmtAppointment)) {            
-            ;exit();
-            
-        }else {
-            die(print_r(sqlsrv_errors(), true));}
-        } 
-        else {
-            die(print_r(sqlsrv_errors(), true));
+            // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
+            $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
+                &$selectedPackage, &$lastPatientID, &$reservationDate
+            ));
+
+            // 執行 SQL 語句
+            if (sqlsrv_execute($stmtAppointment)) {
+                echo "預約插入成功";
+                exit();
+            } else {
+                die("插入 Appointment 資料表失敗: " . print_r(sqlsrv_errors(), true));
+            }
+        } else {
+            die("插入 Patient 資料表失敗: " . print_r(sqlsrv_errors(), true));
         }
-            } catch (Exception $e) {
-                echo "錯誤: " . $e->getMessage();
-            }finally { sqlsrv_close($conn); // 關閉資料庫連接
-        }
-    }    
+    } catch (Exception $e) {
+        echo "錯誤: " . $e->getMessage();
+    } finally {
+        sqlsrv_close($conn); // 關閉資料庫連接
+    }
+}
+
 
         // 使用 PDO 預備語句，防止 SQL 注入攻擊
         $stmt = $conn->prepare($sql);
