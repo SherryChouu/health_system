@@ -250,19 +250,19 @@ while ($day <= $num_days) {
         // 設定套餐 ID
         $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
 
-        // 獲取預約數量///////////////////////////////////////////////////////////////////////////////
-        $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
-        $paramsAppointmentCount = array($packageId, $reservationDate);
+        // 獲取預約數量//
+        $sqlPatientCount = "SELECT COUNT(PatientID) as ARD_Count FROM Patient WHERE Package_id = ? AND ReservationDate = ?";
+        $paramsPatientCount = array($packageId, $reservationDate);
 
-        $stmtAppointmentCount = sqlsrv_prepare($conn, $sqlAppointmentCount, $paramsAppointmentCount);
+        $stmtPatientCount = sqlsrv_prepare($conn, $sqlPatientCount, $paramsPatientCount);
 
-        if (!$stmtAppointmentCount) {
+        if (!$stmtPatientCount) {
             die(print_r(sqlsrv_errors(), true));
         }
 
-        sqlsrv_execute($stmtAppointmentCount); 
-        sqlsrv_fetch($stmtAppointmentCount);
-        $ARD_Count = sqlsrv_get_field($stmtAppointmentCount, 0);
+        sqlsrv_execute($stmtPatientCount); 
+        sqlsrv_fetch($stmtPatientCount);
+        $ARD_Count = sqlsrv_get_field($stmtPatientCount, 0);
 
         // 獲取套餐預約人數上限
         $sqlMaxCapacity = "SELECT MaxCapacity FROM Packages WHERE Package_id = ?";
@@ -278,9 +278,24 @@ while ($day <= $num_days) {
         sqlsrv_fetch($stmtMaxCapacity);
         $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
 
-        // 計算每天剩餘可預約人數
-        $remainingCapacity = $maxCapacity - $ARD_Count;
+        // 1. 搜索状态为 "已取消" 的预约
+        // 搜索状态为 "已取消" 的预约
+        $sqlCancelledAppointments = "SELECT COUNT(PatientID) as CancelledCount FROM Patient WHERE Package_id = ? AND ReservationDate = ? AND appointment_status = '已取消'";
+        $paramsCancelledAppointments = array($packageId, $reservationDate);
+
+        $stmtCancelledAppointments = sqlsrv_prepare($conn, $sqlCancelledAppointments, $paramsCancelledAppointments);
+        if (!$stmtCancelledAppointments) {
+        die(print_r(sqlsrv_errors(), true));
+        }
+
+        sqlsrv_execute($stmtCancelledAppointments);
+        sqlsrv_fetch($stmtCancelledAppointments);
+        $CancelledCount = sqlsrv_get_field($stmtCancelledAppointments, 0);
+
+// 计算每天剩余可预约人数
+$remainingCapacity = $maxCapacity - $ARD_Count + $CancelledCount;
         
+
         //<br>當前日期：$strcurrentDate<br>最快預約日期：$strreservationStartDate
         //<br>當前日期：$strcurrentDate<br>最遠預約日期：$limitDate 
         // 檢查是否在最快預約日期之前或與最快預約日期相等

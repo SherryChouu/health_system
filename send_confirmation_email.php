@@ -109,8 +109,8 @@ $selectedPackage = $packages[$_POST["package"]];
         <div class="content">
             <h1>【健檢預約確認郵件】</h1>
             <p>
-                尊敬的 $chineseName 先生/小姐，
-                <br><br>
+            $chineseName 先生/小姐 您好，
+            <br><br>
                 感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳細信息如下：
                 <br><br>
                 受檢者姓名： $chineseName
@@ -123,7 +123,7 @@ $selectedPackage = $packages[$_POST["package"]];
                 <br>
                 您的驗證碼為： $randomCode 
                 <br><br>
-                如果您有任何問題或需要取消或更改預約，請隨時與我們聯繫。
+                若有任何問題請隨時與我們聯繫。
                 <br><br>
                 祝您健康！
                 <br><br>
@@ -151,13 +151,12 @@ EOT;
 
 
  
+//以下為"預約成功後，資料庫預約人數會減少的程式"
 header("Content-Type:text/html; charset=utf-8");
-
-include 'sql_connect.php';
+ include 'sql_connect.php';
 
 // 獲取當前時間
 $currentDateTime = date('Y-m-d H:i:s');
-
 
 // 檢查是否是 POST 請求
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -165,6 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 這裡可以獲取表單提交的數據
     $chineseName = $_POST["chinese-name"];
     $englishName = $_POST["english-name"];
+    
     $idNumber = $_POST["id-number"];
     $sexual = $_POST["sexual"];
     $birthdate = $_POST["birthdate"];
@@ -177,19 +177,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selectedPackage = isset($_POST["package"]) ? $_POST["package"] : '';
     $reservationDate = isset($_POST["reservationDate"]) ? $_POST["reservationDate"] : '';
     $randomCode = $_POST['random_code'];  // 接收提交的隱藏驗證碼
-
     // 在執行 SQL 語句之前確認 $reservationDate 的值
     echo "Reservation Date: " . $reservationDate;
-
     // 執行資料庫操作
     try {
         // 準備 SQL 語句
-       // 將資料插入 Patient 資料表
-    $sqlPatient = "INSERT INTO Patient (
-        ChineseName, EnglishName, IDNumber, Sexual, Birthdate, 
-        Address, ResidenceAddress, SameAsMailing, Phone, Email, 
-        dietary_habits, Package_id, ReservationDate, random_code, email_sent_time
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // 將資料插入 Patient 資料表
+        $sqlPatient = "INSERT INTO Patient (
+            ChineseName, EnglishName, IDNumber, Sexual, Birthdate, 
+            Address, ResidenceAddress, SameAsMailing, Phone, Email, 
+            dietary_habits, Package_id, ReservationDate, random_code, email_sent_time
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
        $stmtPatient = sqlsrv_prepare($conn, $sqlPatient, array(
@@ -197,47 +195,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         &$residenceAddress, &$sameAsMailing, &$phone, &$email, &$dietary_habits, 
         &$selectedPackage, &$reservationDate, &$randomCode, &$currentDateTime
     ));
-
-        // 執行 SQL 語句  
-        if (sqlsrv_execute($stmtPatient)) {
-            // 獲取剛插入的 Patient ID
-            $result = sqlsrv_query($conn, "SELECT SCOPE_IDENTITY() AS lastID");
-            $lastPatientID = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)['lastID'];
-
-            if ($lastPatientID === false) {
-                die("無法獲取插入的 Patient ID: " . print_r(sqlsrv_errors(), true));
-            }
-
-            // 將資料插入 Appointment 資料表
-            $sqlAppointment = "INSERT INTO Appointments (Package_id, PatientID, ReservationDate) 
-                               VALUES (?, ?, ?)";
-
-            // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
-            $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
-                &$selectedPackage, &$lastPatientID, &$reservationDate
-            ));
-
-            // 執行 SQL 語句
-            if (sqlsrv_execute($stmtAppointment)) {
-                echo "預約插入成功";
-                exit();
-            } else {
-                die("插入 Appointment 資料表失敗: " . print_r(sqlsrv_errors(), true));
-            }
-        } else {
-            die("插入 Patient 資料表失敗: " . print_r(sqlsrv_errors(), true));
+    // 執行 SQL 語句  
+    if (sqlsrv_execute($stmtPatient)) {
+        // 獲取剛插入的 Patient ID
+        $lastPatientID = sqlsrv_fetch_array(sqlsrv_query($conn, "SELECT SCOPE_IDENTITY()"));
+        // 將資料插入 Appointment 資料表
+        $sqlAppointment = "INSERT INTO Appointments (Package_id,PatientID,ReservationDate) 
+        VALUES (?, ?, ?)";
+        // 使用 sqlsrv_prepare 函數，防止 SQL 注入攻擊
+        $stmtAppointment = sqlsrv_prepare($conn, $sqlAppointment, array(
+            &$selectedPackage, &$lastPatientID[0], &$reservationDate
+        ));
+        // 執行 SQL 語句
+        // 執行 SQL 語句
+        if (sqlsrv_execute($stmtAppointment)) {            
+            ;exit();
+            
+        }else {
+            die(print_r(sqlsrv_errors(), true));}
+        } 
+        else {
+            die(print_r(sqlsrv_errors(), true));
         }
-    } catch (Exception $e) {
-        echo "錯誤: " . $e->getMessage();
-    } finally {
-        sqlsrv_close($conn); // 關閉資料庫連接
-    }
-}
-
-
+            } catch (Exception $e) {
+                echo "錯誤: " . $e->getMessage();
+            }finally { sqlsrv_close($conn); // 關閉資料庫連接
+        }
+    } 
+        
         // 使用 PDO 預備語句，防止 SQL 注入攻擊
         $stmt = $conn->prepare($sql);
-
         // 綁定參數
         $stmt->bindParam(':ChineseName', $chineseName);
         $stmt->bindParam(':EnglishName', $englishName);
@@ -251,4 +238,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':Email', $email);
         $stmt->bindParam(':Dietaryhabit', $dietaryhabit);
         $stmt->bindParam(':random_code', $randomCode);
+
 ?>
