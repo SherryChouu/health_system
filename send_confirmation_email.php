@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -109,8 +109,8 @@ $selectedPackage = $packages[$_POST["package"]];
         <div class="content">
             <h1>【健檢預約確認郵件】</h1>
             <p>
-            $chineseName 先生/小姐 您好，
-            <br><br>
+                $chineseName 先生/小姐 您好，
+                <br><br>
                 感謝您選擇我們的醫院進行健康檢查。我們已經收到您的預約，詳細信息如下：
                 <br><br>
                 受檢者姓名： $chineseName

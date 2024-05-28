@@ -132,7 +132,7 @@
                             <li><a href="reserve_online.php">線上預約</a></li>
                             <li><a href="pay.php">繳費資訊</a></li>
                             <li><a href="contact.php">聯絡我們</a></li>
-                        </ul>
+                        </ul> 
                     </nav>
             </div>
 </main>
