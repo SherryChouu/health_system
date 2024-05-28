@@ -250,7 +250,7 @@ while ($day <= $num_days) {
         // 設定套餐 ID
         $packageId = isset($_GET['package']) ? $_GET['package'] : 1;
 
-        // 獲取預約數量
+        // 獲取預約數量///////////////////////////////////////////////////////////////////////////////
         $sqlAppointmentCount = "SELECT COUNT(AppointmentID) as ARD_Count FROM Appointments WHERE Package_id = ? AND ReservationDate = ?";
         $paramsAppointmentCount = array($packageId, $reservationDate);
 

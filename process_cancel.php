@@ -82,14 +82,24 @@ include 'sql_connect.php'; // 確保這個路徑正確並且包含連接資料�
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:\AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 檢查連接是否成功
 if ($conn === false) {
     die("連接失敗: " . print_r(sqlsrv_errors(), true));
 }
+
+// 定義套餐陣列
+$packages = array(
+    '1' => '卓越C',
+    '2' => '卓越M',
+    '3' => '尊爵A',
+    '4' => '尊爵B',
+    '5' => '尊爵C',
+    '6' => '尊爵D'
+);
 
 // 檢查是否收到 POST 請求
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
