@@ -1,80 +1,87 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>取消預約</title>
     <style>
-        body {
-            font-family: Arial, sans-serif; /* 設置字體 */
-            background-color: #f4f4f4; /* 設置背景顏色 */
-            display: flex;
-            justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
-            height: 100vh; /* 高度填滿視窗 */
-            margin: 0; /* 移除邊距 */
-        }
         .form-container {
-            background-color: #ffffff; /* 背景顏色為白色 */
-            padding: 20px; /* 內邊距 */
-            border-radius: 15px; /* 邊框圓角 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 盒子陰影 */
             display: flex;
-            flex-direction: column; /* 元素垂直排列 */
-            align-items: center; /* 內容居中對齊 */
-            width: fit-content; /* 寬度按內容調整 */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* 設定高度為視窗高度，使登入框置中 */
         }
-        form {
+
+        #cancel-form {
+            width: 300px; /* 設定表單寬度 */
+            padding: 50px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
-            flex-direction: column; /* 表單元素垂直排列 */
-            align-items: center; /* 居中對齊 */
-            width: 100%; /* 寬度為100% */
+            flex-direction: column;
+            align-items: flex-start; /* 左對齊表單元素 */
         }
-        .form-field {
-            display: flex;
-            align-items: center; /* 內容垂直居中 */
-            margin-bottom: 10px; /* 底部外邊距 */
-        }
+
         label {
-            margin-right: 10px; /* 標籤右邊距 */
+            font-weight: bold;
+            text-align: left; /* 左對齊文本 */
+            margin-bottom: 10px;
         }
-        input[type="text"] {
-            padding: 8px; /* 輸入框內邊距 */
-            border: 1px solid #ccc; /* 邊框 */
-            border-radius: 10px; /* 邊框圓角 */
-            margin-left: 10px; /* 與標籤間距 */
+        
+        input[type="submit"] {
+            width: 150px;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* 使元素的寬度包含內邊距和邊框，而不包含外邊距 */
+            background-color:  #a1c6e4;
+            color: white;
+            cursor: pointer;
+            align-self: center; /* 使提交按鈕居中 */
         }
-        button {
-            padding: 10px 20px; /* 按鈕內邊距 */
-            border-radius: 10px; /* 邊框圓角 */
-            background-color: rgb(3, 104, 185); /* 背景顏色 */
-            color: white; /* 文字顏色 */
-            border: none; /* 無邊框 */
-            cursor: pointer; /* 滑鼠指標類型 */
-            width: auto; /* 寬度自動 */
-            margin-top: 20px; /* 上邊距 */
+
+        #idNumber, #randomCode {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; 
         }
-        button:hover {
-            background-color: #45a049; /* 鼠標懸停時的背景顏色 */
+
+        .cancel-button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #a1c6e4;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cancel-button:hover {
+            background-color: #e2e5e8;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h1>取消預約</h1>
-        <form action="process_cancel.php" method="post" onsubmit="confirmCancel(event)">
-            <div class="form-field">
-                <label for="idNumber">身分證字號:</label>
-                <input type="text" id="idNumber" name="idNumber" required>
-            </div>
-            <div class="form-field">
-                <label for="randomCode">驗證碼:</label>
-                <input type="text" id="randomCode" name="randomCode" required>
-            </div>
-            <button type="submit">確認取消</button>
+        <form id="cancel-form" action="process_cancel.php" method="post" onsubmit="confirmCancel(event)">
+            <label for="idNumber">身分證字號：</label>
+            <input type="text" id="idNumber" name="idNumber" required><br><br>
+            <label for="randomCode">驗證碼：</label>
+            <input type="text" id="randomCode" name="randomCode" required><br><br>
+            <button class="cancel-button" type="submit">取消預約</button> 
         </form>
     </div>
 </body>
 </html>
+
+
 
 <?php
 include 'sql_connect.php'; // 確保這個路徑正確並且包含連接資料庫的代碼
@@ -82,9 +89,9 @@ include 'sql_connect.php'; // 確保這個路徑正確並且包含連接資料�
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
-require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
-require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
+require 'C:AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
 
 // 檢查連接是否成功
 if ($conn === false) {
@@ -179,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             EOT;
 
                 $mail->send();
-                echo "<script>alert('預約已取消，確認信件已發送至您的郵箱。'); window.location.href = '首頁的URL';</script>";
+                echo "<script>alert('預約已取消，請檢查信箱。'); window.location.href = '首頁的URL';</script>";
             } catch (Exception $e) {
                 echo "郵件發送失敗。Mailer Error: {$mail->ErrorInfo}";
             }
