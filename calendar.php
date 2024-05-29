@@ -278,7 +278,6 @@ while ($day <= $num_days) {
         sqlsrv_fetch($stmtMaxCapacity);
         $maxCapacity = sqlsrv_get_field($stmtMaxCapacity, 0);
 
-        // 1. 搜索状态为 "已取消" 的预约
         // 搜索状态为 "已取消" 的预约
         $sqlCancelledAppointments = "SELECT COUNT(PatientID) as CancelledCount FROM Patient WHERE Package_id = ? AND ReservationDate = ? AND appointment_status = '已取消'";
         $paramsCancelledAppointments = array($packageId, $reservationDate);
@@ -292,7 +291,7 @@ while ($day <= $num_days) {
         sqlsrv_fetch($stmtCancelledAppointments);
         $CancelledCount = sqlsrv_get_field($stmtCancelledAppointments, 0);
 
-// 计算每天剩余可预约人数
+// 計算每天剩餘可預約的人數
 $remainingCapacity = $maxCapacity - $ARD_Count + $CancelledCount;
         
 
