@@ -6,9 +6,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:AMP\php-8.2.11\PHPMailer-master\src\Exception.php';
-require 'C:AMP\php-8.2.11\PHPMailer-master\src\PHPMailer.php';
-require 'C:AMP\php-8.2.11\PHPMailer-master\src\SMTP.php';
+require 'C:\xampp\php\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\php\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\php\PHPMailer-master\src\SMTP.php';
 
 // 配置SMTP
 $mail = new PHPMailer(true);
@@ -144,7 +144,7 @@ EOT;
     
     // 發送郵件
     $mail->send();
-    echo "<script>alert('預約成功，請至信箱查看確認信件！'); window.location.href = '首頁的URL';</script>";
+    echo "<script>alert('預約確認信已經發送至您的Gmail信箱，請查收郵件並點擊確認或取消按鈕。'); window.location.href = '首頁的URL';</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
