@@ -144,7 +144,7 @@ EOT;
     
     // 發送郵件
     $mail->send();
-    echo "<script>alert('預約確認信已經發送至您的Gmail信箱，請查收郵件並點擊確認或取消按鈕。'); window.location.href = '首頁的URL';</script>";
+    echo "<script>alert('提醒！!!您的預約尚未完成！請至信箱收取郵件並確認預約資訊，若無任何問題，請點選確認預約。'); window.location.href = '首頁的URL';</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
