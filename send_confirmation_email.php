@@ -1,4 +1,3 @@
-
 <?php
 
 // 導入必要的文件
@@ -144,7 +143,7 @@ EOT;
     
     // 發送郵件
     $mail->send();
-    echo "<script>alert('提醒！您的預約尚未完成！請至信箱收取郵件並確認預約資訊，若無任何問題，請點選確認預約。'); window.location.href = '首頁的URL';</script>";
+    echo "<script>alert('您的健檢預約尚未完成，請至信箱中察看郵件並點選'); window.location.href = '首頁的URL';</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
@@ -240,3 +239,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':random_code', $randomCode);
 
 ?>
+
